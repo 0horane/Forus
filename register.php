@@ -1,4 +1,5 @@
 <?php require_once 'database/database.php'?>
+<?php require_once 'r_register'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
