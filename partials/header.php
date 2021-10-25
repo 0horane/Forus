@@ -20,6 +20,31 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <?php 
+          
+
+          if (!$loggedin){
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="login.php">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="register.php">Registrarse</a>
+            </li>
+            <?php
+          } else {
+            ?>
+
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
+            </li>
+
+            <?php
+          }
+          
+          ?>
+          </ul>
         </div>
       </div>
     </nav>

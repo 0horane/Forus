@@ -1,5 +1,5 @@
 <?php
-
+require_once 'session_start.php';
 
 
 
@@ -13,6 +13,8 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	} else { 
 		if  (md5($_POST['pwd']) == mysqli_fetch_assoc($result)["Password"]){
 		//   echo("logged in");
+		   session_unset();
+		   session_destroy();
 		   session_start();
 		   $_SESSION["user"]=$_POST['usr'];
 		   $_SESSION["msg"]="logged in";
@@ -21,7 +23,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 			header('Location: index.php');
 			exit;
 	   } else {
-		   echo("El nombre de usuario o contraseña es incorrecto");
+			$_SESSION["msg"]="El nombre de usuario o contraseña es incorrecto";
 	   }
 	}  
 		

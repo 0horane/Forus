@@ -1,5 +1,6 @@
 <?php
     require_once 'database/database.php';
+ require_once 'session_start.php'; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,7 @@
         #footer{
         }
     </style>
+    
 </head>
 <body>
     <?php include 'partials/header.php' ?>

@@ -1,5 +1,5 @@
 <?php
-
+require_once 'session_start.php';
 
 
 
@@ -14,6 +14,8 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !
 
 		if(!(mysqli_query($link, $sqlquery))){exit(mysqli_error($link));}
 		//echo("account created");
+		session_unset();
+		session_destroy();
 		session_start();
 
 		$_SESSION["user"]=$_POST['usr'];
@@ -23,7 +25,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !
 		header('Location: index.php');
 		exit;
 	} else { 
-		echo 'este usuario ya existe';
+		$_SESSION["msg"]= 'este usuario ya existe';
 	   
 	}  
 		
