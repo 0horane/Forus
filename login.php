@@ -1,5 +1,7 @@
 <?php require_once 'database/database.php'?>
-<?php require_once 'r_login'?>
+
+<?php require_once 'login_back.php'?>
+<?php //include 'navbar.php' navbar en este no?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,11 +56,11 @@
                 <form class = "mt-3" action = "login.php" method = "POST"> 
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Direccion de correo</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escribí aca tu email." >
+                    <input name="usr" type="email" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Escribí aca tu email." >
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder = "Escribí aca tu contraseña.">
+                    <input name="pwd" type="password" class="form-control" id="pwd" placeholder = "Escribí aca tu contraseña.">
                   </div>
                   <div class = "d-grid">
                     <button type = "submit" value = "submit" class = "btn mt-2">Login</button>
