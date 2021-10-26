@@ -32,20 +32,25 @@ require_once("session_start.php");
 	$r=isset($_GET['r']) ? $_GET['r'] : '3';
 	$recipe=mysqli_fetch_assoc(qq($link, "SELECT * FROM Recipes WHERE ID = ".$r));
 	
-		if (!isset($_SESSION['id'])){ ?> <script>
+		if (!isset($_SESSION['id'])){ 
+		$_SESSION['msg']=$_SESSION['id'];
+		?> 
+		
+		<script>
 			window.location.href = "index.php";
 			</script>
 			<?php
-			$_SESSION['msg']=$_SESSION['id'];
+			
 			exit();
 		
 	} else if (!($recipe['User_ID']==$_SESSION['id'])){
+		$_SESSION['msg']=$_SESSION['id']." Esta no es tu receta ".$recipe['User_ID'];
 		?> 
 		<script>
 			window.location.href = "index.php";
 			</script>
 			<?php
-			$_SESSION['msg']=$_SESSION['id']." Esta no es tu receta ".$recipe['User_ID'];
+			
 			exit();
 		
 	}
