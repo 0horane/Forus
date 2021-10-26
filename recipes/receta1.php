@@ -24,7 +24,7 @@
                         <img class="image mt-3" src="../images/chorizos_pomarola.jpg" width = "35%">
                         <h4 class="search-result-item-heading"><a href="#">john doe</a></h4>
                         <p class="info">New York, NY 20188</p>
-                        <p class="description">Not just usual Metro. But something bigger. Not just usual widgets, but real widgets. Not just yet another admin template, but next generation admin template.</p>
+                        <p class="recipes">Not just usual Metro. But something bigger. Not just usual widgets, but real widgets. Not just yet another admin template, but next generation admin template.</p>
                     </div>
                     <div class="col-sm-3 text-align-center">
                         <p class="value3 mt-sm">$9, 700</p>
