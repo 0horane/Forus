@@ -19,7 +19,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		   $_SESSION["user"]=$_POST['usr'];
 		   $_SESSION["msg"]="logged in";
 		   $sqlquery='select * from users where users.UserName = "' . $_SESSION["user"] . '"';
-		   $_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["id"];
+		   $_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["ID"];
 			header('Location: index.php');
 			exit;
 	   } else {
