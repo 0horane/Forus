@@ -37,7 +37,7 @@
             ?>
 
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
+              <a class="nav-link" aria-current="page" href="database/logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
             </li>
 
             <?php

@@ -1,5 +1,5 @@
 <?php require_once 'database/database.php'?>
-<?php require_once 'register_back.php'?>
+<?php require_once 'database/register_back.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
