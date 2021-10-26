@@ -9,7 +9,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	if(!($result = qq($link, $sqlquery))){exit(mysqli_error($link));}
 	
 	if (mysqli_num_rows($result) == 0) { 
-		echo("El nombre de usuario o contraseña es incorrecto");
+		$_SESSION["msg"]="El nombre de usuario o contraseña es incorrecto";
 	} else { 
 		if  (md5($_POST['pwd']) == mysqli_fetch_assoc($result)["Password"]){
 		//   echo("logged in");
