@@ -9,8 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <style>
-    #container-receta{
-        background-color: red;
+    body{
+        background-color: #E9E9E9;
     }
 </style>
 <body>
@@ -21,18 +21,38 @@
             <div class="search-result-item-body">
                 <div class="row">
                     <div class="col-sm-9">
-                        <img class="image mt-3" src="../images/chorizos_pomarola.jpg" width = "35%">
-                        <h4 class="search-result-item-heading"><a href="#">john doe</a></h4>
-                        <p class="info">New York, NY 20188</p>
-                        <p class="description">Base de chocolate
-1° paso: pre calentar el horno a 180°C. Recubrir con papel manteca la base del molde de 24 cm.
-2° paso: en un bowl batir los huevos junto con el azúcar.
-3° paso: agregar la leche. Mezclar. Verter en forma de hilo el aceite mezclando constantemente.
-4° paso: agregar en 3 veces la harina, revolver hasta disolver todos los grumos.
-5° paso: por último, incorporar el cacao en polvo previamente tamizado. Batir bien.
-6° paso: verter la mezcla en el molde y llevar a horno 180°C por 15/20 minutos. Pinchar el centro antes de retirarlo del horno. Desmoldar una vez que esté completamente frío.
-7° paso: con un poco de café y cagnac realizar un baño para el bizcochuelo.
-8° paso: recubrir la pared del molde con papel film o un acetato. Colocar la base de bizcochuelo dentro, bañarlo y reservar. Comenzar con el mousse.
+                        <div class="display-1">Chorizitos a la pomarola</div>
+                        <img class="image mt-3" src="../images/chorizos_pomarola.jpg" width = "75%">
+                        <hr>
+                        <div class="display-4">Ingredientes</div>
+                        <ul class = "info mt-3">
+                            <h5><li>Molde 24 cm</li></h5>
+                            <h5><li>Base de chocolate</li></h5>
+                            <h5><li>Huevos...2 unidades</li></h5>
+                            <h5><li>Azúcar...100 grs</li></h5>
+                            <h5><li>Leche...120 mml</li></h5>
+                            <h5><li>Aceite girasol...30 ml</li></h5>
+                            <h5><li>Cacao amargo en polvo...40 grs</li></h5>
+                            <h5><li>Harina 0000...10 grs</li></h5>
+                            <h5><li>Polvo para hornear...8 grs</li></h5>
+                            <h5><li>Mousse de cafe</li></h5>
+                            <h5><li>Leche...350 ml</li></h5>
+                            <h5><li>Azucar...120 grs</li></h5>
+                            <h5><li>Almidón de maíz..25 grs</li></h5>
+                            <h5><li>Café en polvo saludable...8 grs</li></h5>
+                            <h5><li>Crema de leche...450 ml</li></h5>
+                            <h5><li>Azucar...40grs</li></h5>
+                            <h5><li>Gelatina sin sabor...5 grs</li></h5>
+                        </ul>
+                        <p class="description">Base de chocolate <br>
+1° paso: pre calentar el horno a 180°C. Recubrir con papel manteca la base del molde de 24 cm. <br>
+2° paso: en un bowl batir los huevos junto con el azúcar. <br>
+3° paso: agregar la leche. Mezclar. Verter en forma de hilo el aceite mezclando constantemente. <br>
+4° paso: agregar en 3 veces la harina, revolver hasta disolver todos los grumos. <br>
+5° paso: por último, incorporar el cacao en polvo previamente tamizado. Batir bien. <br>
+6° paso: verter la mezcla en el molde y llevar a horno 180°C por 15/20 minutos. Pinchar el centro antes de retirarlo del horno. Desmoldar una vez que esté completamente frío. <br>
+7° paso: con un poco de café y cagnac realizar un baño para el bizcochuelo. <br>
+8° paso: recubrir la pared del molde con papel film o un acetato. Colocar la base de bizcochuelo dentro, bañarlo y reservar. Comenzar con el mousse. <br>
 
 Mousse de chocolate
 1° paso: calentar a fuego medio la leche.
@@ -45,13 +65,93 @@ Mousse de chocolate
 8° paso: verter la mousse dentro del molde, emparejarla y llevarla a freezer por al menos 3 horas o hasta que esté completamente congelada.
 9° paso: retirarla del freezer, desmoldar y decorar con cacao amargo en polvo. Dejar descongelar en heladera por al menos 5 horas antes de ser servida..</p>
                     </div>
-                    <div class="col-sm-3 text-align-center">
-                        <p class="value3 mt-sm">$9, 700</p>
-                        <p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="#">Learn More</a>
-                    </div>
                 </div>
             </div>
         </section>
+        <div class="col-sm-3 text-align-center">
+            <p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="#">Learn More</a>
+        </div>
+         <!-- Footer -->
+<footer class="page-footer font-small blue pt-4 mt-5">
+
+<!-- Footer Links -->
+<div class="container-fluid text-center text-md-left">
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-6 mt-md-0 mt-3">
+
+      <!-- Content -->
+      <h5 class="text-uppercase">Contenido</h5>
+      <p>Hemos realizado una pagina la cual pueda acortar el tiempo de busqueda de los usuarios cuando buscar recetas se trata</p>
+
     </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-3 mb-md-0 mb-3">
+
+      <!-- Links -->
+      <h5 class="text-uppercase">COLABORADORES</h5>
+
+      <ul class="list-unstyled">
+        <li>
+          <a href="#!">Link 1</a>
+        </li>
+        <li>
+          <a href="#!">Link 2</a>
+        </li>
+        <li>
+          <a href="#!">Link 3</a>
+        </li>
+        <li>
+          <a href="#!">Link 4</a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-3 mb-md-0 mb-3">
+
+      <!-- Links -->
+      <h5 class="text-uppercase">Links</h5>
+
+      <ul class="list-unstyled">
+        <li>
+          <a href="#!">Link 1</a>
+        </li>
+        <li>
+          <a href="#!">Link 2</a>
+        </li>
+        <li>
+          <a href="#!">Link 3</a>
+        </li>
+        <li>
+          <a href="#!">Link 4</a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">© 2020 Copyright:
+  <a href="https://mdbootstrap.com/"> Lucas Abdhala</a>
+</div>
+<!-- Copyright -->
+
+</footer>
+    </div>
+    
 </body>
 </html>
