@@ -16,8 +16,8 @@
               <a class="nav-link" href="#">Vids</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <form class="d-flex" action="search.php">
+            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">

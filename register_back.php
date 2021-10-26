@@ -7,12 +7,12 @@ require_once 'session_start.php';
 if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !empty($_POST['Email'])){
 
 	$sqlquery= 'select * from users where users.UserName = "' . $_POST['usr'] . '"';
-	if(!($result = mysqli_query($link, $sqlquery))){exit(mysqli_error($link));}
+	if(!($result = qq($link, $sqlquery))){exit(mysqli_error($link));}
 	
 	if (mysqli_num_rows($result) == 0) { 
 		$sqlquery="insert into users VALUES(null,'" . $_POST['usr'] . "' , md5('" . $_POST['pwd'] . "'), '". $_POST['Email'] ."',now(),null)";
 
-		if(!(mysqli_query($link, $sqlquery))){exit(mysqli_error($link));}
+		if(!(qq($link, $sqlquery))){exit(mysqli_error($link));}
 		//echo("account created");
 		session_unset();
 		session_destroy();
@@ -21,7 +21,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !
 		$_SESSION["user"]=$_POST['usr'];
 		$_SESSION["msg"]="account created";
 		$sqlquery='select * from users where users.UserName = "' . $_SESSION["user"] . '"';
-		$_SESSION["id"]=mysqli_fetch_assoc(mysqli_query($link, $sqlquery))["id"];
+		$_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["id"];
 		header('Location: index.php');
 		exit;
 	} else { 
