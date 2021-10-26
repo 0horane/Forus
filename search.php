@@ -50,7 +50,7 @@
 
 
 
-        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Description LIKE '%".$q."%' OR ingredients LIKE '%".$q."%' OR steps LIKE '%".$q."%' ";
+        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%' ";
         $qlen=ceil(mysqli_fetch_assoc(qq($link, "SELECT COUNT(ID) AS cOC".$sqlquery))['cOC']/$perpage);
         qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
 
@@ -96,11 +96,11 @@
             ?>
             <div class="recipe container border border-secondary rounded"><div class="row">
                 <div class="col-sm-2">
-                <a class="image-link" href="recipe.php/<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>"></a>
+                <a class="image-link" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>"></a>
                 </div>
                 <div class="col-sm-8">
                     <h4>
-                        <a href="recipe.php/<?php echo $row['ID']; ?>">
+                        <a href="recipe.php/?r=<?php echo $row['ID']; ?>">
                             <?php echo $row['Name'] ?>
                         </a>
                     </h4>
@@ -110,7 +110,7 @@
                         ?>                            
                     </p>
                     <p class="description">
-                        <?php echo isset($row['Description']) ? $row['Description'] : 'El creador de la receta no le ha agregado una descripción.' ?>
+                        <?php echo $row['Recipe'];  ?>
                     </p>
                 </div>
 
@@ -121,7 +121,7 @@
                             mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC']
                         ?> <span style="color:gold;font-size=20;">☆</span>
                     </p>
-                    <a class="btn btn-primary btn-info btn-sm" href="recipe.php/<?php echo $row['ID']; ?>">Ver más</a>
+                    <a class="btn btn-primary btn-info btn-sm" href="recipe.php/?r=<?php echo $row['ID']; ?>">Ver más</a>
                 </div>
             </div></div>
         <br>
