@@ -1,6 +1,6 @@
 <?php require_once 'database/database.php'?>
 
-<?php require_once 'login_back.php'?>
+<?php require_once 'database/login_back.php'?>
 <?php //include 'navbar.php' navbar en este no?>
 <!DOCTYPE html>
 <html lang="en">
