@@ -1,6 +1,7 @@
+<?php require_once('../dirs.php'); ?>
 <?php
-    require_once 'database/database.php';
-    require_once 'partials/session_start.php';
+    require_once(from['indexphp'].to['databasephp']);
+    require_once(from['indexphp'].to['session_startphp']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,7 @@
   }
 </style>
 <body>
-  <?php include 'partials/header.php' ?>
+  <?php include from['indexphp'].to['headerphp'] ?>
   <header>
     <video onloadedmetadata="this.muted=true" autoplay loop>
       <source src="vids/BackgroundVideo.mp4">

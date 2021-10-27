@@ -1,3 +1,4 @@
+<?php require_once('../dirs.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     }
 </style>
 <body>
-    <?php include '../partials/header.php'?>
+    <?php include from['receta1otrophp'].to['headerphp']?>
     <div id="container-receta" class='container'>
         <section>
             </a>
@@ -69,7 +70,7 @@ Mousse de chocolate
             </div>
         </section>
         <div class="col-sm-3 text-align-center">
-            <p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="#">Learn More</a>
+        <p class="fs-mini text-muted">comentar</p><a class="btn btn-primary btn-info btn-sm" href="#">Guardar</a>
         </div>
          <!-- Footer -->
 <footer class="page-footer font-small blue pt-4 mt-5">

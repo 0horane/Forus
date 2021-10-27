@@ -1,3 +1,4 @@
+<?php require_once('../dirs.php'); ?>
 <?php
 
 
@@ -13,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php include 'partials/header.php'?>
+    <?php include from['recetasphp'].to['headerphp']?>
     <div class="container">
     <div class = "container mt-3">
   <h1 class ="display-1 text-center">Recetas</h1>

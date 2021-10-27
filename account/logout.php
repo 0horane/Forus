@@ -1,3 +1,4 @@
+<?php require_once('../dirs.php'); ?>
 <?php 
 session_start();
 session_unset();

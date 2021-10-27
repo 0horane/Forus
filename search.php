@@ -1,6 +1,9 @@
+<?php require_once('../dirs.php'); ?>
 <?php
-    require_once 'database/database.php';
-    require_once 'partials/session_start.php'; 
+    require_once from['searchphp'].to['databasephp'];
+    require_once from['searchphp'].to['session_startphp']; 
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +39,7 @@
     
 </head>
 <body>
-    <?php include 'partials/header.php' ?>
+    <?php include from['searchphp'].to['headerphp'] ?>
 
 
 
@@ -117,9 +120,6 @@
                 <div class="col-sm-2 text-align-center">
                     <p class="value3 mt-sm"><?php echo $row['Views'] ?><span style="color:gray"> 👁</span></p>
                     <p class="fs-mini text-muted">
-                        <?php
-                            mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC']
-                        ?> <span style="color:gold;font-size=20;">☆</span>
                     </p>
                     <a class="btn btn-primary btn-info btn-sm" href="recipe.php/?r=<?php echo $row['ID']; ?>">Ver más</a>
                 </div>

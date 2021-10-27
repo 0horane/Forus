@@ -1,7 +1,10 @@
-<?php require_once 'database/database.php'?>
+<?php require_once('../dirs.php'); ?>
+<?php 
+    require_once(from['registerphp'].to['databasephp']);
+    require_once(from['registerphp'].to['register_backphp']);
+ ?>
 
-<?php require_once 'database/login_back.php'?>
-<?php //include 'navbar.php' navbar en este no?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,22 +56,34 @@
 
             <!-- Aca vamos a empeazar a hacer todo lo que viene ser el form-->
 
-                <form class = "mt-3" action = "login.php" method = "POST"> 
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre de usuario o mail</label>
-                    <input name="usr" type="text" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Escribí aca tu email o numbre de usuario." >
+                <form class = "mt-3" action = "register.php" method = "POST"> 
+				  <div class="mb-3">
+                    <label for="usr" class="form-label">Nombre de Usuario</label>
+                    <input name='usr' type="text" class="form-control" id="username" aria-describedby="userHelp" placeholder="Escribí aca tu nombre de usuario." >
+                    <div id="userHelp" class="form-text">Ingrese su nombre de usuario por el cual sera reconocido en nuestro sitio</div>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                    <input name="pwd" type="password" class="form-control" id="pwd" placeholder = "Escribí aca tu contraseña.">
+                    <label for="Email" class="form-label">Direccion de correo <!--<span style="color:gray">(opcional)</span>--></label>
+                    <input name='Email' type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Escribí aca tu email." >
+                    <div id="emailHelp" class="form-text">Nunca compartiremos tu mail con nadie.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="pwd" class="form-label">Contraseña</label>
+                    <input name='pwd' type="password" class="form-control" id="pwd" placeholder = "Escribí aca tu contraseña.">
+                  </div>
+                <!-- Aca yo supongo que tenemos que hacer que el boton submit solo funcione cuando password ==  confirmpassword -->
+                  <div class="mb-3">
+                    <label for="pwdc" class="form-label">Confirmar contraseña</label>
+                    <input name='pwdc' type="password" class="form-control" id="pwd" placeholder = "Confirma tu contraseña.">
                   </div>
                   <div class = "d-grid">
-                    <button type = "submit" value = "submit" class = "btn mt-2">Login</button>
+                    <button type = "submit" value = "submit" class = "btn mt-2">Registrarse</button>
                   </div>
+                <!-- al que le toque esta parte tiene que hacer con js que se ponhga gris el boton de sumbit hasta que el usuario y contrasenia sean iguakles-->
                 </form>
                 <div class="row text-center">
                     <div class="col-13 mt-3">
-                        <span class =>New here? <a href= "register.php">Register</a></span>
+                        <span class =>¿Ya tenes una cuenta? <a href= "login.php">Loguéese</a></span>
                     </div>
                 </div>      
             </div>

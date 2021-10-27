@@ -1,5 +1,7 @@
+<?php require_once('../dirs.php'); ?>
 <?php
-require_once '../partials/session_start.php';
+
+require_once from['login_backphp'].to['session_start.php'];
 
 
 

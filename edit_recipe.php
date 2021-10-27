@@ -1,6 +1,7 @@
+<?php require_once('../dirs.php'); ?>
 <?php
-require_once("database/database.php");
-require_once("partials/session_start.php");
+require_once(from['edit_recipephp'].to['databasephp']);
+require_once(from['edit_recipephp'].to['session_startphp']);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ require_once("partials/session_start.php");
     <script type="text/javascript" src="rich_text/js/jquery.richtext.min.js"></script>
 </head>
 <body>
-	<?php include 'partials/header.php'; 
+	<?php include from['edit_recipephp'].to['headerphp']; 
 	
 
 	
