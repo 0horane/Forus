@@ -25,7 +25,6 @@
                         <img class="image mt-3" src="../images/chorizos_pomarola.jpg" width = "35%">
                         <h4 class="search-result-item-heading"><a href="#">
                             <?php
-                            echo "TU VIEJA";
                             ?>
                         </a></h4>
                         <p class="info">New York, NY 20188</p>
