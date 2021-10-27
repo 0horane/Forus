@@ -27,17 +27,17 @@
           if (!$loggedin){
             ?>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="login.php">Login</a>
+              <a class="nav-link" aria-current="page" href="<?php echo to['loginphp']; ?>">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="register.php">Registrarse</a>
+              <a class="nav-link" aria-current="page" href="<?php echo to['registerphp']; ?>">Registrarse</a>
             </li>
             <?php
           } else {
             ?>
 
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="database/logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
+              <a class="nav-link" aria-current="page" href="<?php echo to['logoutphp']; ?>?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
             </li>
 
             <?php

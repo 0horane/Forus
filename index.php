@@ -1,4 +1,4 @@
-<?php require_once('../dirs.php'); ?>
+<?php require_once('dirs.php'); ?>
 <?php
     require_once(from['indexphp'].to['databasephp']);
     require_once(from['indexphp'].to['session_startphp']);
