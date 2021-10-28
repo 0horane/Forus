@@ -17,4 +17,5 @@
         if(!($tres = mysqli_query($link, $query))){exit(mysqli_error($link)." , in query ".$query);}
         return $tres;
     }
+   
 ?>

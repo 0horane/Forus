@@ -22,11 +22,10 @@
 
         .recipe{
             display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    max-height:100px;
-    width=90%;
-    
+            flex-direction: row;
+            justify-content: space-around;
+            max-height:100px;
+            width= 90%;
         }  
         
         .recipe p{
@@ -37,9 +36,6 @@
 </head>
 <body>
     <?php include 'partials/header.php' ?>
-
-
-
 <?php
     if (isset($_GET['q'])){
         $q=$_GET['q'];

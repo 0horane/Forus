@@ -1,8 +1,6 @@
 <?php
 require_once '../partials/session_start.php';
 
-
-
 if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	
 	$sqlquery= 'select * from users where users.UserName = "' . $_POST['usr'] . '" OR users.Email = "' . $_POST['usr'] . '"';
