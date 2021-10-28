@@ -10,7 +10,7 @@
 </head>
 <style>
     body{
-        background-color: #E9E9E9;
+      background-color: #E9E9E9;
     }
 </style>
 <body>
@@ -44,114 +44,37 @@
                             <h5><li>Azucar...40grs</li></h5>
                             <h5><li>Gelatina sin sabor...5 grs</li></h5>
                         </ul>
-                        <p class="description">Base de chocolate <br>
-1° paso: pre calentar el horno a 180°C. Recubrir con papel manteca la base del molde de 24 cm. <br>
-2° paso: en un bowl batir los huevos junto con el azúcar. <br>
-3° paso: agregar la leche. Mezclar. Verter en forma de hilo el aceite mezclando constantemente. <br>
-4° paso: agregar en 3 veces la harina, revolver hasta disolver todos los grumos. <br>
-5° paso: por último, incorporar el cacao en polvo previamente tamizado. Batir bien. <br>
-6° paso: verter la mezcla en el molde y llevar a horno 180°C por 15/20 minutos. Pinchar el centro antes de retirarlo del horno. Desmoldar una vez que esté completamente frío. <br>
-7° paso: con un poco de café y cagnac realizar un baño para el bizcochuelo. <br>
-8° paso: recubrir la pared del molde con papel film o un acetato. Colocar la base de bizcochuelo dentro, bañarlo y reservar. Comenzar con el mousse. <br>
-
-Mousse de chocolate
-1° paso: calentar a fuego medio la leche.
-2° paso: en una olla de tamaño medio colocar los 120 gramos de azúcar, el almidón y el café soluble. Revolver.
-3° paso: verter, a los polvos, la leche caliente en 3 veces, revolver hasta que el café se haya disuelto por completo. Llevar a fuego medio y cocinar hasta que lleve a hervor. Luego, colocar papel film a contacto a la crema y llevar a heladera hasta que esté completamente fría.
-4° paso: por otro lado, batir la crema de leche junto con los 40 gramos de azúcar. Debe quedar bien firme.
-5° paso: retirar la crema de café de la heladera, con la ayuda de la batidora mezclarla hasta que se una nuevamente. Incorporar un poco de la crema batida a la crema de café y batir.
-6° paso: luego, verter toda la crema de café dentro de la crema de leche. Mezclar con la ayuda de la batidora.
-7° paso: disolver la gelatina sin sabor con un poco de agua caliente, agregar una cucharada sopera de crema a la gelatina, unir y luego verterla dentro de la totalidad de la crema de café. Batir bien con la batidora.
-8° paso: verter la mousse dentro del molde, emparejarla y llevarla a freezer por al menos 3 horas o hasta que esté completamente congelada.
-9° paso: retirarla del freezer, desmoldar y decorar con cacao amargo en polvo. Dejar descongelar en heladera por al menos 5 horas antes de ser servida..</p>
+                        <h4 class="display-6">Procedimientos</h4>
+                        <ul class="description">Base de chocolate <br>
+                          <li>1° paso: pre calentar el horno a 180°C. Recubrir con papel manteca la base del molde de 24 cm. </li>
+                          <li>2° paso: en un bowl batir los huevos junto con el azúcar. </li>
+                          <li>3° paso: agregar la leche. Mezclar. Verter en forma de hilo el aceite mezclando constantemente. </li>
+                          <li>4° paso: agregar en 3 veces la harina, revolver hasta disolver todos los grumos. </li>
+                          <li>5° paso: por último, incorporar el cacao en polvo previamente tamizado. Batir bien.</li> 
+                          <li>6° paso: verter la mezcla en el molde y llevar a horno 180°C por 15/20 minutos. Pinchar el centro antes de retirarlo del horno. Desmoldar una vez que esté completamente frío. </li>
+                          <li>7° paso: con un poco de café y cagnac realizar un baño para el bizcochuelo. </li>
+                          <li>8° paso: recubrir la pared del molde con papel film o un acetato. Colocar la base de bizcochuelo dentro, bañarlo y reservar. Comenzar con el mousse.</li>
+                          <br>
+                          Mousse de chocolate 
+                          <li>1° paso: calentar a fuego medio la leche. </li>
+                          <li>2° paso: en una olla de tamaño medio colocar los 120 gramos de azúcar, el almidón y el café soluble. Revolver. </li>
+                          <li>3° paso: verter, a los polvos, la leche caliente en 3 veces, revolver hasta que el café se haya disuelto por completo. Llevar a fuego medio y cocinar hasta que lleve a hervor. Luego, colocar papel film a contacto a la crema y llevar a heladera hasta que esté completamente fría. </li>
+                          <li>4° paso: por otro lado, batir la crema de leche junto con los 40 gramos de azúcar. Debe quedar bien firme. </li>
+                          <li>5° paso: retirar la crema de café de la heladera, con la ayuda de la batidora mezclarla hasta que se una nuevamente. Incorporar un poco de la crema batida a la crema de café y batir. </li>
+                          <li>6° paso: luego, verter toda la crema de café dentro de la crema de leche. Mezclar con la ayuda de la batidora. </li>
+                          <li>7° paso: disolver la gelatina sin sabor con un poco de agua caliente, agregar una cucharada sopera de crema a la gelatina, unir y luego verterla dentro de la totalidad de la crema de café. Batir bien con la batidora. </li>
+                          <li>8° paso: verter la mousse dentro del molde, emparejarla y llevarla a freezer por al menos 3 horas o hasta que esté completamente congelada. </li>
+                          <li>9° paso: retirarla del freezer, desmoldar y decorar con cacao amargo en polvo. Dejar descongelar en heladera por al menos 5 horas antes de ser servida.</li>
+                        </ul> <br>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="col-sm-3 text-align-center">
-            <p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="#">Learn More</a>
+        <div class="options">
+          <p class="fs-mini text-muted">3124123 👁️ </p>
+          <button type="submit" class="btn btn-warning"><img src="star.png" width="25%" alt=""></button>
+          <button type="submit" class="btn btn-danger"><img src="like.png" width="27%" alt=""></button>
         </div>
-         <!-- Footer -->
-<footer class="page-footer font-small blue pt-4 mt-5">
-
-<!-- Footer Links -->
-<div class="container-fluid text-center text-md-left">
-
-  <!-- Grid row -->
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-md-6 mt-md-0 mt-3">
-
-      <!-- Content -->
-      <h5 class="text-uppercase">Contenido</h5>
-      <p>Hemos realizado una pagina la cual pueda acortar el tiempo de busqueda de los usuarios cuando buscar recetas se trata</p>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-md-3 mb-md-0 mb-3">
-
-      <!-- Links -->
-      <h5 class="text-uppercase">COLABORADORES</h5>
-
-      <ul class="list-unstyled">
-        <li>
-          <a href="#!">Link 1</a>
-        </li>
-        <li>
-          <a href="#!">Link 2</a>
-        </li>
-        <li>
-          <a href="#!">Link 3</a>
-        </li>
-        <li>
-          <a href="#!">Link 4</a>
-        </li>
-      </ul>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-md-3 mb-md-0 mb-3">
-
-      <!-- Links -->
-      <h5 class="text-uppercase">Links</h5>
-
-      <ul class="list-unstyled">
-        <li>
-          <a href="#!">Link 1</a>
-        </li>
-        <li>
-          <a href="#!">Link 2</a>
-        </li>
-        <li>
-          <a href="#!">Link 3</a>
-        </li>
-        <li>
-          <a href="#!">Link 4</a>
-        </li>
-      </ul>
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
-
-</div>
-<!-- Footer Links -->
-
-<!-- Copyright -->
-<div class="footer-copyright text-center py-3">© 2020 Copyright:
-  <a href="https://mdbootstrap.com/"> Lucas Abdhala</a>
-</div>
-<!-- Copyright -->
-
-</footer>
-    </div>
-    
+<?php include '../partials/footer.php' ?>
 </body>
 </html>
