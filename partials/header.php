@@ -1,6 +1,13 @@
+<style>
+  nav{
+    border-bottom: 2.5px solid #2322;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
-      <div class="container my-2">
-        <a class="navbar-brand" href="#">Cakeria</a>
+      <div div="navbarsito" class="container my-2">
+        <a class="navbar-brand" href="#">
+        <img src="images/logo1.png" alt="" width="96" height="55">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,16 +17,20 @@
               <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Recipes</a>
+              <a class="nav-link" href="recetas.php">Recipes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Vids</a>
+              <a class="nav-link" href="videos.php">Vids</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="donations.php">Donations</a>
             </li>
           </ul>
           <form class="d-flex" action="search.php">
             <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+          <!-- El problema fue que se hizo dos ul en el mismo navbar, una ul es una lista y ya esta esa lista entonces son dos lista en 1 Me gustaria solucionarlo en clase o en un meet -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <?php 
           
