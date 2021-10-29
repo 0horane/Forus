@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
       <div div="navbarsito" class="container my-2">
         <a class="navbar-brand" href="#">
-        <img src="images/logo1.png" alt="" width="96" height="55">
+        <img src="images/logo1.png" alt="" width="145" height="82">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
