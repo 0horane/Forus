@@ -1,5 +1,5 @@
 <?php
-require_once '../partials/session_start.php';
+require_once 'partials/session_start.php';
 
 if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	

@@ -1,3 +1,4 @@
+<?php include 'partials/session_start.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
