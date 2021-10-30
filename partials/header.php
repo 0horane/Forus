@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
       <div div="navbarsito" class="container my-2">
         <a class="navbar-brand" href="#">
-        <img src="images/logo1.png" alt="" width="250" height="130">
+          <img src="images/logoheader.png" width ="70">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -25,14 +25,7 @@
             <li class="nav-item">
               <a class="nav-link" href="donations.php">Donations</a>
             </li>
-          </ul>
-          <form class="d-flex" action="search.php">
-            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-          <!-- El problema fue que se hizo dos ul en el mismo navbar, una ul es una lista y ya esta esa lista entonces son dos lista en 1 Me gustaria solucionarlo en clase o en un meet -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <?php 
+            <?php 
           
 
           if (!$loggedin){
@@ -56,6 +49,11 @@
           
           ?>
           </ul>
+          <form class="d-flex" action="search.php">
+            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <!-- El problema fue que se hizo dos ul en el mismo navbar, una ul es una lista y ya esta esa lista entonces son dos lista en 1 Me gustaria solucionarlo en clase o en un meet -->
         </div>
       </div>
     </nav>
