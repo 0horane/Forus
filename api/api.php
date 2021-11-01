@@ -1,31 +1,45 @@
 <?php 
-//esta seria el api abierto, que se puede acceder por cualquier usuario o pagina (principalmente la nuestra)
 
-//'qt' es query type. esto puede ser:
-//v: buscar video por id (numerico). Tambien se puede por listas de id, como '1,3,4,5' (esto no iria dentro de comillas)
-//r: buscar receta por id
-//vl: listar ids de videos con limit puesto en string con formato:  "idInicial,cantidad"
-//rl: listar ids de recetas con limit puesto en string con formato:  "idInicial,cantidad"
-//sr: EN PROCESO ordena todas LAS recetas segun condiciones. 'v' van dos letras sepaardas: a,c,f,v,f para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y la segunda: a,d siendo ascendiente o descendiente. devuelve una lista con todos los ids en orden.  
-//vb: NO IMPLEMENTADO api busqueda de recetas
-//vb: NO IMPLEMENTADO api busqueda de videos
-//cf: cuenta los favoritos de una receta
-
+//Todas las variables se pueden mandar por post o get. get tiene prioridad
 
 //'v' es el valor que se ingresa como query (id o limit o numeros separados por coma o lo que sea). 
-//Todas las variables se pueden mandar por post o get. 
+///////'qt' significa query type. puede llevar los valores:
+
+//////valores publicos (no requieren un usuario logueado). esta seria el api abierto, que se puede acceder por cualquier usuario o pagina (principalmente la nuestra)
+//vd: devuelve los datos de el/los videos indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma 
+//rd: devuelve los datos de las recetas, igual que el anterior
+//vl: listar ids de videos con limit puesto en string con formato:  "idInicial,cantidad"
+//rl: **MEJOR USAR SR** listar ids de recetas con limit puesto en string con formato:  "idInicial,cantidad"
+//sr: devuelve un array de todos los ids de recetas en el orden pedidio. $v recibe dos letras juntas: a,c,f,v,f para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y 'a' o 'd' siendo ascendiente o descendiente. 
+//cf: devuelve la cantidad de favoritos y la cantidad de favoritos en la ultima semana (popularidad), en un array. Recibe el id de receta en $v
+//////valores privados (requieren un usuario logueado con el usuario correcto)
+//dr: NO IMPLEMENTADO recibe un id de receta en $v. La cambia de estado (si esta borrada es recuperada y si no la borra). Devuelve 1 si se borró, 2 si se recuperó, y 0 si no ocurrió nada
+//dv: NO IMPLEMENTADO recibe un id de receta en $v. Lo cambia de estado (si esta borrado es recuperado y si no lo borra). Devuelve 1 si se borró, 2 si se recuperó, y 0 si no ocurrió nada
+//mr: NO IMPLEMENTADO recibe El id de la receta en $v (0 si es nueva), el nombre nuevo en $n y el contenido en $r. Hay que usarlo por post debido al limite del get. Devuelve True si se modificó/creó , False si falló, y el numero de receta si es nuevo
+//mv: NO IMPLEMENTADO recibe El id del video en $v (0 si es nuevo), el nombre nuevo en $n, el codigo en en $c y el autor en $a. Devuelve True si se modificó/creó , False si falló, y el numero del video si es nuevo
+//yr: NO IMPLEMENTADO Devuelve los ids de las recetas del usuario en un array
+//yv: NO IMPLEMENTADO Devuelve los ids de las recetas del usuario en un array
+//ys: NO IMPLEMENTADO funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas
+
 
 //ejemplos
 //http://localhost/Tarea/proyecto/Forus/api/api.php?qt=rl&v=2,5
-/////////devuelve una lista con strings numericos mostrando las 5 recetas sin borrar despues de la que tiene id 2.
-//http://localhost/Tarea/proyecto/Forus/api/api.php?qt=r&v=2,5,8,3
+/////////devuelve una lista con strings numericos mostrando las 5 recetas que no fueron borradas despues de la que tiene id 2.
+//http://localhost/Tarea/proyecto/Forus/api/api.php?qt=rd&v=2,5,8,3
 /////////devuelve una lista con arrays asociativos para las recetas 2, 3 y 5. La ocho no la devuelve porque esta borrada. Para acceder a la 8 se deberá usar el api privada desde la cuenta correspondiente
 //http://localhost/Tarea/proyecto/Forus/api/api.php?qt=cf&v=3
 /////////devuelve un array ["2","1"] con el primer numero siendo el total de favoritos de la receta 3 y el segundo siendo solo los de la ultima semana. Este segundo se puede usar para elejir los mas populares. 
 //http://localhost/Tarea/proyecto/Forus/api/api.php?qt=sr&v=fd
 /////////devuelve un array con los ids de todos las recetas, en orden de cantidad de favoritos decendiente
 
-
+function privQSt(){
+    require_once '..\partials\session_start.php'; 
+    if (isset($_SESSION['id'])){
+        return $_SESSION['id'];
+    } else {
+        exit('{"error":"This call requires being logged in"}');
+    }
+}
 
 
 if (isset($_GET['qt'])) {
@@ -42,7 +56,7 @@ if (isset($_GET['v'])) {
 } else if  (isset($_POST['v'])){
     $value=$_POST['v'];
 
-} else if ($qt=='v' ||$qt=='r') {
+} else if ($qt=='vd' ||$qt=='rd') {
     $value='0,25';
 } else if ($qt=='sr') {
     $value='aa';
@@ -51,11 +65,11 @@ if (isset($_GET['v'])) {
 }
 
 
-include '..\database\database.php';
+require_once '..\database\database.php';
 $json=[];
 
 switch($qt){
-    case 'v':
+    case 'vd':
         if (is_numeric($value)){
             $query="SELECT * FROM videos WHERE ID =".$value." AND Deleted_At IS NULL";
         }
@@ -82,7 +96,7 @@ switch($qt){
         break;
 
 
-    case 'r':
+    case 'rd':
         if (is_numeric($value)){
             $query="SELECT * FROM recipes WHERE ID =".$value." AND Deleted_At IS NULL";
         }
@@ -182,7 +196,20 @@ switch($qt){
             array_push($json,$row['ID']);
         }
         break;
+    
 
+    case 'ed':
+        break;
+    case 'em':
+        break;
+    case 'ec':
+        break;
+    case 'mr':
+        break;
+    case 'mv':
+        break;
+    case 'ms':
+        break;
         
 }
 echo json_encode($json);
