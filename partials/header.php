@@ -20,10 +20,8 @@
               <a class="nav-link" href="recetas.php">Recipes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="videos.php">Vids</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="donations.php">Donations</a>
+            </li>
             </li>
             <?php 
           
@@ -39,7 +37,17 @@
             <?php
           } else {
             ?>
-
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My activity
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Mis recetas</a></li>
+                <li><a class="dropdown-item" href="#">Mis videos</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="database/logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
             </li>

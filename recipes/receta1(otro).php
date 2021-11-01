@@ -7,12 +7,58 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <style>
+    .titulo-comentarios{
+        display: flex;
+        justify-content: space-between;
+    }
+    .comentario{
+        background-color: white;
+        border-radius: 5px;
+    }
     body{
       background-color: #E9E9E9;
     }
+    .comentarios{
+        background-color: red;
+        border-radius: 5px;
+
+    }
+    .fav-btn{
+        height: 45px;
+        width: 100px;
+        border: none;
+        color: white;
+        font-size: 25px;
+        background-color: rgb(255, 0, 68);
+        border-radius: 15px;
+        box-shadow: inset 0 0 0 0 #f9e506;
+        transition: ease-out 0.3s;
+        font-size: 2rem;
+        outLine: none;
+    }
+    .fav-btn:hover{
+        box-shadow: inset 100px 0 0 0 #f9e506;
+        cursor: pointer;
+        color: #000;
+    }
+    .fav-btn img{
+        margin-bottom: 11px;
+    }
+    .options{
+        display: flex;
+        justify-content: space-between;
+    }
 </style>
+<script>
+    $.(document).ready(function(){
+       $(".fav").click(function(){
+            $(this).toggleClass("active");
+       });
+    });
+</script>
 <body>
     <?php include '../partials/header.php'?>
     <div id="container-receta" class='container'>
@@ -23,6 +69,7 @@
                     <div class="col-sm-9">
                         <div class="display-1">Chorizitos a la pomarola</div>
                         <img class="image mt-3" src="../images/chorizos_pomarola.jpg" width = "75%">
+                        <p class="fs-mini text-muted mt-3">Esta receta tiene: 3124123 👁️ </p>
                         <hr>
                         <div class="display-4">Ingredientes</div>
                         <ul class = "info mt-3">
@@ -70,11 +117,30 @@
                 </div>
             </div>
         </section>
-        <div class="options">
-          <p class="fs-mini text-muted">3124123 👁️ </p>
-          <button type="submit" class="btn btn-warning"><img src="star.png" width="25%" alt=""></button>
-          <button type="submit" class="btn btn-danger"><img src="like.png" width="27%" alt=""></button>
+        <div class="container-fluid">
+            <div class="options col-10">
+                ¿Te gusto la receta? ¡No olvides darle a favoritos!
+                <button type="submit" class="fav-btn"><img src="star.png" alt="estrelha" width="25%"></button>
+            </div>
         </div>
-<?php include '../partials/footer.php' ?>
+        <h4 class="display-6 mt-4">Comentarios</h4>
+        <div class="comentarios-section container-fluid">
+            <div class="comentarios p-2">
+                <div class="titulo-comentarios">
+                <h6>Lucas</h6>
+                <h6 class="text-end">Hecho el dia 23223/1342534/1324132543</h6>
+                </div>
+                <h3 class="comentario col-12 p-3">Nefasto comerse el sanguche de medias me parece la cosa mas asquerosa de todas, pero igual esta rico</h3>
+            </div>
+            <div class="comentarios p-2 mt-2">
+                <div class="titulo-comentarios">
+                    <h6>donal trump</h6>
+                    <h6 class="text-end">Hecho el dia 23223/1342534/1324132543</h6>
+                </div>
+                <h3 class="comentario col-12 p-3">🇱🇷🇱🇷🇱🇷🇱🇷🇱🇷🇱🇷🇱🇷🇱🇷 ز كيلوغرام الطماطم</h3>
+            </div>    
+        </div>
+        <?php include '../partials/footer.php' ?>
+    </div>
 </body>
 </html>
