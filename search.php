@@ -12,7 +12,8 @@
     <link rel="shortcut icon" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	<style>
+    <style>
+
 		.row{
 			background-color: red;
 		}
@@ -22,16 +23,39 @@
 			justify-content: end;
 		}
         #arriba{
-            padding:20px;
             background:#024959;
             font-size:20px;
             color:#fff;
+            border-radius: 15%;
             cursor:pointer;
             position:fixed;
-            bottom:20px;
-            right:20px;
+            bottom:10px;
+            right:10px;
+            transform: translate(-20%, -20%);
+        }
+        #container-search{
+            z-index: -1;
         }
 	</style>
+    <script>
+        //Get the button:
+        mybutton = document.getElementById("arriba");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            }   else {
+                mybutton.style.display = "none";
+            }
+        }       
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
 </head>
 <body>
     <?php include 'partials/header.php' ?>
@@ -87,8 +111,8 @@
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
-            <button id="arriba" href="search.php"class="btn btn-primary">asd</button>
-            <div class="container">
+            <button onclick="topFunction()" title="Go to top" id="arriba" href="search.php"class="btn btn-primary shadow">🠥</button>
+            <div id="container-search" class="container">
 				<div class="row justify-content-center mt-5 rounded-3">
 					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" width="100%"></a>
 					<div class="col-8">
@@ -142,3 +166,15 @@
 <?php } ?>
 
 </body>
+<script>
+    window.onscroll = function(){
+    if(document.documentElement.scrollTop > 100){
+        document.querySelector("#arriba")
+        .classList.add("show");
+    }
+    else{
+        document.querySelector("#arriba")
+        .classList.remove("show");
+    }
+}
+</script>
