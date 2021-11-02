@@ -17,9 +17,20 @@
 			background-color: red;
 		}
 		.info-search{
+            margin-top: 15px;
 			display: flex;
 			justify-content: end;
 		}
+        #arriba{
+            padding:20px;
+            background:#024959;
+            font-size:20px;
+            color:#fff;
+            cursor:pointer;
+            position:fixed;
+            bottom:20px;
+            right:20px;
+        }
 	</style>
 </head>
 <body>
@@ -58,7 +69,7 @@
         
         $temp=$page-1;
         $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
-        echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=0'><<</a><span> </span>";
+        echo "<a class= 'text-center' href='".$_SERVER['REQUEST_URI'].$spchar."page=0'><<</a><span> </span>";
         echo $page!=0 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'><</a><span> </span>" : '' ;
         for ($i=$startpage;$i<$endpage;$i++){
             echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=${i}'>${i}</a><span> </span> " ;
@@ -76,6 +87,7 @@
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
+            <button id="arriba" href="search.php"class="btn btn-primary">asd</button>
             <div class="container">
 				<div class="row justify-content-center mt-5 rounded-3">
 					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" width="100%"></a>
@@ -83,13 +95,14 @@
 						<div style="justify-content:space-between" class="d-flex">
 							<h4 style="display:inline-block">
 								<a href="recipe.php/?r=<?php echo $row['ID']; ?>">
-								<?php echo $row['Name']?>
+								 <?php echo $row['Name']?>
 								</a>
 							</h4>
 						
-							<span class="text-end"><?php echo $row['Created_At'] ?></span>
+							<span class="text-end text-muted"><?php echo $row['Created_At'] ?></span>
 						</div>
-						<p class="info">
+						<p class="info text-muted">
+                            Creado por:
 							<?php
 							echo mysqli_fetch_assoc(qq($link, "SELECT UserName FROM users WHERE ID = ".$row['User_ID']))['UserName'];
 							?>                            

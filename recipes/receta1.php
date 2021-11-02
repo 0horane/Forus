@@ -12,39 +12,17 @@
 </head>
 <body>
     <h1 class="title">Listado de Recetas</h1>
-	<div class="conteiner mt-3">
+	<div class="conteiner col-sm-12">
 		<div class="row">
-			<div class="col-12">
-			<?php
-				include_once '../database/database.php';
-				$sql= "SELECT 'Name', 'Recipe', 'Views', 'img_path' FROM `recipes` WHERE 1";
-				$resultSet=mysqli_query($link,$sql);
-					while($row=mysqli_fetch_assoc($resultSet)){
-						?>
-						<div class="container">
-							<div class="card">
-							<img src="../images/<?php echo $row['img_path'] ?>> 
-							<h4></h4>
-							<p>Un platillo esquisito y fácil de cocinar</P> <?php//aquí va un texto corto para ver si te gusta la receta o no?>
-							<a href="#">leer mas..</a> <?php//aquí iria la url que direcciona a la receta completa?>
-							</div>
-						<?php } ?>
-					</div>
-			</div>
-		</div>
-	</div>
+			<div class="conteiner">
+			<div class="conteiner">
+            <?php for($i=0; $i < 30; $i++) {?> 
+            <div class="card">
+            <img src="../images/descarga.jpg"> 
+            <p>Un platillo esquisito y fácil de cocinar</P> 
+            <a href="#">leer mas..</a> 
+            </div>
+        <?php } ?>
+   </div>
 </body>
 </html>
-    <?php//<div class="conteiner">
-            <?php//<?php for($i=0; $i < 30; $i++) {?> <?php//aquí tendría quue que vincularce con la base de datos y preguntar cuantos registros hay en la tabla 'recipes'?>
-                <?php//<div class="card">
-                    <?php//<img src="../images/descarga.jpg"> <?php//aquí deverian agregarse las imagenes que suban los usuarios de las recetas?>
-                       <?php// <h4><?php ?>
-                          <?php//  echo 'Hamburgesa' ?><?php//</h4><?php//aquí se coloca el nombre del platillo?>
-                   <?php// <p>Un platillo esquisito y fácil de cocinar</P> <?php//aquí va un texto corto para ver si te gusta la receta o no?>
-              <?php//      <a href="#">leer mas..</a> <?php//aquí iria la url que direcciona a la receta completa?>
-            <?php//    </div>
-        <?php//    <?php } ?>
-   <?php// </div>
-<?php//</body>
-<?php//</html>

@@ -6,15 +6,17 @@
 ///////'qt' significa query type. puede llevar los valores:
 
 //////valores publicos (no requieren un usuario logueado). esta seria el api abierto, que se puede acceder por cualquier usuario o pagina (principalmente la nuestra)
-//rd: devuelve los datos de la/s videos indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma 
-//sr: devuelve un array de todos los ids de recetas en el orden pedidio. $v recibe dos letras juntas: a,c,f,v,p para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y 'a' o 'd' siendo ascendiente o descendiente. 
-//cf: devuelve la cantidad de favoritos y la cantidad de favoritos en la ultima semana (popularidad), en un array. Recibe el id de receta en $v
+//rd: (Recipe data) devuelve los datos de la/s recetas indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma 
+//sr: (Search recipe)devuelve un array de todos los ids de recetas en el orden pedidio. $v recibe dos letras juntas: a,c,f,v,p para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y 'a' o 'd' siendo ascendiente o descendiente. 
+//cf: (Count favorites)devuelve la cantidad de favoritos y la cantidad de favoritos en la ultima semana (popularidad), en un array. Recibe el id de receta en $v
 //////valores privados (requieren un usuario logueado con el usuario correcto)
-//dr: recibe un id de receta en $v. La cambia de estado (si esta borrada es recuperada y si no la borra). Devuelve True si quedo sin borra y False si quedó borrada
+//dr: (delete recipe)recibe un id de receta en $v. La cambia de estado (si esta borrada es recuperada y si no la borra). Devuelve True si quedo sin borra y False si quedó borrada
 //mr: NO IMPLEMENTADO recibe El id de la receta en $v (0 si es nueva). Usa variables : name,recipe,code,img. Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el numero de receta si es nuevo
-//yr: funciona igual que sr, pero busca las recetas del usuario ordenadas. Devuelve una lista con als recetas sin borrar y otra con borradas
-//yf: funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. Tambien permite usar el valor 'm' como primera letra para ver mas recientes
-//sf: cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
+
+//yr: (Your recipes)funciona igual que sr, pero busca las recetas del usuario ordenadas. Devuelve una lista con als recetas sin borrar y otra con borradas
+//ys: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. Tambien permite usar el valor 'm' como primera letra para ver mas recientes
+//sf: (Swap favorites)cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
+
 
 
 //ejemplos
@@ -168,7 +170,7 @@ switch($qt){
 				} else { $img_exists=0; }
 			} else { $img_exists=0; }
 			if ($valor==0){
-				$query="INSERT INTO recipes VALUES(,".$id.",'".$_POST['name']."','".$_POST['recipe']."',0,".(isset($_FILES['img']) ? ).")
+				$query="INSERT INTO recipes VALUES(,".$id.",'".$_POST['name']."','".$_POST['recipe']."',0,".(isset($_FILES['img']) ? ).)
 				qq($link, $query);
 			}
 		} else {
