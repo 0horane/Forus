@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2021 a las 13:42:11
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.9
+-- Tiempo de generación: 02-11-2021 a las 21:17:07
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -47,6 +48,22 @@ CREATE TABLE `favorites` (
   `Created_At` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `favorites`
+--
+
+INSERT INTO `favorites` (`User_ID`, `Recipes_ID`, `Created_At`) VALUES
+(2, 5, '2021-10-04 10:41:16'),
+(4, 17, '2021-09-04 17:33:17'),
+(5, 14, '2021-10-21 16:17:34'),
+(6, 2, '2021-11-02 12:22:41'),
+(10, 20, '2021-11-01 14:08:13'),
+(12, 16, '2020-02-12 22:39:21'),
+(15, 28, '2021-07-30 23:51:59'),
+(25, 19, '2018-08-13 10:41:17'),
+(28, 9, '2021-10-25 20:34:13'),
+(30, 4, '2021-09-14 22:40:50');
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +74,7 @@ CREATE TABLE `recipes` (
   `ID` int(11) UNSIGNED NOT NULL,
   `User_ID` int(11) UNSIGNED NOT NULL,
   `Name` varchar(64) NOT NULL,
-  `Recipe` longtext DEFAULT NULL,
+  `Recipe` longtext,
   `Views` int(11) UNSIGNED NOT NULL,
   `img_path` varchar(64) DEFAULT NULL,
   `Code` varchar(16) DEFAULT NULL,

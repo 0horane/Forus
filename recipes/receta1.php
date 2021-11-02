@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1 class="title">Listado de Recetas</h1>
-	<div class="conteiner">
+	<div class="conteiner col-sm-12">
 		<div class="row">
 			<div class="conteiner">
 			<div class="conteiner">
