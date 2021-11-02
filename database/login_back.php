@@ -1,5 +1,11 @@
 <?php
-require_once 'partials/session_start.php';
+require 'partials\session_start.php';
+
+if (isset($_SESSION["id"])){
+	$_SESSION["msg"]="Ya estas logeado";
+	header('Location: index.php');
+	exit;
+}
 
 if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	
@@ -27,7 +33,9 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		
 	
 	
+} else {
+	//$_SESSION["msg"]="nombre de usuario o contraseÑA no ingresado";
 }
 
-
+require 'partials\session_start.php';
 ?>
