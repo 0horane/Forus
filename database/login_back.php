@@ -21,7 +21,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 			header('Location: index.php');
 			exit;
 	   } else {
-			$_SESSION["msg"]="El nombre de usuario o contraseña es incorrecto";
+			$_SESSION["msg"]="El nombre de usuario o contraseña es incorrecto"; // El usuario y/o contraseña esta mal
 	   }
 	}  
 		

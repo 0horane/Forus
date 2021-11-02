@@ -17,11 +17,11 @@
 			<div class="col-12">
 			<?php
 				include_once '../database/database.php';
-				$sql= "SELECT 'Name', 'Recipe', 'Views', 'img_path' FROM `recipes` WHERE 1"
+				$sql= "SELECT 'Name', 'Recipe', 'Views', 'img_path' FROM `recipes` WHERE 1";
 				$resultSet=mysqli_query($link,$sql);
-					while($row=mysqli_query($resultSet)){
+					while($row=mysqli_fetch_assoc($resultSet)){
 						?>
-						<div class="conteiner">
+						<div class="container">
 							<div class="card">
 							<img src="../images/<?php echo $row['img_path'] ?>> 
 							<h4></h4>
@@ -30,8 +30,6 @@
 							</div>
 						<?php } ?>
 					</div>
-					}
-			?>
 			</div>
 		</div>
 	</div>
@@ -41,7 +39,7 @@
             <?php//<?php for($i=0; $i < 30; $i++) {?> <?php//aquí tendría quue que vincularce con la base de datos y preguntar cuantos registros hay en la tabla 'recipes'?>
                 <?php//<div class="card">
                     <?php//<img src="../images/descarga.jpg"> <?php//aquí deverian agregarse las imagenes que suban los usuarios de las recetas?>
-                       <?php// <h4><?php 
+                       <?php// <h4><?php ?>
                           <?php//  echo 'Hamburgesa' ?><?php//</h4><?php//aquí se coloca el nombre del platillo?>
                    <?php// <p>Un platillo esquisito y fácil de cocinar</P> <?php//aquí va un texto corto para ver si te gusta la receta o no?>
               <?php//      <a href="#">leer mas..</a> <?php//aquí iria la url que direcciona a la receta completa?>

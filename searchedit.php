@@ -16,10 +16,6 @@
 		.row{
 			background-color: red;
 		}
-		.info-search{
-			display: flex;
-			justify-content: end;
-		}
 	</style>
 </head>
 <body>
@@ -76,35 +72,9 @@
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
-            <div class="container">
+            <div class="container p-3">
 				<div class="row justify-content-center mt-5 rounded-3">
-					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" width="100%"></a>
-					<div class="col-8">
-						<div style="justify-content:space-between" class="d-flex">
-							<h4 style="display:inline-block">
-								<a href="recipe.php/?r=<?php echo $row['ID']; ?>">
-								<?php echo $row['Name']?>
-								</a>
-							</h4>
-						
-							<span class="text-end"><?php echo $row['Created_At'] ?></span>
-						</div>
-						<p class="info">
-							<?php
-							echo mysqli_fetch_assoc(qq($link, "SELECT UserName FROM users WHERE ID = ".$row['User_ID']))['UserName'];
-							?>                            
-						</p>
-						<p class="description">
-							<?php echo $row['Recipe'];  ?>
-						</p>
-					</div>
-				</div>
-				<div class="info-search">
-					<p><?php echo $row['Views'] ?><span style="color:gray"> 👁</span></p>
-						<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
-						<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
-					</p>
-					<a class="btn btn-primary btn-info btn-sm" href="recipe.php/?r=<?php echo $row['ID']; ?>">Ver más</a>
+					<a class="image-link p-3" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" width="30%"></a>
 				</div>
 				<br>
 			</div>

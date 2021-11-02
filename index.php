@@ -46,7 +46,7 @@
     </video>
     <div class = "container">
       <div id = "absoluto" class = "text-center">
-        <h1 class = "display-1 mt-5">RECETARIO DE COCINA</h1>
+        <h1 class = "display-1 mt-5">Recetario</h1>
         <h3 class = "display-4">Unidos por el amor de la cocina</h3>
       </div>
     </div>
