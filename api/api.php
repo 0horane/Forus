@@ -12,9 +12,11 @@
 //////valores privados (requieren un usuario logueado con el usuario correcto)
 //dr: (delete recipe)recibe un id de receta en $v. La cambia de estado (si esta borrada es recuperada y si no la borra). Devuelve True si quedo sin borra y False si quedó borrada
 //mr: NO IMPLEMENTADO recibe El id de la receta en $v (0 si es nueva). Usa variables : name,recipe,code,img. Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el numero de receta si es nuevo
+
 //yr: (Your recipes)funciona igual que sr, pero busca las recetas del usuario ordenadas. Devuelve una lista con als recetas sin borrar y otra con borradas
 //ys: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. Tambien permite usar el valor 'm' como primera letra para ver mas recientes
 //sf: (Swap favorites)cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
+
 
 
 //ejemplos
@@ -136,22 +138,41 @@ switch($qt){
 
     case 'dr':
         $id=privQSt();
-        $isdel= mysqli_fetch_assoc(qq($link, "SELECT Deleted_At FROM recipes WHERE ID = ".$value))['Deleted_At'];
-        $query="UPDATE recipes SET Deleted_At = ".($isdel ? "NULL" : "NOW()")." WHERE ID = ".$value;
-        qq($link, $query);
-        array_push($json, $isdel ? true : false);
+        $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID,Deleted_At FROM recipes WHERE ID = ".$value));
+		if ($isdel['User_ID']==$id){		
+			$query="UPDATE recipes SET Deleted_At = ".($isdel['Deleted_At'] ? "NULL" : "NOW()")." WHERE ID = ".$value;
+			qq($link, $query);
+			array_push($json, $isdel['Deleted_At'] ? true : false);
+		} else {
+			array_push($json, $isdel['Deleted_At'] ? false : true);
+		}
+		
         break;
 
 
     case 'mr':
 		$id=privQSt();
-		if (isset($_POST['name']) && isset($_POST['recipe']) ){
-			if (isset($_FILE['img'])){
-				
+		if ($valor!=0){
+			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$valor))['User_ID']==$id)){
+				die('[false]');
+			} else {
+				$imagefile=$valor;
 			}
-			
-			
-			
+		} else {
+			$imagefile=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID']+1;
+		}
+		if (isset($_POST['name']) && isset($_POST['recipe'])) {			
+			if (isset($_FILES['img'])){
+				if (strpos($_FILES['img']['type'],'image') && $_FILES['img']['type']<20000 && !($_FILES['img']['error']>0)){
+					
+					move_uploaded_file($_FILES['img']['tmp_name'],"..\\images\\recipe\\".$imagefile.end(explode('.',$_FILES['img']['tmp_name'])));
+					$img_exists=1;
+				} else { $img_exists=0; }
+			} else { $img_exists=0; }
+			if ($valor==0){
+				$query="INSERT INTO recipes VALUES(,".$id.",'".$_POST['name']."','".$_POST['recipe']."',0,".(isset($_FILES['img']) ? ).)
+				qq($link, $query);
+			}
 		} else {
 			array_push($json, false);
 		}
@@ -167,7 +188,7 @@ switch($qt){
 		break;
 
 
-    case 'ys':
+    case 'yf':
 		$id=privQSt();
         $orderarr = str_split($value);
         $query=sortorder($orderarr[0],$orderarr[1],"WHERE recipes.ID = favorites.Recipes_ID AND favorites.User_ID = ".$id." AND Deleted_At IS NULL");
@@ -188,6 +209,7 @@ switch($qt){
 
         
 }
-echo json_encode($json);
+echo filter_var(json_encode($json), FILTER_SANITIZE_STRING);
+
 ?>
 
