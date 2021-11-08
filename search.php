@@ -43,6 +43,7 @@
             max-width: 280px !important;
             border-line: 50px;
         }
+        
 	</style>
     <script>
         //Get the button:
@@ -76,9 +77,8 @@
 
 
 
-        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%'";
+        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%'AND Deleted_At IS NULL"; // Falta arreglar
         $qlen=ceil(mysqli_fetch_assoc(qq($link, "SELECT COUNT(ID) AS cOC".$sqlquery))['cOC']/$perpage);
-        qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
 
 
         if ($page >=$qlen-5){
@@ -98,55 +98,59 @@
             $startpage=0;
         }
 ?>
-        <div class="container-fluid rounded">
-            <ul class="pagination">
-                <?php
-                $temp=$page-1;
-                $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
-                $isdis = 0==$page ? " disabled" : ""; ?>
-                <li class="page-item <?php echo $isdis; ?>"> 
-                    <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=0"; ?>"  <?php echo $isdis; ?>>
-                        «
-                    </a>
-                </li>
-                <li class="page-item ${isdis}"> 
-                    <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
-                        ‹
-                    </a>
-                </li>
-                <?php
-                for ($i=$startpage;$i<$endpage;$i++){
-                    $isdis = $i==$page ? "disabled" : "";
-                    $isact = $i==$page ? " active" : "";
-                    ?>
-                    <li class="page-item <?php echo $isact." ".$isdis ?>">
-                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
+        <div class="container rounded mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="pagination dp-flex justify-content-center">
+                    <?php
+                    $temp=$page-1;
+                    $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
+                    $isdis = 0==$page ? " disabled" : ""; ?>
+                    <li class="page-item <?php echo $isdis; ?>"> 
+                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=0"; ?>"  <?php echo $isdis; ?>>
+                            «
+                        </a>
+                    </li>
+                    <li class="page-item ${isdis}"> 
+                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
+                            ‹
+                        </a>
                     </li>
                     <?php
-                }
-                $temp=$page+1;
-                $temp2=$qlen-1;
-                $isdis = $qlen-1==$page ? "disabled" : "";
-                ?>
+                    for ($i=$startpage;$i<$endpage;$i++){
+                        $isdis = $i==$page ? "disabled" : "";
+                        $isact = $i==$page ? " active" : "";
+                        ?>
+                        <li class="page-item <?php echo $isact." ".$isdis ?>">
+                            <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
+                        </li>
+                        <?php
+                    }
+                    $temp=$page+1;
+                    $temp2=$qlen-1;
+                    $isdis = $qlen-1==$page ? "disabled" : "";
+                    ?>
 
-                <li class="page-item <?php echo $isdis; ?>">
-                    <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=". $temp?>' <?php echo $isdis ?>>
-                        ›
-                    </a>
-                </li>
-                <li class="page-item <?php echo $isdis; ?>">
-                    <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=" . $temp2; ?>' <?php echo $isdis; ?>>
-                        »
-                    </a>
-                </li>
+                    <li class="page-item <?php echo $isdis; ?>">
+                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=". $temp?>' <?php echo $isdis ?>>
+                            ›
+                        </a>
+                    </li>
+                    <li class="page-item <?php echo $isdis; ?>">
+                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=" . $temp2; ?>' <?php echo $isdis; ?>>
+                            »
+                        </a>
+                    </li>
 
 
-                
-                <?php
 
-                $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
-                ?>
-            </ul>
+                    <?php
+
+                    $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
+                    ?>
+                    </ul>
+                </div>
+            </div>
         </div>
         <?php
 
@@ -155,7 +159,7 @@
             ?>
             <button onclick="topFunction()" title="Go to top" id="arriba" href="search.php"class="btn btn-primary shadow">🠥</button>
             <div id="container-search" class="container">
-				<div class="row justify-content-center mt-5 rounded-3">
+				<div class="row justify-content-center mt-3 rounded-3">
 					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" width="100%"></a>
 					<div class="col-8">
 						<div style="justify-content:space-between" class="d-flex">
