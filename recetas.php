@@ -1,4 +1,5 @@
 <?php include 'partials/session_start.php' ?>
+<?php include 'partials/header.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
+<style>
+	#cartita{
+		background-color: red;
+		max-width: 25%;
+	}
+	#cartita img{
+		margin-top: 10px;
+	}
+</style>
 <body> 
 <?php
 include 'database/database.php';
@@ -44,18 +54,23 @@ hacer el ajax que le prometimos al profe, y no nos permite usar las tarjetas que
 */
 while ($fila = mysqli_fetch_assoc($resultado)) {
 ?>
-		<div class="container">
-		<div class="row">
-		<img class="card-img-top" src="images/descarga.jpg" alt="Card image cap">
-		<div class="card-body">
-		<h5 class="card-title"><?php echo $fila["Name"] ?></h5>
-		<p class="card-text">Un platillo esquisito y fácil de cocinar</P> 
-		<a href="#">leer mas..</a> 
+	<div class="container mt-3 dp-flex justify-content-between">
+		<div class="row mt-5">
+			<div id="cartita" class="col-md-4 mt-2">
+				<img src="images/descarga.jpg" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title"><?php echo $fila["Name"] ?></h5>
+					<p class="card-text">Un platillo esquisito y fácil de cocinar</P> 
+					<a href="#">leer mas..</a> 
+				</div>
+			</div>
+
 		</div>
-            </div>
+    </div>
 <?php }?>
-  <p class="text-center mt-5">< *Paginador* ></p>
+<div class="container">
+	<p class="text-center mt-5">< *Paginador* ></p>
   <?php include 'partials/footer.php' ?>
-  </div>
+</div>
 </body>
 </html>
