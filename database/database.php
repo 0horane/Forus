@@ -1,4 +1,4 @@
-<?php
+ <?php
     define('DB_SERVER',"localhost");
     define('DB_USER',"root");
     define('DB_PASS',"");
@@ -17,5 +17,7 @@
         if(!($tres = mysqli_query($link, $query))){exit(mysqli_error($link)." , in query ".$query);}
         return $tres;
     }
+	
+
    
 ?>
