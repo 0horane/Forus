@@ -99,25 +99,54 @@
         }
 ?>
         <div class="container-fluid rounded">
-            <div class="paginador row mt-4 rounded-3">
-                <div class="col-12 text-center d-flex justify-content-between">
+            <ul class="pagination">
                 <?php
                 $temp=$page-1;
                 $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
-                echo "<a class='item-paginador' 'text-center' href='".$_SERVER['REQUEST_URI'].$spchar."page=0'><<</a><span> </span>";
-                echo $page!=0 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'><</a><span> </span>" : '' ;
+                $isdis = 0==$page ? " disabled" : ""; ?>
+                <li class="page-item <?php echo $isdis; ?>"> 
+                    <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=0"; ?>"  <?php echo $isdis; ?>>
+                        «
+                    </a>
+                </li>
+                <li class="page-item ${isdis}"> 
+                    <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
+                        ‹
+                    </a>
+                </li>
+                <?php
                 for ($i=$startpage;$i<$endpage;$i++){
-                    echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=${i}'>${i}</a><span> </span> " ;
+                    $isdis = $i==$page ? "disabled" : "";
+                    $isact = $i==$page ? " active" : "";
+                    ?>
+                    <li class="page-item <?php echo $isact." ".$isdis ?>">
+                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
+                    </li>
+                    <?php
                 }
                 $temp=$page+1;
                 $temp2=$qlen-1;
-                echo $page!=$temp2 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'>></a><span> </span>" : '';
-                echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=" . $temp2 . "'>>></a><span> </span>";
+                $isdis = $qlen-1==$page ? "disabled" : "";
+                ?>
+
+                <li class="page-item <?php echo $isdis; ?>">
+                    <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=". $temp?>' <?php echo $isdis ?>>
+                        ›
+                    </a>
+                </li>
+                <li class="page-item <?php echo $isdis; ?>">
+                    <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=" . $temp2; ?>' <?php echo $isdis; ?>>
+                        »
+                    </a>
+                </li>
+
+
+                
+                <?php
 
                 $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
                 ?>
-                </div>
-            </div>
+            </ul>
         </div>
         <?php
 

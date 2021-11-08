@@ -1,9 +1,19 @@
 <?php 
-	include 'database.php'
+
+
+
+/*
+Esto que pagina es? seria un include para el index? otra vez, ignora todo el procedimiento que esta detallado en la descripción del trello. Esto iba por js
+
+*/
+
+
+
+	include 'database.php';
 	$Populares= 'SELECT Name, Views
 	FROM recipes
 	ORDER BY Views DESC
-	'
+	';
 	$resultado = mysqli_query($link, $sql);
 	echo $Populares;
 	if(!$resultado){

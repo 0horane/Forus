@@ -25,9 +25,26 @@ if(!$resultado){
 	die("Falló la consulta: " . mysqli_error($link));
 }
 
+/*
+No se quien hizo todo esto (dice que fue estrada??) pero ignoró todas las instrucciones en el trello
+
+En el archivo recetas.php
+Recibe infromacion de una tarjeta desde el api usando javascript, y muestra una tarjeta, con la imagen, la parte inicial de la receta,
+ la cantidad de vistas, la cantidad de favoritos, y un boton de ver mas. Si se aprieta este boton manda a la pagina de esta receta.
+
+Campaya Alejandro hace 10 horas
+Fetch API - Referencia de la API Web | MDN
+https://developer.mozilla.org/es/docs/Web/API/Fetch_API
+https://www.javascripttutorial.net/javascript-fetch-api/
+
+
+Lo que estaba puesto antes aca estaba bien, solo hay que agregarle el fetch y meter los datos. Hacerlo desde el php no va a permitir
+hacer el ajax que le prometimos al profe, y no nos permite usar las tarjetas que ya teníamos hechas que funcionaban bien
+
+*/
 while ($fila = mysqli_fetch_assoc($resultado)) {
 ?>
-		<div class="conteiner">
+		<div class="container">
 		<div class="row">
 		<img class="card-img-top" src="images/descarga.jpg" alt="Card image cap">
 		<div class="card-body">

@@ -152,13 +152,13 @@ switch($qt){
 /*
     case 'mr':
 		$id=privQSt();
-		if ($valor!=0){
-			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$valor))['User_ID']==$id)){
+		if ($valor!=0){ //Se fija si la receta es nueva. 
+			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$valor))['User_ID']==$id)){ //se fija si la receta es del usuario
 				die('[false]');
 			} else {
 				$imagefile=$valor;
 			}
-		} else {
+		} else { //da el numero de la receta nueva
 			$imagefile=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID']+1;
 		}
 		if (isset($_POST['name']) && isset($_POST['recipe'])) {			
@@ -183,6 +183,7 @@ switch($qt){
 		}
 		break;
 	*/
+
     case 'yr':
 		$id=privQSt();
         $orderarr = str_split($value);
