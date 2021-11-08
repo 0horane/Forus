@@ -149,7 +149,7 @@ switch($qt){
 		
         break;
 
-
+/*
     case 'mr':
 		$id=privQSt();
 		if ($valor!=0){
@@ -182,7 +182,7 @@ switch($qt){
 			array_push($json, false);
 		}
 		break;
-	
+	*/
     case 'yr':
 		$id=privQSt();
         $orderarr = str_split($value);
