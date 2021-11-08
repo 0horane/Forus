@@ -20,11 +20,11 @@
 
 
 //ejemplos
-//http://localhost/Tarea/proyecto/Forus/api/api.php?qt=rd&v=2,5,8,3
+//http://localhost/Forus/api/api.php?qt=rd&v=2,5,8,3
 /////////devuelve una lista con arrays asociativos para las recetas 2, 3 y 5. La ocho no la devuelve porque esta borrada. Para acceder a la 8 se deberá usar el api privada desde la cuenta correspondiente
-//http://localhost/Tarea/proyecto/Forus/api/api.php?qt=cf&v=3
+//http://localhost/Forus/api/api.php?qt=cf&v=3
 /////////devuelve un array ["2","1"] con el primer numero siendo el total de favoritos de la receta 3 y el segundo siendo solo los de la ultima semana. Este segundo se puede usar para elejir los mas populares. 
-//http://localhost/Tarea/proyecto/Forus/api/api.php?qt=sr&v=fd
+//http://localhost/Forus/api/api.php?qt=sr&v=fd
 /////////devuelve un array con los ids de todos las recetas, en orden de cantidad de favoritos decendiente
 
 function privQSt(){
@@ -149,7 +149,7 @@ switch($qt){
 		
         break;
 
-
+/*
     case 'mr':
 		$id=privQSt();
 		if ($valor!=0){
@@ -170,14 +170,19 @@ switch($qt){
 				} else { $img_exists=0; }
 			} else { $img_exists=0; }
 			if ($valor==0){
-				$query="INSERT INTO recipes VALUES(,".$id.",'".$_POST['name']."','".$_POST['recipe']."',0,".(isset($_FILES['img']) ? ).)
+				$query="INSERT INTO recipes VALUES(
+									".$id.",
+									'".$_POST['name']."',
+									'".$_POST['recipe']."',
+									0,
+									".(isset($_FILES['img']) ? ).) //falta terminar el codigo.
 				qq($link, $query);
 			}
 		} else {
 			array_push($json, false);
 		}
 		break;
-	
+	*/
     case 'yr':
 		$id=privQSt();
         $orderarr = str_split($value);
