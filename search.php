@@ -13,10 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <style>
-
-		.row{
-			background-color: red;
-		}
 		.info-search{
             margin-top: 15px;
 			display: flex;
@@ -35,6 +31,17 @@
         }
         #container-search{
             z-index: -1;
+            height: 450px !important;
+            overflow: hidden;
+        }
+        .paginador a{
+            text-decoration: none;
+            color: black;
+        }
+        .container-fluid{
+            max-height: 0px !important;
+            max-width: 280px !important;
+            border-line: 50px;
         }
 	</style>
     <script>
@@ -90,22 +97,28 @@
         if ($startpage<0){
             $startpage=0;
         }
-        
-        $temp=$page-1;
-        $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
-        echo "<a class= 'text-center' href='".$_SERVER['REQUEST_URI'].$spchar."page=0'><<</a><span> </span>";
-        echo $page!=0 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'><</a><span> </span>" : '' ;
-        for ($i=$startpage;$i<$endpage;$i++){
-            echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=${i}'>${i}</a><span> </span> " ;
-        }
-        $temp=$page+1;
-        $temp2=$qlen-1;
-        echo $page!=$temp2 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'>></a><span> </span>" : '';
-        echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=" . $temp2 . "'>>></a><span> </span>";
-
-        $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
 ?>
+        <div class="container-fluid rounded">
+            <div class="paginador row mt-4 rounded-3">
+                <div class="col-12 text-center d-flex justify-content-between">
+                <?php
+                $temp=$page-1;
+                $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
+                echo "<a class='item-paginador' 'text-center' href='".$_SERVER['REQUEST_URI'].$spchar."page=0'><<</a><span> </span>";
+                echo $page!=0 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'><</a><span> </span>" : '' ;
+                for ($i=$startpage;$i<$endpage;$i++){
+                    echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=${i}'>${i}</a><span> </span> " ;
+                }
+                $temp=$page+1;
+                $temp2=$qlen-1;
+                echo $page!=$temp2 ? "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=". $temp ."'>></a><span> </span>" : '';
+                echo "<a href='".$_SERVER['REQUEST_URI'].$spchar."page=" . $temp2 . "'>>></a><span> </span>";
 
+                $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
+                ?>
+                </div>
+            </div>
+        </div>
         <?php
 
         while ($row=mysqli_fetch_assoc($rows)){
@@ -136,23 +149,21 @@
 						</p>
 					</div>
 				</div>
-				<div class="info-search">
-					<p><?php echo $row['Views'] ?><span style="color:gray"> 👁</span></p>
-						<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
-						<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
-					</p>
-					<a class="btn btn-primary btn-info btn-sm" href="recipe.php/?r=<?php echo $row['ID']; ?>">Ver más</a>
-				</div>
-				<br>
-			</div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="info-search">
+				        <p><?php echo $row['Views'] ?><span style="color:gray"> 👁</span></p>
+				        	<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
+				        	<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
+				        </p>
+				        <a class="btn btn-primary btn-info btn-sm" href="recipe.php/?r=<?php echo $row['ID']; ?>">Ver más</a>
+			        </div>
+			        <br>
+                </div>
+            </div>
+            <div class="espaciado mt-3"></div>
   <?php } ?>
-
-
-
-
-
-
-
 
 <?php } else { ?>
 
