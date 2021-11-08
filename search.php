@@ -76,7 +76,7 @@
 
 
 
-        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%' ";
+        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%'";
         $qlen=ceil(mysqli_fetch_assoc(qq($link, "SELECT COUNT(ID) AS cOC".$sqlquery))['cOC']/$perpage);
         qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
 
