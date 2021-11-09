@@ -9,17 +9,17 @@
 //rd: (Recipe data) devuelve los datos de la/s recetas indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma 
 //sr: (Search recipe)devuelve un array de todos los ids de recetas en el orden pedidio. $v recibe dos letras juntas: a,c,f,v,p para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y 'a' o 'd' siendo ascendiente o descendiente. 
 //cf: (Count favorites)devuelve la cantidad de favoritos y la cantidad de favoritos en la ultima semana (popularidad), en un array. Recibe el id de receta en $v
-//sc: SIN IMPLEMENTAR (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
 //////valores privados (requieren un usuario logueado con el usuario correcto)
 //dr: (delete recipe)recibe un id de receta en $v. La cambia de estado (si esta borrada es recuperada y si no la borra). Devuelve True si quedo sin borra y False si quedó borrada
 //mr: SIN PROBAR (modify recipe) recibe El id de la receta en $v (0 si es nueva). Usa variables : name,recipe,code,img. Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el numero de receta si es nuevo
-//mc: SIN IMPLEMENTAR (modify comment) recibe El id de la receta en $v. Usa variables : id,text .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo
 
 //yr: (Your recipes)funciona igual que sr, pero busca las recetas del usuario ordenadas. Devuelve una lista con als recetas sin borrar y otra con borradas
 //yf: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. ESTO PROXIMO NO ES CIERTO PERO LO AGREGO SI TENGO TIEMPO Tambien permite usar el valor 'm' como primera letra para ver guardadas mas recientes
 //sf: (Swap favorites)cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
 
-
+//sc: SIN PROBAR (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
+//mc: SIN PROBAR (modify comment) recibe el id del comentario en $v. Usa variables : receta,text, .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo. Si es para crear un comentario nuevo, no mandar nada o mandar 0 en id
+//dc: SIN IMPLEMENTAR (delete comment) recibe un id de comentario en $v. La borra si es del usuario logueado. Devuelve True si se borro y False si no
 
 //ejemplos
 //http://localhost/Forus/api/api.php?qt=rd&v=2,5,8,3
@@ -43,7 +43,7 @@ function orderAndPush($query,$link){
     $json=[];
     $result=qq($link, $query);
     while ($row=mysqli_fetch_assoc($result)){
-        array_push($json,$row['ID']);
+        $json[]=$row['ID'];
     }
     return $json;
 };
@@ -85,6 +85,8 @@ if (isset($_GET['v'])) {
     $value='0,25';
 } else if ($qt=='sr') {
     $value='aa';
+} else if($qt=='mr' || $qt=='mc'){
+    $value=0;
 } else {
     exit('{"error":"no query value"}');
 }
@@ -109,7 +111,7 @@ switch($qt){
         }
         $result=qq($link, $query);
         while ($row=mysqli_fetch_assoc($result)){
-            array_push($json, [
+            $json[]=[
                 'id'=>$row['ID'],
                 'user_id'=>$row['User_ID'],
                 'name'=>$row['Name'],
@@ -118,7 +120,7 @@ switch($qt){
                 'img_path'=>$row['img_path'],
                 'created_at'=>$row['Created_At'],
                 'code'=>$row['Code'],
-            ]);
+            ];
         }
         break;
 
@@ -128,7 +130,8 @@ switch($qt){
         $result1=mysqli_fetch_assoc(qq($link, $query))['tf'];
         $query="SELECT COUNT('User_ID') as rf FROM favorites WHERE Recipes_ID=".$value." AND Created_At + INTERVAL 7 DAY > NOW()";
         $result2=mysqli_fetch_assoc(qq($link, $query))['rf'];
-        array_push($json,$result1,$result2);        
+        $json[]=$result1;
+        $json[]=$result2;        
         break;
 
     case 'sr':
@@ -144,9 +147,9 @@ switch($qt){
 		if ($isdel['User_ID']==$id){		
 			$query="UPDATE recipes SET Deleted_At = ".($isdel['Deleted_At'] ? "NULL" : "NOW()")." WHERE ID = ".$value;
 			qq($link, $query);
-			array_push($json, $isdel['Deleted_At'] ? true : false);
+			$json[]= $isdel['Deleted_At'] ? true : false;
 		} else {
-			array_push($json, $isdel['Deleted_At'] ? false : true);
+			$json[]= $isdel['Deleted_At'] ? false : true;
 		}
 		
         break;
@@ -154,11 +157,11 @@ switch($qt){
 
     case 'mr':
 		$id=privQSt();
-		if ($valor!=0){ //Se fija si la receta es nueva. 
-			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$valor))['User_ID']==$id)){ //se fija si la receta es del usuario
+		if ($value!=0){ //Se fija si la receta es nueva. 
+			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$value))['User_ID']==$id)){ //se fija si la receta es del usuario
 				die('[false]');
 			} else {
-				$imagefile=$valor;
+				$imagefile=$value;
 			}
 		} else { //da el numero de la receta nueva
 			$imagefile=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID']+1;
@@ -171,7 +174,7 @@ switch($qt){
 					$img_exists=1;
 				} else { $img_exists=0; }
 			} else { $img_exists=0; }
-			if ($valor==0){ //si la receta es nueva
+			if ($value==0){ //si la receta es nueva
 				$query="INSERT INTO recipes VALUES(
 									NULL,
                                     ".$id.",
@@ -185,7 +188,7 @@ switch($qt){
                                     
                                 )" ;
                 qq($link, $query);
-                array_push($json, $imagefile);
+                $json[]= $imagefile;
                 
 				
 			} else { //si la receta ya existe
@@ -194,12 +197,12 @@ switch($qt){
                     Recipe = '".$_POST['recipe']."'";
                 $query.= $img_exists ? ",img_path = '".$imagefile.end(explode('.',$_FILES['img']['tmp_name']))."'" : "";
                 $query.= $isset($_POST['code']) ? ",Code = '".$_POST['code']."'" : "";
-                $query.= "WHERE recipes.ID = ".$valor;
+                $query.= "WHERE recipes.ID = ".$value;
                 qq($link, $query);
-                array_push($json, true);
+                $json[]= true;
             }
 		} else {
-			array_push($json, false);
+			$json[]= false;
 		}
 		break; //FALTARIA PROBAR< NO SE SI FUNCIONA< PERO NADIE HIZO EL FORM DE PREUBA TODAVIA
 	
@@ -208,9 +211,9 @@ switch($qt){
 		$id=privQSt();
         $orderarr = str_split($value);
         $query=sortorder($orderarr[0],$orderarr[1],"WHERE recipes.User_ID = ".$id." AND Deleted_At IS NULL");
-        array_push($json,orderAndPush($query,$link));
+        $json[]=orderAndPush($query,$link);
 		$query=sortorder($orderarr[0],$orderarr[1],"WHERE recipes.User_ID = ".$id." AND NOT Deleted_At IS NULL");
-        array_push($json,orderAndPush($query,$link));
+        $json[]=orderAndPush($query,$link);
 		break;
 
 
@@ -230,11 +233,59 @@ switch($qt){
 			$query="INSERT INTO favorites VALUES(" . $id . ", " . $value . ", NOW() )";
 		}
         qq($link, $query);
-        array_push($json, $isfav ? false : true);
+        $json[]= $isfav ? false : true;
         break;
 
+
+    case 'sc':
+         $query="SELECT * FROM comments WHERE Recipe_ID=${value} ORDER BY Created_At DESC";
+         $result=qq($link, $query);
+        while ($row=mysqli_fetch_assoc($result)){
+            $json[]=[$row];
+        }
+        break;
+
+    case 'mc':
+        $id=privQSt();
+        if (isset($_POST['text'])){
+            if ($value!=0){ //Se fija si el comment es nuevo. 
+                if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from comments where ID = ".$value))['User_ID']==$id)){ //se fija si la receta es del usuario
+                    die('[false]');
+                } else {
+                    $query="UPDATE comments SET `Text` = '".$_POST['text']."'WHERE ID = ".$value;
+                    qq($link, $query);
+                    $json[]= true;
+                }
+            } else if (isset($_POST['recipe'])) { //da el numero de la receta nueva
+                $query="INSERT INTO comments VALUES(null,${id},${_POST['recipe']},${_POST['text']},NOW())" ;
+                qq($link, $query);
+                $json[]=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID'];
+            } else {
+                $json[]= false;
+            }
+        } else {
+            $json[]= false;
+        }
+    break; //FALTARIA PROBAR< NO SE SI FUNCIONA< PERO NADIE HIZO EL FORM DE PREUBA TODAVIA
+    
+    case 'dr':
+        $id=privQSt();
+        $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID FROM comments WHERE ID = ".$value));
+        if ($isdel['User_ID']==$id){		
+            $query="DELETE FROM comments WHERE ID=${value}";
+            qq($link, $query);
+            $json[]= true;
+        } else {
+            $json[]= false;
+        }
         
+        break;
+
 }
+
+
+
+
 echo filter_var(json_encode($json), FILTER_SANITIZE_STRING);
 
 ?>
