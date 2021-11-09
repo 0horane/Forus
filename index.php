@@ -53,7 +53,7 @@
   </header>
   <div class = "container mt-3">
   <h1 class ="display-1 text-center">Recetas del dia</h1>
-  <div class = "row mt-5 cardbox" >
+  <div id="cardbox" class = "row mt-5" >
     <!--
     <div class="col-md-4 mt-2">
       <div class="card text-center">
@@ -90,19 +90,7 @@
 <?php include 'partials/footer.php' ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-  /*
-  console.log(window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php");
-  $.ajax({
-						url:window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-						dataType:"json", //html, xml,
-            method:"GET",
-            data: {
-              qt: 'sr',
-              v:  'pd'
-            },
-						success:function(result){
-              console.log('hAola')
-						}});
+  
 
 
 $.ajax({
@@ -114,7 +102,6 @@ $.ajax({
     v:  'pd'
   },
   success:function(result){
-    console.log("hola");
     $.ajax({
       url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
       dataType:"json",
@@ -123,13 +110,31 @@ $.ajax({
         v:  `${result[0]},${result[1]},${result[2]}`
       },
       success: function( result ) {
-        console.log("hola");
+        str="";
+        for (x=0;x<3;x++){
+        str+=`<div class="col-md-4 mt-2">
+          <div class="card text-center">
+            <img src="images/recipe/${result[x]['img_path']}" alt="Sin Imagen" onerror=this.src="images/noimage.png" style="clip-path: inset(25% 0% 25% 0%);">
+            <div class="card-body">
+              <h5 class="card-title">${result[x]['name']}</h5>
+              <div style="height:200px;overflow:hidden;">
+              <p class="card-text">${result[x]['recipe']}</p>
+              </div>
+              <a href="recetaParticular.php?r=${result[x]['id']}" class="btn btn-primary mt-1">Ver Mas</a>
+            </div>
+          </div>
+        </div>`;
+        
+        }
+        box=document.getElementById("cardbox");
+        box.innerHTML=str;
+        console.log(str);
       }
     });
   }
 });
 
-*/
+
   console.log("se paso");
 </script>
 </body>

@@ -286,7 +286,6 @@ switch($qt){
 
 
 
-echo filter_var(json_encode($json), FILTER_SANITIZE_STRING);
-
-?>
-
+//echo filter_var(json_encode($json), FILTER_SANITIZE_STRING);
+header("Content-type: application/json; charset=utf-8");
+echo json_encode($json);
