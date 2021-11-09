@@ -16,7 +16,7 @@
     <?php include_once 'partials/header.php'?>
 	<div class="container">
 	<div class="container mt-3">
-		<h4 class="display-4 text-center">Mis Recetas</h4>
+		<h4 class="display-4 text-center">Favoritos</h4>
 		<div class="row mt-4">
 			<div class="col-md-4 mt-2">
 				<div class="card text-center">

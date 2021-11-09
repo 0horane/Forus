@@ -44,8 +44,8 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="navlink-disabled text-center">Mi Actividad</li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-center" href="#">Mis recetas</a></li>
-                <li><a class="dropdown-item text-center" href="#">Favoritos</a></li>
+                <li><a class="dropdown-item text-center" href="misrecetas.php">Mis recetas</a></li>
+                <li><a class="dropdown-item text-center" href="favoritosUser.php">Favoritos</a></li>
               </ul>
             </li>
             <li class="nav-item">
