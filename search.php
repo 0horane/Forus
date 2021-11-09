@@ -44,6 +44,11 @@
             border-line: 50px;
         }
         
+        .image{
+            width="100%"
+
+        }
+
 	</style>
     <script>
         //Get the button:
@@ -77,7 +82,7 @@
 
 
 
-        $sqlquery=" FROM recipes WHERE Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%'AND Deleted_At IS NULL"; // Falta arreglar
+        $sqlquery=" FROM recipes WHERE ( Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%' ) AND Deleted_At IS NULL "; // Falta arreglar
         $qlen=ceil(mysqli_fetch_assoc(qq($link, "SELECT COUNT(ID) AS cOC".$sqlquery))['cOC']/$perpage);
 
 
@@ -111,7 +116,7 @@
                             «
                         </a>
                     </li>
-                    <li class="page-item ${isdis}"> 
+                    <li class="page-item <?php echo $isdis; ?>"> 
                         <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
                             ‹
                         </a>
@@ -160,7 +165,7 @@
             <button onclick="topFunction()" title="Go to top" id="arriba" href="search.php"class="btn btn-primary shadow">🠥</button>
             <div id="container-search" class="container">
 				<div class="row justify-content-center mt-3 rounded-3">
-					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" width="100%"></a>
+					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
 					<div class="col-8">
 						<div style="justify-content:space-between" class="d-flex">
 							<h4 style="display:inline-block">

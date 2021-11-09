@@ -1,6 +1,6 @@
 <?php 
 
-//Todas las variables se pueden mandar por post o get. get tiene prioridad
+//las variables v y qt se pueden mandar por post o get. get tiene prioridad
 
 //'v' es el valor que se ingresa como query (id o limit o numeros separados por coma o lo que sea). 
 ///////'qt' significa query type. puede llevar los valores:
@@ -9,12 +9,14 @@
 //rd: (Recipe data) devuelve los datos de la/s recetas indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma 
 //sr: (Search recipe)devuelve un array de todos los ids de recetas en el orden pedidio. $v recibe dos letras juntas: a,c,f,v,p para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y 'a' o 'd' siendo ascendiente o descendiente. 
 //cf: (Count favorites)devuelve la cantidad de favoritos y la cantidad de favoritos en la ultima semana (popularidad), en un array. Recibe el id de receta en $v
+//sc: SIN IMPLEMENTAR (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
 //////valores privados (requieren un usuario logueado con el usuario correcto)
 //dr: (delete recipe)recibe un id de receta en $v. La cambia de estado (si esta borrada es recuperada y si no la borra). Devuelve True si quedo sin borra y False si quedó borrada
-//mr: NO IMPLEMENTADO recibe El id de la receta en $v (0 si es nueva). Usa variables : name,recipe,code,img. Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el numero de receta si es nuevo
+//mr: SIN PROBAR (modify recipe) recibe El id de la receta en $v (0 si es nueva). Usa variables : name,recipe,code,img. Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el numero de receta si es nuevo
+//mc: SIN IMPLEMENTAR (modify comment) recibe El id de la receta en $v. Usa variables : id,text .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo
 
 //yr: (Your recipes)funciona igual que sr, pero busca las recetas del usuario ordenadas. Devuelve una lista con als recetas sin borrar y otra con borradas
-//ys: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. Tambien permite usar el valor 'm' como primera letra para ver mas recientes
+//yf: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. ESTO PROXIMO NO ES CIERTO PERO LO AGREGO SI TENGO TIEMPO Tambien permite usar el valor 'm' como primera letra para ver guardadas mas recientes
 //sf: (Swap favorites)cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
 
 
@@ -149,7 +151,7 @@ switch($qt){
 		
         break;
 
-/*
+
     case 'mr':
 		$id=privQSt();
 		if ($valor!=0){ //Se fija si la receta es nueva. 
@@ -161,28 +163,46 @@ switch($qt){
 		} else { //da el numero de la receta nueva
 			$imagefile=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID']+1;
 		}
-		if (isset($_POST['name']) && isset($_POST['recipe'])) {			
-			if (isset($_FILES['img'])){
-				if (strpos($_FILES['img']['type'],'image') && $_FILES['img']['type']<20000 && !($_FILES['img']['error']>0)){
+		if (isset($_POST['name']) && isset($_POST['recipe'])) {		 //si estan los requerimientos minimos	
+			if (isset($_FILES['img'])){ //si mandaron imagen
+				if (strpos($_FILES['img']['type'],'image') && $_FILES['img']['type']<20000 && !($_FILES['img']['error']>0)){ //si la imagen es válida
 					
-					move_uploaded_file($_FILES['img']['tmp_name'],"..\\images\\recipe\\".$imagefile.end(explode('.',$_FILES['img']['tmp_name'])));
+					move_uploaded_file($_FILES['img']['tmp_name'],"..\\images\\recipe\\".$imagefile.end(explode('.',$_FILES['img']['tmp_name']))); //mueve la imagen y le pone de nombre el id de receta.png/jpg/etc
 					$img_exists=1;
 				} else { $img_exists=0; }
 			} else { $img_exists=0; }
-			if ($valor==0){
+			if ($valor==0){ //si la receta es nueva
 				$query="INSERT INTO recipes VALUES(
-									".$id.",
+									NULL,
+                                    ".$id.",
 									'".$_POST['name']."',
 									'".$_POST['recipe']."',
 									0,
-									".(isset($_FILES['img']) ? ).) //falta terminar el codigo.
-				qq($link, $query);
-			}
+									".($img_exists ?  '"'.$imagefile.end(explode('.',$_FILES['img']['tmp_name'])).'"' : "NULL" ).",
+                                    '".(isset($_POST['code']) ? $_POST['code'] : "NULL")."',
+                                    NOW(),
+                                    NULL
+                                    
+                                )" ;
+                qq($link, $query);
+                array_push($json, $imagefile);
+                
+				
+			} else { //si la receta ya existe
+                $query="UPDATE recipes SET 
+                    `Name` = '".$_POST['name']."', 
+                    Recipe = '".$_POST['recipe']."'";
+                $query.= $img_exists ? ",img_path = '".$imagefile.end(explode('.',$_FILES['img']['tmp_name']))."'" : "";
+                $query.= $isset($_POST['code']) ? ",Code = '".$_POST['code']."'" : "";
+                $query.= "WHERE recipes.ID = ".$valor;
+                qq($link, $query);
+                array_push($json, true);
+            }
 		} else {
 			array_push($json, false);
 		}
-		break;
-	*/
+		break; //FALTARIA PROBAR< NO SE SI FUNCIONA< PERO NADIE HIZO EL FORM DE PREUBA TODAVIA
+	
 
     case 'yr':
 		$id=privQSt();

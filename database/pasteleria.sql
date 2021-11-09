@@ -144,7 +144,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`ID`, `UserName`, `Password`, `Email`, `Created_At`, `Deleted_At`) VALUES
 (1, 'bel', 'e10adc3949ba59abbe56e057f20f883e', 'bejishiil@arge.as.3', '2021-10-25 19:02:44', NULL),
 (2, 'cathy', 'e10adc3949ba59abbe56e057f20f883e', 'cathy@gmail.com', '2021-10-26 08:49:59', NULL),
-(3, 'camila', 'e10adc3949ba59abbe56e057f20f883e', 'camila123@gmail.com', '2021-10-26 15:33:59', NULL),
+(3, 'lei', '3070910e4d327805abcc9a4c93566a71', 'camila123@gmail.com', '2021-10-26 15:33:59', NULL),
 (4, 'carlos', 'e10adc3949ba59abbe56e057f20f883e', 'carlos123@gmail.com', '2021-10-26 15:43:30', NULL),
 (5, 'karen', 'e10adc3949ba59abbe56e057f20f883e', 'karen1234@gmail.com', '2021-10-26 15:48:41', NULL),
 (6, 'Leandro', 'e10adc3949ba59abbe56e057f20f883e', 'Leandro132@gmail.com', '2021-10-26 21:13:16', '2021-10-26 21:13:16'),
