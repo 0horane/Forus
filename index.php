@@ -54,38 +54,6 @@
   <div class = "container mt-3">
   <h1 class ="display-1 text-center">Recetas del dia</h1>
   <div id="cardbox" class = "row mt-5" >
-    <!--
-    <div class="col-md-4 mt-2">
-      <div class="card text-center">
-        <img src="images/platillodeldia.png" alt="platillodeldia">
-        <div class="card-body">
-          <h5 class="card-title">HOLA</h5>
-          <p class="card-text">Nose</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mt-2">
-      <div class="card text-center">
-        <img src="images/platillodeldia.png" alt="platillodeldia">
-        <div class="card-body">
-          <h5 class="card-title">HOLA</h5>
-          <p class="card-text">Nose</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mt-2">
-      <div class="card text-center">
-        <img src="images/platillodeldia.png" alt="platillodeldia">
-        <div class="card-body">
-          <h5 class="card-title">HOLA</h5>
-          <p class="card-text">Nose</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-  -->
   </div>
 <?php include 'partials/footer.php' ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -112,18 +80,7 @@ $.ajax({
       success: function( result ) {
         str="";
         for (x=0;x<3;x++){
-        str+=`<div class="col-md-4 mt-2">
-          <div class="card text-center">
-            <img src="images/recipe/${result[x]['img_path']}" alt="Sin Imagen" onerror=this.src="images/noimage.png" style="clip-path: inset(25% 0% 25% 0%);">
-            <div class="card-body">
-              <h5 class="card-title">${result[x]['name']}</h5>
-              <div style="height:200px;overflow:hidden;">
-              <p class="card-text">${result[x]['recipe']}</p>
-              </div>
-              <a href="recetaParticular.php?r=${result[x]['id']}" class="btn btn-primary mt-1">Ver Mas</a>
-            </div>
-          </div>
-        </div>`;
+        str+=gencard(result[x][],name,text,author,views,image="");
         
         }
         box=document.getElementById("cardbox");
