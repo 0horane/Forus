@@ -268,7 +268,7 @@ switch($qt){
         }
     break; //FALTARIA PROBAR< NO SE SI FUNCIONA< PERO NADIE HIZO EL FORM DE PREUBA TODAVIA
     
-    case 'dr':
+    case 'dc':
         $id=privQSt();
         $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID FROM comments WHERE ID = ".$value));
         if ($isdel['User_ID']==$id){		

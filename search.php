@@ -82,8 +82,8 @@
 
 
 
-        $sqlquery=" FROM recipes WHERE ( Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%' ) AND Deleted_At IS NULL "; // Falta arreglar
-        $qlen=ceil(mysqli_fetch_assoc(qq($link, "SELECT COUNT(ID) AS cOC".$sqlquery))['cOC']/$perpage);
+        $sqlquery=" FROM recipes INNER JOIN users on recipes.User_ID=users.ID WHERE ( Name LIKE '%".$q."%' OR Recipe LIKE '%".$q."%' OR UserName LIKE  '%".$q."%' ) AND recipes.Deleted_At IS NULL "; // Falta arreglar
+        $qlen=ceil(mysqli_fetch_assoc(qq($link, "SELECT COUNT(recipes.ID) AS cOC".$sqlquery))['cOC']/$perpage);
 
 
         if ($page >=$qlen-5){

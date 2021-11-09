@@ -53,7 +53,8 @@
   </header>
   <div class = "container mt-3">
   <h1 class ="display-1 text-center">Recetas del dia</h1>
-  <div class = "row mt-5">
+  <div class = "row mt-5 cardbox" >
+    <!--
     <div class="col-md-4 mt-2">
       <div class="card text-center">
         <img src="images/platillodeldia.png" alt="platillodeldia">
@@ -84,7 +85,52 @@
         </div>
       </div>
     </div>
+  -->
   </div>
 <?php include 'partials/footer.php' ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  /*
+  console.log(window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php");
+  $.ajax({
+						url:window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+						dataType:"json", //html, xml,
+            method:"GET",
+            data: {
+              qt: 'sr',
+              v:  'pd'
+            },
+						success:function(result){
+              console.log('hAola')
+						}});
+
+
+$.ajax({
+  cache:false,
+  url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+  dataType:"json",
+  data: {
+    qt: 'sr',
+    v:  'pd'
+  },
+  success:function(result){
+    console.log("hola");
+    $.ajax({
+      url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+      dataType:"json",
+      data: {
+        qt: 'rd',
+        v:  `${result[0]},${result[1]},${result[2]}`
+      },
+      success: function( result ) {
+        console.log("hola");
+      }
+    });
+  }
+});
+
+*/
+  console.log("se paso");
+</script>
 </body>
 </html>
