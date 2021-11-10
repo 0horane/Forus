@@ -1,5 +1,7 @@
-<?php include 'partials/session_start.php' ?>
-<?php include 'partials/header.php' ?>
+<?php 
+include 'partials/session_start.php' ;
+require_once 'partials/starfunc.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +90,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     <link rel="shortcut icon" href="cutlery.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
   <script>
@@ -99,14 +102,14 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     <?php include 'partials/header.php'?>
 
 	<form>
-		<select id="condition" name="condition" onchange="submit()">
+		<select id="condition" name="condition" onchange="updateCards ()">
 			<option value='a'>Alfabético</option>
 			<option value='c'>Cronológico</option>
 			<option value='f'>Por Favoritos</option>
 			<option value='v'>Por Vistas</option>
 			<option value='p'>Por Popularidad</option>
 		</select>
-		<select name="direction" onchange="submit()">
+		<select id="direction" name="direction" onchange="updateCards ()">
 			<option value='a'>Ascendiente</option>
 			<option value='d'>Descendiente</option>
 
@@ -117,27 +120,54 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 		<div class = "container mt-3">
 			<h1 class ="display-1 text-center">Recetas</h1>
 			<div id="cardbox" class = "row mt-5">
-			<?php for ($x=0;$x<9;$x++){ ?>
-				<div class="col-md-4 mt-2">
-					<div class="card text-center">
-						<img src="images/platillodeldia.png" alt="platillodeldia">
-						<div class="card-body">
-							<h5 class="card-title">HOLA</h5>
-							<p class="card-text">Nose</p>
-							<a href="recipes/receta1.php" class="btn btn-primary">Go somewhere</a>
-						</div>
-					</div>
-				</div>
-			<?php } ?>
+
 				
 			</div>
 		</div>
 	<script>
 
 		function updateCards (){
+			conditionElement = document.getElementById('condition');
+			condition=conditionElement.options[conditionElement.selectedIndex].value;
+			directionElement = document.getElementById('direction');
+			direction=directionElement.options[directionElement.selectedIndex].value;
+			//console.log(`${condition},${direction}`);
+			let str="";
+			$.ajax({
+				url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+				dataType:"json",
+				data: {
+					qt: 'sr',
+					v:  `${condition}${direction}`
+				},
+				success: function( result ) {
+					//console.log(result);
+					let ajaxvalues=[];
+					for (i=page*9+1;i<page*9+10;i++){
+						ajaxvalues.push(result[i]);
+					}
+					$.ajax({
+						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+						dataType:"json",
+						data: {
+							qt: 'rd',
+							v:  ajaxvalues.join(',')
+						},
+						success: function( result ) {
+							result.forEach(recipe=>{
+								//console.log(recipe);
+								str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
+							});
+							document.getElementById('cardbox').innerHTML=str;
+						}
+					});
+				}
+			});
 
+
+			
 		}
-
+		updateCards ()
 	</script>
 	<?php include 'partials/footer.php' ?>
   	</div>

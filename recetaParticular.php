@@ -127,7 +127,7 @@ require_once 'partials/session_start.php';
                     let str="";
                     console.log(result);
                     result.forEach(comment=>{
-                        console.log(comment);
+                        //console.log(comment);
                         str+=`<div class="comentarios p-2 mt-2">
                                 <div class="titulo-comentarios">
                                     <h6>${comment[0]['UserName']}</h6>
