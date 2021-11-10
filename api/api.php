@@ -1,5 +1,5 @@
 <?php 
-
+header("Content-type: application/json; charset=utf-8");
 //las variables v y qt se pueden mandar por post o get. get tiene prioridad
 
 //'v' es el valor que se ingresa como query (id o limit o numeros separados por coma o lo que sea). 
@@ -98,29 +98,35 @@ $json=[];
 switch($qt){
     case 'rd':
         if (is_numeric($value)){
-            $query="SELECT * FROM recipes WHERE ID =".$value." AND Deleted_At IS NULL";
+            $query="SELECT recipes.*,UserName FROM recipes INNER JOIN users ON users.ID=recipes.User_ID WHERE recipes.ID =".$value." AND recipes.Deleted_At IS NULL";
         }
         else {
             
             $idarr=explode (",", $value);
-            $query="SELECT * FROM recipes WHERE ( 0 ";
+            $query="SELECT recipes.*,UserName FROM recipes INNER JOIN users ON users.ID=recipes.User_ID WHERE ( 0 ";
             foreach ($idarr as $subid){
-                $query.="OR ID=".$subid." ";
+                $query.="OR recipes.ID=".$subid." ";
             }
-            $query.=" ) AND Deleted_At IS NULL";
+            $query.=" ) AND recipes.Deleted_At IS NULL";
         }
         $result=qq($link, $query);
-        while ($row=mysqli_fetch_assoc($result)){
-            $json[]=[
-                'id'=>$row['ID'],
-                'user_id'=>$row['User_ID'],
-                'name'=>$row['Name'],
-                'recipe'=>$row['Recipe'],
-                'views'=>$row['Views'],
-                'img_path'=>$row['img_path'],
-                'created_at'=>$row['Created_At'],
-                'code'=>$row['Code'],
-            ];
+        if(mysqli_fetch_assoc($result)){
+            mysqli_data_seek($result,0);
+            while ($row=mysqli_fetch_assoc($result)){
+                $json[]=[
+                    'id'=>$row['ID'],
+                    'user_id'=>$row['User_ID'],
+                    'username'=>$row['UserName'],
+                    'name'=>$row['Name'],
+                    'recipe'=>$row['Recipe'],
+                    'views'=>$row['Views'],
+                    'img_path'=>$row['img_path'],
+                    'created_at'=>$row['Created_At'],
+                    'code'=>$row['Code'],
+                ];
+            }
+        } else {
+            die('false');
         }
         break;
 
@@ -147,9 +153,9 @@ switch($qt){
 		if ($isdel['User_ID']==$id){		
 			$query="UPDATE recipes SET Deleted_At = ".($isdel['Deleted_At'] ? "NULL" : "NOW()")." WHERE ID = ".$value;
 			qq($link, $query);
-			$json[]= $isdel['Deleted_At'] ? true : false;
+			die( $isdel['Deleted_At'] ? 'true' : 'false');
 		} else {
-			$json[]= $isdel['Deleted_At'] ? false : true;
+			die( $isdel['Deleted_At'] ? 'false' : 'true');
 		}
 		
         break;
@@ -159,7 +165,7 @@ switch($qt){
 		$id=privQSt();
 		if ($value!=0){ //Se fija si la receta es nueva. 
 			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$value))['User_ID']==$id)){ //se fija si la receta es del usuario
-				die('[false]');
+				die('false');
 			} else {
 				$imagefile=$value;
 			}
@@ -199,10 +205,10 @@ switch($qt){
                 $query.= $isset($_POST['code']) ? ",Code = '".$_POST['code']."'" : "";
                 $query.= "WHERE recipes.ID = ".$value;
                 qq($link, $query);
-                $json[]= true;
+                die('true');
             }
 		} else {
-			$json[]= false;
+			die('false');
 		}
 		break; //FALTARIA PROBAR< NO SE SI FUNCIONA< PERO NADIE HIZO EL FORM DE PREUBA TODAVIA
 	
@@ -233,12 +239,12 @@ switch($qt){
 			$query="INSERT INTO favorites VALUES(" . $id . ", " . $value . ", NOW() )";
 		}
         qq($link, $query);
-        $json[]= $isfav ? false : true;
+        die( $isfav ? 'false' : 'true');
         break;
 
 
     case 'sc':
-         $query="SELECT * FROM comments WHERE Recipe_ID=${value} ORDER BY Created_At DESC";
+         $query="SELECT comments.*,UserName FROM comments INNER JOIN users on users.ID=comments.User_ID WHERE comments.Recipe_ID=${value} ORDER BY comments.Created_At DESC";
          $result=qq($link, $query);
         while ($row=mysqli_fetch_assoc($result)){
             $json[]=[$row];
@@ -250,21 +256,21 @@ switch($qt){
         if (isset($_POST['text'])){
             if ($value!=0){ //Se fija si el comment es nuevo. 
                 if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from comments where ID = ".$value))['User_ID']==$id)){ //se fija si la receta es del usuario
-                    die('[false]');
+                    die('false');
                 } else {
                     $query="UPDATE comments SET `Text` = '".$_POST['text']."'WHERE ID = ".$value;
                     qq($link, $query);
-                    $json[]= true;
+                    die('true');
                 }
             } else if (isset($_POST['recipe'])) { //da el numero de la receta nueva
                 $query="INSERT INTO comments VALUES(null,${id},${_POST['recipe']},${_POST['text']},NOW())" ;
                 qq($link, $query);
                 $json[]=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID'];
             } else {
-                $json[]= false;
+                die('false');
             }
         } else {
-            $json[]= false;
+            die('false');
         }
     break; //FALTARIA PROBAR< NO SE SI FUNCIONA< PERO NADIE HIZO EL FORM DE PREUBA TODAVIA
     
@@ -274,9 +280,9 @@ switch($qt){
         if ($isdel['User_ID']==$id){		
             $query="DELETE FROM comments WHERE ID=${value}";
             qq($link, $query);
-            $json[]= true;
+            die('true');
         } else {
-            $json[]= false;
+            die('false');
         }
         
         break;
@@ -287,5 +293,5 @@ switch($qt){
 
 
 //echo filter_var(json_encode($json), FILTER_SANITIZE_STRING);
-header("Content-type: application/json; charset=utf-8");
+
 echo json_encode($json);

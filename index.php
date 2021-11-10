@@ -1,6 +1,7 @@
 <?php
     require_once 'database/database.php';
     require_once 'partials/session_start.php';
+    require_once 'partials/starfunc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
 </head>
 <style>
   body{
-    background-clip: url("vids/backgroundVid.mp4");
+    background-clip: url("vids/backgroundVid.mp4"); 
   }
   header{
     width: 100%;
@@ -80,9 +81,11 @@ $.ajax({
       success: function( result ) {
         str="";
         for (x=0;x<3;x++){
-        str+=gencard(result[x][],name,text,author,views,image="");
+          console.log(result);
+        str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path']);
         
         }
+
         box=document.getElementById("cardbox");
         box.innerHTML=str;
         console.log(str);

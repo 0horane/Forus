@@ -103,9 +103,10 @@
             $startpage=0;
         }
 ?>
-        <div class="container rounded mt-3">
+        <div class="container rounded mt-3" >
             <div class="row">
                 <div class="col-12">
+                    <?php if ($qlen>$perpage){ ?>
                     <ul class="pagination dp-flex justify-content-center">
                     <?php
                     $temp=$page-1;
@@ -147,29 +148,25 @@
                         </a>
                     </li>
 
-
-
-                    <?php
-
-                    $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
-                    ?>
                     </ul>
+                    <?php } ?>
                 </div>
             </div>
         </div>
         <?php
-
+        $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
             <button onclick="topFunction()" title="Go to top" id="arriba" href="search.php"class="btn btn-primary shadow">🠥</button>
+            <div style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;">
             <div id="container-search" class="container">
 				<div class="row justify-content-center mt-3 rounded-3">
-					<a class="image-link p-2 col-4" href="recipe.php/?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
+					<a class="image-link p-2 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
 					<div class="col-8">
 						<div style="justify-content:space-between" class="d-flex">
 							<h4 style="display:inline-block">
-								<a href="recipe.php/?r=<?php echo $row['ID']; ?>">
+								<a href="recetaParticular.php?r=<?php echo $row['ID']; ?>">
 								 <?php echo $row['Name']?>
 								</a>
 							</h4>
@@ -195,10 +192,11 @@
 				        	<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
 				        	<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
 				        </p>
-				        <a class="btn btn-primary btn-info btn-sm" href="recipe.php/?r=<?php echo $row['ID']; ?>">Ver más</a>
+				        <a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
 			        </div>
 			        <br>
                 </div>
+            </div>
             </div>
             <div class="espaciado mt-3"></div>
   <?php } ?>

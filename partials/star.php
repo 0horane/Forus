@@ -1,1 +1,1 @@
-<p style="color:gold;">star</p>
+<span style="color:gold;">star</span>
