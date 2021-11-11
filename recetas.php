@@ -100,7 +100,7 @@ require_once 'partials/starfunc.php';
 							v:  ajaxvalues.join(',')
 						},
 						success: function( result ) {
-						var cantidadDePaginas = Math.ceil(result.length/9); 
+						<?php /*var cantidadDePaginas = Math.ceil(result.length/9); 
 						        if (page >=cantidadDePaginas-5){
             startpage=cantidadDePaginas-10;
             endpage=cantidadDePaginas;
@@ -171,7 +171,7 @@ require_once 'partials/starfunc.php';
 						
 						
 						
-						
+						*/?>
 							
 							result.forEach(recipe=>{
 								//console.log(recipe);
