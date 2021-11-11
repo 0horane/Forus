@@ -24,60 +24,6 @@ require_once 'partials/starfunc.php';
 	}
 </style>
 <body> 
-<?php /*
-include 'database/database.php';
-$sqlRecipes='SELECT Name, Views
-					FROM recipes
-					ORDER BY Views DESC';
-				
-					;
-$resultado = mysqli_query($link, $sqlRecipes);
-
-if(!$resultado){
-	die("Falló la consulta: " . mysqli_error($link));
-}
-
-/*
-No se quien hizo todo esto (dice que fue estrada??) pero ignoró todas las instrucciones en el trello
-
-En el archivo recetas.php
-Recibe infromacion de una tarjeta desde el api usando javascript, y muestra una tarjeta, con la imagen, la parte inicial de la receta,
- la cantidad de vistas, la cantidad de favoritos, y un boton de ver mas. Si se aprieta este boton manda a la pagina de esta receta.
-
-Campaya Alejandro hace 10 horas
-Fetch API - Referencia de la API Web | MDN
-https://developer.mozilla.org/es/docs/Web/API/Fetch_API
-https://www.javascripttutorial.net/javascript-fetch-api/
-
-
-Lo que estaba puesto antes aca estaba bien, solo hay que agregarle el fetch y meter los datos. Hacerlo desde el php no va a permitir
-hacer el ajax que le prometimos al profe, y no nos permite usar las tarjetas que ya teníamos hechas que funcionaban bien
-
-
-while ($fila = mysqli_fetch_assoc($resultado)) {
-
-
-	<div class="container mt-3 dp-flex justify-content-between">
-		<div class="row mt-5">
-			<div id="cartita" class="col-md-4 mt-2">
-				<img src="images/descarga.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title"><?php echo $fila["Name"] ?></h5>
-					<p class="card-text">Un platillo esquisito y fácil de cocinar</P> 
-					<a href="#">leer mas..</a> 
-				</div>
-			</div>
-
-		</div>
-    </div>
-<?php }?>
-<div class="container">
-	<p class="text-center mt-5">< *Paginador* ></p>
-  <?php include 'partials/footer.php' ?>
- 
-</div>
- */ ?>
-
 
 <?php include 'partials/session_start.php' ?>
 <!DOCTYPE html>
@@ -154,6 +100,79 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 							v:  ajaxvalues.join(',')
 						},
 						success: function( result ) {
+						var cantidadDePaginas = Math.ceil(result.length/9); 
+						        if (page >=cantidadDePaginas-5){
+            startpage=cantidadDePaginas-10;
+            endpage=cantidadDePaginas;
+            
+        } else if ($page>=5){
+            startpage=$page-5;
+            endpage=$page+5;
+        
+        } else{
+            startpage=0;
+            endpage=10;
+            
+        }
+        if (startpage<0){
+            startpage=0;
+        }
+?>
+        <div class="container rounded mt-3" >
+            <div class="row">
+                <div class="col-12">
+                    <?php if ($qlen>$perpage){ ?>
+                    <ul class="pagination dp-flex justify-content-center">
+                    <?php
+                    $temp=$page-1;
+                    $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
+                    $isdis = 0==$page ? " disabled" : ""; ?>
+                    <li class="page-item <?php echo $isdis; ?>"> 
+                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=0"; ?>"  <?php echo $isdis; ?>>
+                            «
+                        </a>
+                    </li>
+                    <li class="page-item <?php echo $isdis; ?>"> 
+                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
+                            ‹
+                        </a>
+                    </li>
+                    <?php
+                    for ($i=$startpage;$i<$endpage;$i++){
+                        $isdis = $i==$page ? "disabled" : "";
+                        $isact = $i==$page ? " active" : "";
+                        ?>
+                        <li class="page-item <?php echo $isact." ".$isdis ?>">
+                            <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
+                        </li>
+                        <?php
+                    }
+                    $temp=$page+1;
+                    $temp2=$qlen-1;
+                    $isdis = $qlen-1==$page ? "disabled" : "";
+                    ?>
+
+                    <li class="page-item <?php echo $isdis; ?>">
+                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=". $temp?>' <?php echo $isdis ?>>
+                            ›
+                        </a>
+                    </li>
+                    <li class="page-item <?php echo $isdis; ?>">
+                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=" . $temp2; ?>' <?php echo $isdis; ?>>
+                            »
+                        </a>
+                    </li>
+
+                    </ul>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+						
+						
+						
+						
+							
 							result.forEach(recipe=>{
 								//console.log(recipe);
 								str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
