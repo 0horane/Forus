@@ -87,10 +87,69 @@ require_once 'partials/starfunc.php';
 					v:  `${condition}${direction}`
 				},
 				success: function( result ) {
+
+					var cantidadDePaginas = Math.ceil(result.length/9); 
+						console.log(result);
+						if (page >=cantidadDePaginas-5){
+							startpage=cantidadDePaginas-10;
+							endpage=cantidadDePaginas;
+            
+						} else if (page>=5){
+							startpage=page-5;
+							endpage=page+5;
+        
+						} else{
+							startpage=0;
+							endpage=10;
+            
+						}
+						if (startpage<0){
+							startpage=0;
+						}
+
+						str+= `<div class='container rounded mt-3' >
+							<div class="row">
+								<div class="col-12">
+									<ul class="pagination dp-flex justify-content-center">
+									<li class="page-item ${page ==0 ? 'disabled': ''}"> 
+										<a class="page-link" onclick = " page=0; updateCards ()"  ${page ==0 ? "disabled": ""}>
+											«
+										</a>
+									</li>
+									<li class="page-item ${page ==0 ? 'disabled': ''}"> 
+										<a class="page-link" onclick = " page-=1; updateCards ()"  ${page ==0 ? "disabled": ""}>
+											‹
+										</a>
+									</li>`;
+									
+						for (i=startpage;i<endpage;i++) {
+										str+= `<li class="page-item ${page ==i ? 'active disabled': ''} ">
+											<a class="page-link" onclick = " page=${i}; updateCards ()"  ${page ==i ? "disabled": ""}> ${i} </a>
+										</li>`;
+									}
+									
+									
+									str+=`<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
+										<a class="page-link" onclick = " page+=1; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}>
+											›
+										</a>
+									</li>
+									<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
+										<a class="page-link" onclick = " page=${cantidadDePaginas-1}; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}> 
+											»
+										</a>
+									</li>
+
+									</ul>
+								</div>
+							</div>
+						</div>`;
 					//console.log(result);
 					let ajaxvalues=[];
 					for (i=page*9+1;i<page*9+10;i++){
+						if (result[i]){
 						ajaxvalues.push(result[i]);
+						}
 					}
 					$.ajax({
 						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
@@ -100,78 +159,11 @@ require_once 'partials/starfunc.php';
 							v:  ajaxvalues.join(',')
 						},
 						success: function( result ) {
-						<?php /*var cantidadDePaginas = Math.ceil(result.length/9); 
-						        if (page >=cantidadDePaginas-5){
-            startpage=cantidadDePaginas-10;
-            endpage=cantidadDePaginas;
-            
-        } else if ($page>=5){
-            startpage=$page-5;
-            endpage=$page+5;
-        
-        } else{
-            startpage=0;
-            endpage=10;
-            
-        }
-        if (startpage<0){
-            startpage=0;
-        }
-?>
-        <div class="container rounded mt-3" >
-            <div class="row">
-                <div class="col-12">
-                    <?php if ($qlen>$perpage){ ?>
-                    <ul class="pagination dp-flex justify-content-center">
-                    <?php
-                    $temp=$page-1;
-                    $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
-                    $isdis = 0==$page ? " disabled" : ""; ?>
-                    <li class="page-item <?php echo $isdis; ?>"> 
-                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=0"; ?>"  <?php echo $isdis; ?>>
-                            «
-                        </a>
-                    </li>
-                    <li class="page-item <?php echo $isdis; ?>"> 
-                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
-                            ‹
-                        </a>
-                    </li>
-                    <?php
-                    for ($i=$startpage;$i<$endpage;$i++){
-                        $isdis = $i==$page ? "disabled" : "";
-                        $isact = $i==$page ? " active" : "";
-                        ?>
-                        <li class="page-item <?php echo $isact." ".$isdis ?>">
-                            <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
-                        </li>
-                        <?php
-                    }
-                    $temp=$page+1;
-                    $temp2=$qlen-1;
-                    $isdis = $qlen-1==$page ? "disabled" : "";
-                    ?>
-
-                    <li class="page-item <?php echo $isdis; ?>">
-                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=". $temp?>' <?php echo $isdis ?>>
-                            ›
-                        </a>
-                    </li>
-                    <li class="page-item <?php echo $isdis; ?>">
-                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=" . $temp2; ?>' <?php echo $isdis; ?>>
-                            »
-                        </a>
-                    </li>
-
-                    </ul>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
+						 console.log(result);
 						
 						
 						
-						*/?>
+						
 							
 							result.forEach(recipe=>{
 								//console.log(recipe);
