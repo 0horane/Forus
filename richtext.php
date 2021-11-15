@@ -1,4 +1,5 @@
-<?php 
+<?php
+	include 'partials/session_start.php' ;
 	echo "<pre>";
 	print_r($_POST);
 	echo "</pre>";
@@ -11,8 +12,9 @@
 		<script>
 			$(function() {
 				$('#save').click(function() {
-						var mysave = $('#editor').html();
+						var mysave = $('.ck-content').html();
 						console.log(mysave);
+						
 						$('#text-area').val(mysave);
 				});
 			});
@@ -21,12 +23,11 @@
 	</head>
 	<body>
 		<div class="cont1">
-			<h1> Texto de ejemplo </h1>
-			<form action"" method="post">
+			<form action="http://localhost/Forus/api/api.php?qt=mr&v=0" method="post">
 				<div name="texto" id="editor">
-					<p name="a">segundo texto de ejemplo</p>
+					
 				</div>
-				<textarea name="text-area" id="text-area">
+				<textarea name="text-area" id="text-area" style="display:none;">
 				</textarea>
 				<input id="save" name="b" type='submit'>
 			</form>

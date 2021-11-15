@@ -46,11 +46,8 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-center" href="misrecetas.php">Mis recetas</a></li>
                 <li><a class="dropdown-item text-center" href="favoritosUser.php">Favoritos</a></li>
+				<li><a id="logout" class="dropdown-item text-center" href="database/logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Cerrar Sesion</a></li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a id="logout"class="nav-link" aria-current="page" href="database/logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Logout</a>
-            </li>
 
             <?php
           }
