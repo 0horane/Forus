@@ -71,6 +71,7 @@ $.ajax({
     v:  'pd'
   },
   success:function(result){
+	  console.log(`${result[0]},${result[1]},${result[2]}`);
     $.ajax({
       url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
       dataType:"json",
@@ -82,7 +83,7 @@ $.ajax({
         str="";
         for (x=0;x<3;x++){
           console.log(result);
-        str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path']);
+        str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path'],result[x]['code'], (<?php echo strval($loggedin) ?> ? true : false), false);
         
         }
 
