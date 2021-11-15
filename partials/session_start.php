@@ -11,8 +11,15 @@ if (isset($_SESSION["msg"])){
     <script>
 		
 		function showErrMsg(){
-			setTimeout(function() { alert('<?php echo $_SESSION["msg"]; ?>'); }, 0.01);
-			
+			setTimeout(function() {
+				Swal.fire({
+					icon: "<?php echo $_SESSION["icon"]; ?>",
+					title: "<?php echo $_SESSION["msg"]; ?>",
+					backdrop: true,
+					timer: 2000
+				});
+			}, 0.01);
+
 		}
 		
 		window.onload=showErrMsg;

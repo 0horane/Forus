@@ -3,6 +3,7 @@ require 'partials\session_start.php';
 
 if (isset($_SESSION["id"])){
 	$_SESSION["msg"]="Ya estas logeado";
+	$_SESSION["icon"]="success";
 	header('Location: index.php');
 	exit;
 }
@@ -25,22 +26,25 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !
 
 				$_SESSION["user"]=$_POST['usr'];
 				$_SESSION["msg"]="account created";
+				$_SESSION["icon"]="success";
 				$sqlquery='select * from users where users.UserName = "' . $_SESSION["user"] . '"';
 				$_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["ID"];
 				header('Location: index.php');
 				exit;
 			} else { 
 				$_SESSION["msg"]= 'este usuario ya existe';
-			   
+				$_SESSION["icon"]="error";
 			}  
 		
 		} else {
 			$_SESSION["msg"]= 'SSon diferentes las contraseñas';
+			$_SESSION["icon"]="error";
 		}
 	
 } else {
-	if(!empty($_POST['usr']) || !empty($_POST['pwd']) || !empty($_POST['Email']) || !empty($_POST['pwdc'])){
-		   echo("no completaste todos los campos");
+	if(empty($_POST['usr']) || empty($_POST['pwd']) || empty($_POST['Email']) || empty($_POST['pwdc'])){
+			$_SESSION["msg"]= 'No completaste todos los datos';
+			$_SESSION["icon"]="error";
 	   }}
 	   
 require 'partials\session_start.php';
