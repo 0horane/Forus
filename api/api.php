@@ -45,6 +45,9 @@ function orderAndPush($query,$link){
     while ($row=mysqli_fetch_assoc($result)){
         $json[]=$row['ID'];
     }
+    if (count($json)==0){
+        $json[]="0";
+    }
     return $json;
 };
 
