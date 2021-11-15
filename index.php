@@ -97,5 +97,6 @@ $.ajax({
 
   console.log("se paso");
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>
