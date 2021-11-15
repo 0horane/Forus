@@ -173,7 +173,7 @@ switch($qt){
 				$imagefile=$value;
 			}
 		} else { //da el numero de la receta nueva
-			$imagefile=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID']+1;
+			$imagefile=mysqli_fetch_assoc(qq($link, "SELECT MAX(ID) AS maxID FROM recipes"))['maxID']+1;
 		}
 		if (isset($_POST['name']) && isset($_POST['recipe'])) {		 //si estan los requerimientos minimos	
 			if (isset($_FILES['img'])){ //si mandaron imagen

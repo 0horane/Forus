@@ -1,4 +1,5 @@
-<?php 
+<?php
+	include 'partials/session_start.php' ;
 	echo "<pre>";
 	print_r($_POST);
 	echo "</pre>";
@@ -22,7 +23,7 @@
 	</head>
 	<body>
 		<div class="cont1">
-			<form action"" method="post">
+			<form action="http://localhost/Forus/api/api.php?qt=mr&v=0" method="post">
 				<div name="texto" id="editor">
 					
 				</div>
