@@ -35,10 +35,11 @@ header("Content-type: application/json; charset=utf-8");
 
 function privQSt(){
     require_once '..\partials\session_start.php'; 
+    
     if (isset($_SESSION['id'])){
         return $_SESSION['id'];
     } else {
-        
+        var_dump($_SESSION);
         exit('{"error":"This call requires being logged in","$_SESSION:"'.print_r($_SESSION).'}');
     }
 }

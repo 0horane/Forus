@@ -42,7 +42,7 @@
             ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php echo $_SESSION["user"] ?>
+                <?php echo htmlspecialchars($_SESSION["user"]) ?>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="navlink-disabled text-center">Mi Actividad</li>

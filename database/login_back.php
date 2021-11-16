@@ -17,16 +17,15 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		$_SESSION["msg"]="El nombre de usuario o contraseña es incorrecto";
 		$_SESSION["icon"]="error";
 	} else { 
-		if  (md5($_POST['pwd']) == mysqli_fetch_assoc($result)["Password"]){
+		if  (md5($_POST['pwd']) == ($assoc= mysqli_fetch_assoc($result))["Password"]){
 		//   echo("logged in");
 		   session_unset();
 		   session_destroy();
 		   session_start();
-		   $_SESSION["user"]=$_POST['usr'];
+		   $_SESSION["user"]=mysqli_real_escape_string($link,$_POST['usr']);
 		   $_SESSION["msg"]="logged in";
 		   $_SESSION["icon"]="success";
-		   $sqlquery='select * from users where users.UserName = "' . mysqli_real_escape_string($link, $_SESSION["user"]) . '"';
-		   $_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["ID"];
+		   $_SESSION["id"]=$assoc["ID"];
 			header('Location: index.php');
 			exit;
 	   } else {

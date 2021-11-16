@@ -24,7 +24,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !
 				session_destroy();
 				session_start();
 
-				$_SESSION["user"]=$_POST['usr'];
+				$_SESSION["user"]=mysqli_real_escape_string($link, htmlspecialchars($_POST['usr']));
 				$_SESSION["msg"]="account created";
 				$_SESSION["icon"]="success";
 				$sqlquery='select * from users where users.UserName = "' . $_SESSION["user"] . '"';
