@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2021 a las 13:55:25
+-- Tiempo de generación: 16-11-2021 a las 12:43:19
 -- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.11
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -127,10 +127,7 @@ INSERT INTO `recipes` (`ID`, `User_ID`, `Name`, `Recipe`, `Views`, `img_path`, `
 (27, 25, 'Pechugas de pollo rellenas de jamón y queso', 'Ingredientes:\r\n2 filetes de pechuga de pollo\r\n1 rodaja de jamón york\r\n1 rodaja de queso para sándwich\r\nHarina\r\n2 huevos\r\nPan rallado\r\nSal y pimienta\r\naceite\r\n\r\nProcedimiento:\r\n1.- Salpimentamos los filetes de pollo. Los filetes lo venden ya envasados en cualquier supermercado. También puedes encontrarlos en cualquier carnicería, si se lo pides al carnicero te lo va a hacer y si no, puedes hacerlo tú mismo en casa a partir de una pechuga de pollo entera.\r\n\r\n2.- Cubrimos uno de los filetes con el queso. Encima, ponemos una rodaja de jamón cocido (si no cabe entera, puedes doblarla por la mitad) y encima, cubrimos con más queso para sándwich. Finalmente tapamos con otro filete de pechuga de pollo\r\n\r\n3.- Cogemos con los dedos y firmemente la pechuga de pollo rellena de jamón y queso, que no se deshaga ni se salga el relleno y lo pasamos todo primero por harina, después por huevo batido, al cual previamente le habremos echado una pizquita de sal y finalmente por pan rallado. Reservamos en un plato.\r\n\r\n4.- Cuando hayamos empanado bien todas las pechugas, congelamos durante 10 minutos o metemos en la nevera una hora. El objetivo es hacer que el empanado se asiente bien en el pollo\r\n\r\n5.- Freír en abundante aceite hasta que quede bien dorado por fuera y cocinado por dentro. Un par de minutos. Finalmente, poner sobre papel absorbente antes de servir junto a una ensalada o unas patatas fritas.\r\n\r\nAsí de fácil tendremos nuestras pechugas de pollo rellenas de jamón y queso. Al partirlo, ¡el queso fundido se irá escapando del interior!\r\n\r\nEsta receta es perfecta para cualquier ocasión. Puedes incluirla incluso, en tus menús mas especiales. Elabora estas deliciosas pechugas de pollo como aperitivo de navidad o inclúyelo dentro de tus recetas de navidad favoritas. ¡Pruébalo!', 0, NULL, NULL, '2021-10-26 15:35:16', NULL),
 (28, 22, 'Macarrones con carne', 'Ingredientes:\r\n500g de macarrones\r\n500g de carne picada o molida. Mejor si es mezcla de ternera y cerdo\r\n500g de tomate frito (salsa de tomate)\r\n1 cebolla\r\n4 dientes de ajo\r\norégano seco\r\nsal y pimienta\r\naceite\r\n\r\nProcedimiento:\r\n1.- Cocemos los macarrones. Para ello, los introducimos en una cazuela con abundante agua hirviendo. Añadimos un buen puñadito de sal y los cocemos durante unos 12-15 minutos. Hasta que estén al dente. Removemos de vez en cuando, sobre todo al principio, para que no se peguen al fondo de la olla\r\n\r\n2.- Mientras se cocinan, podemos ir preparando la salsa. En una sartén amplia, ponemos a calentar un chorrito de aceite a fuego medio. Después añadimos la cebolla y los ajos picados muy finos. Salpimentamos y removemos con una cuchara de palo mientras cocinamos durante 5 minutos\r\n \r\n3.- Pasado el tiempo, añadimos la carne picada. la salpimentamos y la desmenuzamos con la cuchara de palo para que no queden mazacotes grandes y quede bien suelta. Subimos la fuerza del fuego y la dejamos cocinar hasta que coja algo de color\r\n\r\n4.- Una vez hecho esto, añadimos el tomate frito y espolvoreamos con orégano seco. Mezclamos todos los ingredientes y dejamos cocinar 10 minutos más.\r\n\r\n5.- Cuando los macarrones estén al dente, reservamos uno 150ml del caldo de la cocción en un vaso y los escurrimos del resto del agua\r\n\r\n6.- Cuando tanto los macarrones como la salsa estén cocinados, añadimos los macarrones a la cazuela donde esté la salsa. Añadimos el caldo de la cocción (que potenciará todos los sabores) y lo mezclamos todo bien, mientras cocinamos todo durante un par de minutos\r\n\r\nY así de fácil tendrás tus macarrones con carne y picada y tomate. Muy fáciles de hacer. ¡Y gustarán tanto a mayores como a niños!', 0, NULL, NULL, '2021-10-26 15:35:16', NULL),
 (29, 27, 'Aros de cebolla crujientes', 'Ingredientes:\r\n500g de macarrones\r\n500g de carne picada o molida. Mejor si es mezcla de ternera y cerdo\r\n500g de tomate frito (salsa de tomate)\r\n1 cebolla\r\n4 dientes de ajo\r\norégano seco\r\nsal y pimienta\r\naceite\r\n\r\nProcedimiento:\r\n1.- Cocemos los macarrones. Para ello, los introducimos en una cazuela con abundante agua hirviendo. Añadimos un buen puñadito de sal y los cocemos durante unos 12-15 minutos. Hasta que estén al dente. Removemos de vez en cuando, sobre todo al principio, para que no se peguen al fondo de la olla\r\n\r\n2.- Mientras se cocinan, podemos ir preparando la salsa. En una sartén amplia, ponemos a calentar un chorrito de aceite a fuego medio. Después añadimos la cebolla y los ajos picados muy finos. Salpimentamos y removemos con una cuchara de palo mientras cocinamos durante 5 minutos\r\n\r\n3.- Pasado el tiempo, añadimos la carne picada. la salpimentamos y la desmenuzamos con la cuchara de palo para que no queden mazacotes grandes y quede bien suelta. Subimos la fuerza del fuego y la dejamos cocinar hasta que coja algo de color\r\n\r\n4.- Una vez hecho esto, añadimos el tomate frito y espolvoreamos con orégano seco. Mezclamos todos los ingredientes y dejamos cocinar 10 minutos más.\r\n\r\n5.- Cuando los macarrones estén al dente, reservamos uno 150ml del caldo de la cocción en un vaso y los escurrimos del resto del agua\r\n\r\n6.- Cuando tanto los macarrones como la salsa estén cocinados, añadimos los macarrones a la cazuela donde esté la salsa. Añadimos el caldo de la cocción (que potenciará todos los sabores) y lo mezclamos todo bien, mientras cocinamos todo durante un par de minutos\r\n\r\nY así de fácil tendrás tus macarrones con carne y picada y tomate. Muy fáciles de hacer. ¡Y gustarán tanto a mayores como a niños!', 0, NULL, NULL, '2021-10-26 15:35:16', NULL),
-(30, 24, 'Cochinillo asado al horno', 'Ingredientes:\r\n500g de macarrones\r\n500g de carne picada o molida. Mejor si es mezcla de ternera y cerdo\r\n500g de tomate frito (salsa de tomate)\r\n1 cebolla\r\n4 dientes de ajo\r\norégano seco\r\nsal y pimienta\r\naceite\r\n\r\nProcedimientos:\r\n1.- Cocemos los macarrones. Para ello, los introducimos en una cazuela con abundante agua hirviendo. Añadimos un buen puñadito de sal y los cocemos durante unos 12-15 minutos. Hasta que estén al dente. Removemos de vez en cuando, sobre todo al principio, para que no se peguen al fondo de la olla\r\n\r\n2.- Mientras se cocinan, podemos ir preparando la salsa. En una sartén amplia, ponemos a calentar un chorrito de aceite a fuego medio. Después añadimos la cebolla y los ajos picados muy finos. Salpimentamos y removemos con una cuchara de palo mientras cocinamos durante 5 minutos\r\n\r\n3.- Pasado el tiempo, añadimos la carne picada. la salpimentamos y la desmenuzamos con la cuchara de palo para que no queden mazacotes grandes y quede bien suelta. Subimos la fuerza del fuego y la dejamos cocinar hasta que coja algo de color\r\n\r\n4.- Una vez hecho esto, añadimos el tomate frito y espolvoreamos con orégano seco. Mezclamos todos los ingredientes y dejamos cocinar 10 minutos más.\r\n\r\n5.- Cuando los macarrones estén al dente, reservamos uno 150ml del caldo de la cocción en un vaso y los escurrimos del resto del agua\r\n \r\n6.- Cuando tanto los macarrones como la salsa estén cocinados, añadimos los macarrones a la cazuela donde esté la salsa. Añadimos el caldo de la cocción (que potenciará todos los sabores) y lo mezclamos todo bien, mientras cocinamos todo durante un par de minutos\r\n\r\nY así de fácil tendrás tus macarrones con carne y picada y tomate. Muy fáciles de hacer. ¡Y gustarán tanto a mayores como a niños!', 0, NULL, NULL, '2021-10-26 15:35:16', NULL),
-(31, 0, '', NULL, 0, NULL, 'Sf5rNQviiKo', '2021-11-02 13:25:03', NULL),
-(32, 0, '', NULL, 0, NULL, NULL, '2021-11-02 13:26:42', NULL),
-(33, 0, '', NULL, 0, NULL, 'Sf5rNQviiKo', '2021-11-02 13:26:42', NULL);
+(30, 24, 'Cochinillo asado al horno', 'Ingredientes:\r\n500g de macarrones\r\n500g de carne picada o molida. Mejor si es mezcla de ternera y cerdo\r\n500g de tomate frito (salsa de tomate)\r\n1 cebolla\r\n4 dientes de ajo\r\norégano seco\r\nsal y pimienta\r\naceite\r\n\r\nProcedimientos:\r\n1.- Cocemos los macarrones. Para ello, los introducimos en una cazuela con abundante agua hirviendo. Añadimos un buen puñadito de sal y los cocemos durante unos 12-15 minutos. Hasta que estén al dente. Removemos de vez en cuando, sobre todo al principio, para que no se peguen al fondo de la olla\r\n\r\n2.- Mientras se cocinan, podemos ir preparando la salsa. En una sartén amplia, ponemos a calentar un chorrito de aceite a fuego medio. Después añadimos la cebolla y los ajos picados muy finos. Salpimentamos y removemos con una cuchara de palo mientras cocinamos durante 5 minutos\r\n\r\n3.- Pasado el tiempo, añadimos la carne picada. la salpimentamos y la desmenuzamos con la cuchara de palo para que no queden mazacotes grandes y quede bien suelta. Subimos la fuerza del fuego y la dejamos cocinar hasta que coja algo de color\r\n\r\n4.- Una vez hecho esto, añadimos el tomate frito y espolvoreamos con orégano seco. Mezclamos todos los ingredientes y dejamos cocinar 10 minutos más.\r\n\r\n5.- Cuando los macarrones estén al dente, reservamos uno 150ml del caldo de la cocción en un vaso y los escurrimos del resto del agua\r\n \r\n6.- Cuando tanto los macarrones como la salsa estén cocinados, añadimos los macarrones a la cazuela donde esté la salsa. Añadimos el caldo de la cocción (que potenciará todos los sabores) y lo mezclamos todo bien, mientras cocinamos todo durante un par de minutos\r\n\r\nY así de fácil tendrás tus macarrones con carne y picada y tomate. Muy fáciles de hacer. ¡Y gustarán tanto a mayores como a niños!', 0, NULL, NULL, '2021-10-26 15:35:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -194,6 +191,24 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`User_ID`,`Recipes_ID`);
+
+--
+-- Indices de la tabla `recipes`
+--
+ALTER TABLE `recipes`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -202,6 +217,18 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `comments`
   MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `recipes`
+--
+ALTER TABLE `recipes`
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
