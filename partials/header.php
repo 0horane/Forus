@@ -1,9 +1,12 @@
 <style>
+  .navbar-light{
+    background: white;
+  }
   nav{
     border-bottom: 2.5px solid #2322;
   }
 </style>
-<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+<nav class="navbar navbar-expand-lg navbar-light"> 
       <div div="navbarsito" class="container my-2">
         <a class="navbar-brand" href="index.php">
           <img src="images/logoheader.png" width ="70">
