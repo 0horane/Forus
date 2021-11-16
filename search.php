@@ -31,7 +31,7 @@
         }
         #container-search{
             z-index: -1;
-            height: 450px !important;
+            height: 350px !important;
             overflow: hidden;
         }
         .paginador a{
@@ -44,10 +44,11 @@
             border-line: 50px;
         }
         
-        .image{
-            width="100%"
-
+        .image-link{
+            max-width=100%;
         }
+
+	}
 
 	</style>
     <script>
@@ -159,11 +160,24 @@
         //	print_r($row);
             ?>
             <button onclick="topFunction()" title="Go to top" id="arriba" href="search.php"class="btn btn-primary shadow">🠥</button>
-            <div style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;">
-            <div id="container-search" class="container">
-				<div class="row justify-content-center mt-3 rounded-3">
-					<a class="image-link p-2 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
-					<div class="col-8">
+            <div class="dp-flex justify-items-center" style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:15%;"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" -->
+            <div id="container-search" class="container dp-flex justify-content-center">
+				<div class="row mt-3 rounded-3">
+					<a class="image-link p-1 col-5" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
+					<div class="col-9 col-lg-7 p-2 dp-flex justify-content-center">
+					
+							<div class="container" style="position:absolute;transform:translate(41.7%, 110%)">
+				
+									
+								<span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
+									<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
+									<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
+								</span>
+								<a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
+
+						
+							</div>
+					
 						<div style="justify-content:space-between" class="d-flex">
 							<h4 style="display:inline-block">
 								<a href="recetaParticular.php?r=<?php echo $row['ID']; ?>">
@@ -185,18 +199,7 @@
 					</div>
 				</div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="info-search">
-				        <p><?php echo $row['Views'] ?><span style="color:gray"> 👁</span></p>
-				        	<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
-				        	<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
-				        </p>
-				        <a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
-			        </div>
-			        <br>
-                </div>
-            </div>
+            
             </div>
             <div class="espaciado mt-3"></div>
   <?php } ?>
