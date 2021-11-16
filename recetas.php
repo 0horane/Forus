@@ -21,6 +21,17 @@ require_once 'partials/starfunc.php';
 	#cartita img{
 		margin-top: 10px;
 	}
+	.page-item{
+		cursor: pointer;
+	}
+	.selects{
+		width: 15%;
+	}
+	.selects form{
+		display: flex;
+		justify-content: space-between;
+	}
+
 </style>
 <body> 
 
@@ -39,26 +50,27 @@ require_once 'partials/starfunc.php';
   </script>
 	
     <?php include 'partials/header.php'?>
+	<div class="selects">
+		<form class="p-3">
+			<select id="condition" name="condition" onchange="updateCards ()" class="form-select">
+				<option value='a'>Alfabético</option>
+				<option value='c'>Cronológico</option>
+				<option value='f'>Por Favoritos</option>
+				<option value='v'>Por Vistas</option>
+				<option value='p'>Por Popularidad</option>
+			</select>
+			<select id="direction" name="direction" onchange="updateCards ()" class="form-select">
+				<option value='a'>Ascendiente</option>
+				<option value='d'>Descendiente</option>
 
-	<form>
-		<select id="condition" name="condition" onchange="updateCards ()">
-			<option value='a'>Alfabético</option>
-			<option value='c'>Cronológico</option>
-			<option value='f'>Por Favoritos</option>
-			<option value='v'>Por Vistas</option>
-			<option value='p'>Por Popularidad</option>
-		</select>
-		<select id="direction" name="direction" onchange="updateCards ()">
-			<option value='a'>Ascendiente</option>
-			<option value='d'>Descendiente</option>
-
-		</select>
-	</form>
+			</select>
+		</form>
+	</div>
 
     <div id="container" class="container">
 		<div class = "container mt-3">
 			<h1 class ="display-1 text-center">Recetas</h1>
-			<div id="cardbox" class = "row mt-5">
+			<div id="cardbox" class = "row mt-3">
 
 				
 			</div>
@@ -101,7 +113,7 @@ require_once 'partials/starfunc.php';
 							startpage=0;
 						}
 
-						str+= `<div class='container rounded mt-3' >
+						str+= `<div id = "paginator" class='container rounded mt-2' >
 							<div class="row">
 								<div class="col-12">
 									<ul class="pagination dp-flex justify-content-center">
