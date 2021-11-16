@@ -63,7 +63,7 @@
 
 
   callAPI('sr','pd',function(result){
-	  callAPI('rd',`${result[0]},${result[1]},${result[2]}`,function( result ) {
+	  callAPI('rd',`pd,${result[0]},${result[1]},${result[2]}`,function( result ) {
         str="";
         for (x=0;x<3;x++){
           str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path'],result[x]['code'], (<?php echo strval($loggedin) ?> ? true : false), false);

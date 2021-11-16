@@ -6,7 +6,7 @@ header("Content-type: application/json; charset=utf-8");
 ///////'qt' significa query type. puede llevar los valores:
 
 //////valores publicos (no requieren un usuario logueado). esta seria el api abierto, que se puede acceder por cualquier usuario o pagina (principalmente la nuestra)
-//rd: (Recipe data) devuelve los datos de la/s recetas indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma 
+//rd: (Recipe data) devuelve los datos de la/s recetas indicados en $v. $v recibe un número de id de video o una lista de numeros separados por coma. Se puede poner al principio de la lista dos letras en el mismo formato que sr para que las recetas las devuelva en ese orden
 //sr: (Search recipe)devuelve un array de todos los ids de recetas en el orden pedidio. $v recibe dos letras juntas: a,c,f,v,p para sortear por orden alfabetico, cronologico, por favoritos, vistas o popularidad; y 'a' o 'd' siendo ascendiente o descendiente. 
 //cf: (Count favorites)devuelve la cantidad de favoritos y la cantidad de favoritos en la ultima semana (popularidad), en un array. Recibe el id de receta en $v
 //////valores privados (requieren un usuario logueado con el usuario correcto)
@@ -106,20 +106,40 @@ $json=[];
 
 switch($qt){
     case 'rd':
-        if (is_numeric($value)){
+        if (is_numeric($value)){ // if there is only just one recipe
             $query="SELECT recipes.*,UserName FROM recipes INNER JOIN users ON users.ID=recipes.User_ID WHERE recipes.ID =".$value." AND recipes.Deleted_At IS NULL";
         }
         else {
             
             $idarr=explode (",", $value);
-            $query="SELECT recipes.*,UserName FROM recipes INNER JOIN users ON users.ID=recipes.User_ID WHERE ( 0 ";
+            $orderstr="";
+            if (!is_numeric($idarr[0])){ //if the recepies are given a sort order
+                
+                $sortarr=str_split(array_shift($idarr));
+                $orderstr=" ORDER BY ";
+                switch ($sortarr[0]){
+                    case 'a': $orderstr.="Name"; break;
+                    case 'c': $orderstr.="Created_At"; break;
+                    case 'f': $orderstr.="favcount"; break; 
+                    case 'v': $orderstr.="Views"; break; 
+                    case 'p': $orderstr.="popularity"; break;
+                    }
+                switch ($sortarr[1]){
+                    case 'a': $orderstr.=" ASC"; break;
+                    case 'd': $orderstr.=" DESC"; break;
+                }
+            }
+            $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as favcount FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID WHERE ( 0 ";
+            if (!empty($orderstr) && $sortarr[0]=='p'){
+                $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as popularity FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID AND favorites.Created_At + INTERVAL 7 DAY > NOW() WHERE ( 0 ";
+            }
             foreach ($idarr as $subid){
                 $query.="OR recipes.ID=".$subid." ";
             }
-            $query.=" ) AND recipes.Deleted_At IS NULL";
+            $query.=" ) AND recipes.Deleted_At IS NULL"." GROUP BY recipes.ID".$orderstr;
         }
         $result=qq($link, $query);
-        if(mysqli_fetch_assoc($result)){
+        if(mysqli_fetch_assoc($result)){ //foreach result of query
             mysqli_data_seek($result,0);
             while ($row=mysqli_fetch_assoc($result)){
                 $json[]=[

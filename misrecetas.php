@@ -96,10 +96,10 @@ require_once 'partials/starfunc.php';
 					ajaxvalues.push(result[0][i]);
 					}
 				}
-				callAPI('rd',ajaxvalues.join(','), function( result ) {
+				callAPI('rd',[`${condition}${direction}`]+','+ajaxvalues.join(','), function( result ) {
 						
 						result.forEach(recipe=>{
-							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, false, false);
+							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, true, false);
 						});
 						document.getElementById('cardbox').innerHTML=str;
 						setfavs()

@@ -114,7 +114,7 @@ function genstar(id){
 
 function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditdel=false, isdis=false){
     str="";
-    str+=`  <div class="col-md-4 mt-2">
+    str+=`  <div id="c${id}" class="col-md-4 mt-2">
             
                 <div class="card text-center" style="max-height:550px;">
                 
@@ -129,12 +129,12 @@ function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditd
                             <div style="height:200px;overflow:hidden;">
                                 <p class="card-text">${text}</p>
                             </div>
-                            ${ isdis ? `<div style="padding:6px;"><a href="edit_recipe.php.php?r=${id}" class="btn btn-warning mt-1">Reactivar</a></div>` :
+                            ${ isdis ? `<div style="padding:6px;"><a href="#" onclick="isdel('c${id}')" class="btn btn-warning mt-1">Reactivar</a></div>` :
                                 `<div style="padding:6px;">
                                     <a href="recetaParticular.php?r=${id}" class="btn btn-primary mt-1">Ver Mas</a>
                                     ${ haseditdel ? 
-                                        `<a href="edit_recipe.php.php?r=${id}" class="btn btn-primary mt-1">Editar</a>
-                                        <a href="edit_recipe.php.php?r=${id}" class="btn btn-warning mt-1">Borrar</a>` : ""
+                                        `<a href="richtext.php?r=${id}" class="btn btn-primary mt-1">Editar</a>
+                                        <a href="#" onclick="isdel('c${id}')" class="btn btn-warning mt-1">Borrar</a>` : ""
                                     }
                                 </div>
                                 <div style="display:flex;justify-content:space-around;">
@@ -153,7 +153,15 @@ function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditd
         return str;
 }
 
-
+function isdel (cardid){
+    callAPI (  'dr', cardid.slice(1),function(result){
+        cardelement=document.getElementById(cardid);
+        cardelement.innerHTML="";
+        
+        return(result);
+    });
+    
+} 
 
 
 

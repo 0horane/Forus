@@ -40,7 +40,7 @@ require_once 'partials/starfunc.php';
 </head>
 <style>
 	body{
-		background-color: #ffff99;
+		/*background-color: #ffff99;*/
 	}
 </style>
 <body>
@@ -95,10 +95,10 @@ require_once 'partials/starfunc.php';
 					}
 				}
 //				console.log(ajaxvalues);
-				callAPI ('rd',ajaxvalues.join(','),function( result ) {
+				callAPI ('rd',[`${condition}${direction}`]+','+ajaxvalues.join(','),function( result ) {
 //					console.log(result);
 						result.forEach(recipe=>{
-							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
+							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'],recipe['code'],(<?php echo strval($loggedin) ?> ? true : false));
 						});
 						document.getElementById('cardbox').innerHTML=str;
 						setfavs();
