@@ -139,6 +139,22 @@ require_once 'partials/session_start.php';
                     document.getElementById('comentarios-section').innerHTML=str;
             }
             });
+
+
+            $.ajax({
+                cache:false,
+                url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+                dataType:"json",
+                data: {
+                    qt: 'iv',
+                    v:  <?php echo $_GET['r']; ?>
+                },
+                success:function(result){
+                   
+                }
+            });
+
+
       } else {
         document.getElementById('container-receta').innerHTML="Esta receta no existe";
       }

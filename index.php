@@ -71,7 +71,7 @@ $.ajax({
     v:  'pd'
   },
   success:function(result){
-	  console.log(`${result[0]},${result[1]},${result[2]}`);
+	  //console.log(`${result[0]},${result[1]},${result[2]}`);
     $.ajax({
       url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
       dataType:"json",
@@ -82,21 +82,27 @@ $.ajax({
       success: function( result ) {
         str="";
         for (x=0;x<3;x++){
-          console.log(result);
+          //console.log(result);
         str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path'],result[x]['code'], (<?php echo strval($loggedin) ?> ? true : false), false);
         
         }
 
         box=document.getElementById("cardbox");
         box.innerHTML=str;
-        console.log(str);
-      }
+        setfavs()
+        }
+
+
+  
+        
+        //console.log(str);
+      
     });
   }
 });
 
 
-  console.log("se paso");
+  //console.log("se paso");
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>

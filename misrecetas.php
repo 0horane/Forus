@@ -103,6 +103,7 @@ require_once 'partials/starfunc.php';
 								str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
 							});
 							document.getElementById('cardbox').innerHTML=str;
+							setfavs()
 						}
 					});
 				}
