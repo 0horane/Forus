@@ -13,6 +13,7 @@ require_once 'partials/starfunc.php';
     <link rel="shortcut icon" href="cutlery.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
 </head>
 <style>
 	#cartita{
@@ -83,109 +84,26 @@ require_once 'partials/starfunc.php';
 			condition=conditionElement.options[conditionElement.selectedIndex].value;
 			directionElement = document.getElementById('direction');
 			direction=directionElement.options[directionElement.selectedIndex].value;
-			//console.log(`${condition},${direction}`);
 			let str="";
-			$.ajax({
-				url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-				dataType:"json",
-				data: {
-					qt: 'sr',
-					v:  `${condition}${direction}`
-				},
-				success: function( result ) {
+			callAPI ('sr',`${condition}${direction}`,function( result ) {
 
-					var cantidadDePaginas = Math.ceil(result.length/9); 
-						console.log(result);
-						if (page >=cantidadDePaginas-5){
-							startpage=cantidadDePaginas-10;
-							endpage=cantidadDePaginas;
-            
-						} else if (page>=5){
-							startpage=page-5;
-							endpage=page+5;
-        
-						} else{
-							startpage=0;
-							endpage=10;
-            
-						}
-						if (startpage<0){
-							startpage=0;
-						}
-
-						str+= `<div id = "paginator" class='container rounded mt-2' >
-							<div class="row">
-								<div class="col-12">
-									<ul class="pagination dp-flex justify-content-center">
-									<li class="page-item ${page ==0 ? 'disabled': ''}"> 
-										<a class="page-link" onclick = " page=0; updateCards ()"  ${page ==0 ? "disabled": ""}>
-											«
-										</a>
-									</li>
-									<li class="page-item ${page ==0 ? 'disabled': ''}"> 
-										<a class="page-link" onclick = " page-=1; updateCards ()"  ${page ==0 ? "disabled": ""}>
-											‹
-										</a>
-									</li>`;
-									
-						for (i=startpage;i<endpage;i++) {
-										str+= `<li class="page-item ${page ==i ? 'active disabled': ''} ">
-											<a class="page-link" onclick = " page=${i}; updateCards ()"  ${page ==i ? "disabled": ""}> ${i} </a>
-										</li>`;
-									}
-									
-									
-									str+=`<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
-										<a class="page-link" onclick = " page+=1; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}>
-											›
-										</a>
-									</li>
-									<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
-										<a class="page-link" onclick = " page=${cantidadDePaginas-1}; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}> 
-											»
-										</a>
-									</li>
-
-									</ul>
-								</div>
-							</div>
-						</div>`;
-					//console.log(result);
-					let ajaxvalues=[];
-					for (i=page*9;i<page*9+9;i++){
-						if (result[i]){
-						ajaxvalues.push(result[i]);
-						
-						}
+				str+=makepager(result, page);
+				let ajaxvalues=[];
+				for (i=page*9;i<page*9+9;i++){
+					if (result[i]){
+					ajaxvalues.push(result[i]);
 					}
-					console.log(ajaxvalues);
-					$.ajax({
-						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-						dataType:"json",
-						data: {
-							qt: 'rd',
-							v:  ajaxvalues.join(',')
-						},
-						success: function( result ) {
-						 console.log(result);
-						
-						
-						
-						
-							
-							result.forEach(recipe=>{
-								//console.log(recipe);
-								str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
-							});
-							document.getElementById('cardbox').innerHTML=str;
-							setfavs()
-						}
-					});
 				}
+//				console.log(ajaxvalues);
+				callAPI ('rd',ajaxvalues.join(','),function( result ) {
+//					console.log(result);
+						result.forEach(recipe=>{
+							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
+						});
+						document.getElementById('cardbox').innerHTML=str;
+						setfavs();
+				});
 			});
-
-
-			
 		}
 		updateCards ()
 	</script>

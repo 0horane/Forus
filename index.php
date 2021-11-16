@@ -62,44 +62,17 @@
   
 
 
-$.ajax({
-  cache:false,
-  url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-  dataType:"json",
-  data: {
-    qt: 'sr',
-    v:  'pd'
-  },
-  success:function(result){
-	  //console.log(`${result[0]},${result[1]},${result[2]}`);
-    $.ajax({
-      url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-      dataType:"json",
-      data: {
-        qt: 'rd',
-        v:  `${result[0]},${result[1]},${result[2]}`
-      },
-      success: function( result ) {
+  callAPI('sr','pd',function(result){
+	  callAPI('rd',`${result[0]},${result[1]},${result[2]}`,function( result ) {
         str="";
         for (x=0;x<3;x++){
-          //console.log(result);
-        str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path'],result[x]['code'], (<?php echo strval($loggedin) ?> ? true : false), false);
-        
+          str+=gencard(result[x]['id'],result[x]['name'],result[x]['recipe'],result[x]['username'],result[x]['views'],result[x]['img_path'],result[x]['code'], (<?php echo strval($loggedin) ?> ? true : false), false);
         }
-
-        box=document.getElementById("cardbox");
-        box.innerHTML=str;
-        setfavs()
-        }
-
-
-  
-        
-        //console.log(str);
-      
+        document.getElementById("cardbox").innerHTML=str;
+        setfavs();
     });
-  }
-});
+  });
+
 
 
   //console.log("se paso");

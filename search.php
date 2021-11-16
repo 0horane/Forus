@@ -1,6 +1,7 @@
 <?php
     require_once 'database/database.php';
     require_once 'partials/session_start.php'; 
+    require_once 'partials/starfunc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,7 @@
     <link rel="shortcut icon" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.info-search{
             margin-top: 15px;
@@ -76,7 +78,7 @@
 <?php
     if (isset($_GET['q'])){
         $q=$_GET['q'];
-        $perpage=2;
+        $perpage=5;
         if (isset($_GET['page'])){
             $page = $_GET['page'];
         } else {$page = 0;}
@@ -103,11 +105,15 @@
         if ($startpage<0){
             $startpage=0;
         }
+        if ($endpage>$qlen){
+            $endpage=$qlen;
+        }
+        
 ?>
         <div class="container rounded mt-3" >
             <div class="row">
                 <div class="col-12">
-                    <?php if ($qlen>$perpage){ ?>
+                    <?php if ($qlen>1){ ?>
                     <ul class="pagination dp-flex justify-content-center">
                     <?php
                     $temp=$page-1;
@@ -171,7 +177,7 @@
 									
 								<span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
 									<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
-									<span class="mx-2" style="color:gold">☆</span> <!-- Queda editar esto -->
+									<?php echo $loggedin ? "<div id='replace${row['ID']}'>aa<script>document.getElementById('replace${row['ID']}').innerHTML=genstar(${row['ID']});</script></div>" : '';?>
 								</span>
 								<a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
 
@@ -227,4 +233,5 @@
         .classList.remove("show");
     }
 }
+setfavs()
 </script>

@@ -86,96 +86,26 @@ require_once 'partials/starfunc.php';
 			directionElement = document.getElementById('direction');
 			direction=directionElement.options[directionElement.selectedIndex].value;
 			let str="";
-			$.ajax({
-				url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-				dataType:"json",
-				data: {
-					qt: 'yr',
-					v:  `${condition}${direction}`
-				},
-				success: function( result ) {
-					
-					var cantidadDePaginas = Math.ceil(result.length/9); 
-						console.log(result);
-						if (page >=cantidadDePaginas-5){
-							startpage=cantidadDePaginas-10;
-							endpage=cantidadDePaginas;
-            
-						} else if (page>=5){
-							startpage=page-5;
-							endpage=page+5;
-        
-						} else{
-							startpage=0;
-							endpage=10;
-            
-						}
-						if (startpage<0){
-							startpage=0;
-						}
+			callAPI('yr',`${condition}${direction}`, function( result ) {
 
-						str+= `<div id = "paginator" class='container rounded mt-2' >
-							<div class="row">
-								<div class="col-12">
-									<ul class="pagination dp-flex justify-content-center">
-									<li class="page-item ${page ==0 ? 'disabled': ''}"> 
-										<a class="page-link" onclick = " page=0; updateCards ()"  ${page ==0 ? "disabled": ""}>
-											«
-										</a>
-									</li>
-									<li class="page-item ${page ==0 ? 'disabled': ''}"> 
-										<a class="page-link" onclick = " page-=1; updateCards ()"  ${page ==0 ? "disabled": ""}>
-											‹
-										</a>
-									</li>`;
-									
-						for (i=startpage;i<endpage;i++) {
-										str+= `<li class="page-item ${page ==i ? 'active disabled': ''} ">
-											<a class="page-link" onclick = " page=${i}; updateCards ()"  ${page ==i ? "disabled": ""}> ${i} </a>
-										</li>`;
-									}
-									
-									
-									str+=`<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
-										<a class="page-link" onclick = " page+=1; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}>
-											›
-										</a>
-									</li>
-									<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
-										<a class="page-link" onclick = " page=${cantidadDePaginas-1}; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}> 
-											»
-										</a>
-									</li>
-
-									</ul>
-								</div>
-							</div>
-						</div>`;
-					//console.log(result);
-					let ajaxvalues=[];
-					for (i=page*9;i<page*9+9;i++){
-						if(result[0][i]){
-						ajaxvalues.push(result[0][i]);
-						}
+				str+=makepager(result[0], page);
+				//console.log(result);
+				let ajaxvalues=[];
+				for (i=page*9;i<page*9+9;i++){
+					if(result[0][i]){
+					ajaxvalues.push(result[0][i]);
 					}
-					$.ajax({
-						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-						dataType:"json",
-						data: {
-							qt: 'rd',
-							v:  ajaxvalues.join(',')
-						},
-						success: function( result ) {
-							
-							result.forEach(recipe=>{
-								str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path']);
-							});
-							document.getElementById('cardbox').innerHTML=str;
-							setfavs()
-						}
-					});
 				}
+				callAPI('rd',ajaxvalues.join(','), function( result ) {
+						
+						result.forEach(recipe=>{
+							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, false, false);
+						});
+						document.getElementById('cardbox').innerHTML=str;
+						setfavs()
+				});
 			});
+			
 			
 		}
 		updateCards ()
