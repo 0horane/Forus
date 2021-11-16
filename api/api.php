@@ -134,7 +134,7 @@ switch($qt){
                 $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as popularity FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID AND favorites.Created_At + INTERVAL 7 DAY > NOW() WHERE ( 0 ";
             }
             foreach ($idarr as $subid){
-                $query.="OR recipes.ID=".$subid." ";
+                $query.="OR recipes.ID=".mysqli_real_escape_string($link, $subid)." ";
             }
             $query.=" ) AND recipes.Deleted_At IS NULL"." GROUP BY recipes.ID".$orderstr;
         }
@@ -161,9 +161,9 @@ switch($qt){
 
 
     case 'cf':
-        $query="SELECT COUNT('User_ID') as tf FROM favorites WHERE Recipes_ID=".$value;
+        $query="SELECT COUNT('User_ID') as tf FROM favorites WHERE Recipes_ID=".mysqli_real_escape_string($link, $value);
         $result1=mysqli_fetch_assoc(qq($link, $query))['tf'];
-        $query="SELECT COUNT('User_ID') as rf FROM favorites WHERE Recipes_ID=".$value." AND Created_At + INTERVAL 7 DAY > NOW()";
+        $query="SELECT COUNT('User_ID') as rf FROM favorites WHERE Recipes_ID=".mysqli_real_escape_string($link, $value)." AND Created_At + INTERVAL 7 DAY > NOW()";
         $result2=mysqli_fetch_assoc(qq($link, $query))['rf'];
         $json[]=$result1;
         $json[]=$result2;        
@@ -178,9 +178,9 @@ switch($qt){
 
     case 'dr':
         $id=privQSt();
-        $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID,Deleted_At FROM recipes WHERE ID = ".$value));
+        $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID,Deleted_At FROM recipes WHERE ID = ".mysqli_real_escape_string($link, $value)));
 		if ($isdel['User_ID']==$id){		
-			$query="UPDATE recipes SET Deleted_At = ".($isdel['Deleted_At'] ? "NULL" : "NOW()")." WHERE ID = ".$value;
+			$query="UPDATE recipes SET Deleted_At = ".($isdel['Deleted_At'] ? "NULL" : "NOW()")." WHERE ID = ".mysqli_real_escape_string($link, $value);
 			qq($link, $query);
 			die( $isdel['Deleted_At'] ? 'true' : 'false');
 		} else {
@@ -193,7 +193,7 @@ switch($qt){
     case 'mr':
 		$id=privQSt();
 		if ($value!=0){ //Se fija si la receta es nueva. 
-			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".$value))['User_ID']==$id)){ //se fija si la receta es del usuario
+			if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from recipes where ID = ".mysqli_real_escape_string($link, $value)))['User_ID']==$id)){ //se fija si la receta es del usuario
 				die('false');
 			} else {
 				$imagefile=$value;
@@ -213,11 +213,11 @@ switch($qt){
 				$query="INSERT INTO recipes VALUES(
 									NULL,
                                     ".$id.",
-									'".$_POST['name']."',
-									'".$_POST['recipe']."',
+									'".mysqli_real_escape_string($link, htmlspecialchars($_POST['name']))."',
+									'".mysqli_real_escape_string($link, $_POST['recipe'])."',
 									0,
 									".($img_exists ?  '"'.$imagefile.end(explode('.',$_FILES['img']['tmp_name'])).'"' : "NULL" ).",
-                                    '".(isset($_POST['code']) ? $_POST['code'] : "NULL")."',
+                                    '".mysqli_real_escape_string($link, htmlspecialchars((isset($_POST['code']) ? $_POST['code'] : "NULL")))."',
                                     NOW(),
                                     NULL
                                     
@@ -228,11 +228,11 @@ switch($qt){
 				
 			} else { //si la receta ya existe
                 $query="UPDATE recipes SET 
-                    `Name` = '".$_POST['name']."', 
-                    Recipe = '".$_POST['recipe']."'";
+                    `Name` = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['name']))."', 
+                    Recipe = '".mysqli_real_escape_string($link, $_POST['recipe'])."'";
                 $query.= $img_exists ? ",img_path = '".$imagefile.end(explode('.',$_FILES['img']['tmp_name']))."'" : "";
-                $query.= $isset($_POST['code']) ? ",Code = '".$_POST['code']."'" : "";
-                $query.= "WHERE recipes.ID = ".$value;
+                $query.= $isset($_POST['code']) ? ",Code = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['code']))."'" : "";
+                $query.= "WHERE recipes.ID = ".mysqli_real_escape_string($link, $value);
                 qq($link, $query);
                 die('true');
             }
@@ -261,11 +261,11 @@ switch($qt){
 		
     case 'sf':
 		$id=privQSt();
-        $isfav= mysqli_num_rows(qq($link, "SELECT Created_At FROM favorites WHERE Recipes_ID = ".$value." AND USER_ID=".$id));
+        $isfav= mysqli_num_rows(qq($link, "SELECT Created_At FROM favorites WHERE Recipes_ID = ".mysqli_real_escape_string($link, $value)." AND USER_ID=".$id));
         if ($isfav){
-			$query="DELETE FROM favorites WHERE Recipes_ID = ".$value." AND USER_ID=".$id;
+			$query="DELETE FROM favorites WHERE Recipes_ID = ".mysqli_real_escape_string($link, $value)." AND USER_ID=".$id;
 		} else {
-			$query="INSERT INTO favorites VALUES(" . $id . ", " . $value . ", NOW() )";
+			$query="INSERT INTO favorites VALUES(" . $id . ", " . mysqli_real_escape_string($link, $value) . ", NOW() )";
 		}
         qq($link, $query);
         die( $isfav ? 'false' : 'true');
@@ -273,7 +273,7 @@ switch($qt){
 
 
     case 'sc':
-         $query="SELECT comments.*,UserName FROM comments INNER JOIN users on users.ID=comments.User_ID WHERE comments.Recipe_ID=${value} ORDER BY comments.Created_At DESC";
+         $query="SELECT comments.*,UserName FROM comments INNER JOIN users on users.ID=comments.User_ID WHERE comments.Recipe_ID=".mysqli_real_escape_string($link, $value). " ORDER BY comments.Created_At DESC";
          $result=qq($link, $query);
         while ($row=mysqli_fetch_assoc($result)){
             $json[]=[$row];
@@ -284,17 +284,17 @@ switch($qt){
         $id=privQSt();
         if (isset($_POST['text'])){
             if ($value!=0){ //Se fija si el comment es nuevo. 
-                if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from comments where ID = ".$value))['User_ID']==$id)){ //se fija si la receta es del usuario
+                if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from comments where ID = ".mysqli_real_escape_string($link, $value)))['User_ID']==$id)){ //se fija si la receta es del usuario
                     die('false');
                 } else {
-                    $query="UPDATE comments SET `Text` = '".$_POST['text']."'WHERE ID = ".$value;
+                    $query="UPDATE comments SET `Text` = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['text']))."'WHERE ID = ".$value;
                     qq($link, $query);
                     die('true');
                 }
             } else if (isset($_POST['recipe'])) { //da el numero de la receta nueva
-                $query="INSERT INTO comments VALUES(null,${id},${_POST['recipe']},${_POST['text']},NOW())" ;
+                $query="INSERT INTO comments VALUES(null,${id},".mysqli_real_escape_string($link, $_POST['recipe']).",'".mysqli_real_escape_string($link, htmlspecialchars($_POST['text']))."',NOW())" ;
                 qq($link, $query);
-                $json[]=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM recipes"))['maxID'];
+                $json[]=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM comments"))['maxID'];
             } else {
                 die('false');
             }
@@ -305,9 +305,9 @@ switch($qt){
     
     case 'dc':
         $id=privQSt();
-        $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID FROM comments WHERE ID = ".$value));
+        $isdel= mysqli_fetch_assoc(qq($link, "SELECT User_ID FROM comments WHERE ID = ".mysqli_real_escape_string($link, $value)));
         if ($isdel['User_ID']==$id){		
-            $query="DELETE FROM comments WHERE ID=${value}";
+            $query="DELETE FROM comments WHERE ID=".mysqli_real_escape_string($link, $value);
             qq($link, $query);
             die('true');
         } else {
@@ -318,14 +318,14 @@ switch($qt){
 
     case 'iv':
         
-        $query="UPDATE recipes SET Views=Views+1 WHERE ID=${value}";
+        $query="UPDATE recipes SET Views=Views+1 WHERE ID=".mysqli_real_escape_string($link, $value);
         qq($link, $query);
         die('true');
         break;
 
     case 'if':
         $id=privQSt();
-        $isfav= mysqli_num_rows(qq($link, "SELECT Created_At FROM favorites WHERE Recipes_ID = ".$value." AND USER_ID=".$id));
+        $isfav= mysqli_num_rows(qq($link, "SELECT Created_At FROM favorites WHERE Recipes_ID = ".mysqli_real_escape_string($link, $value)." AND USER_ID=".$id));
         if ($isfav){
             die('true');
         } else {

@@ -1,1 +1,1 @@
-<?php die('trrue'); ?>
+<?php echo htmlspecialchars("eita<h1>sshsd"); ?>
