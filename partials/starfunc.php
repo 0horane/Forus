@@ -50,6 +50,7 @@ function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditd
                     <div class="card-body container" style="transform: translate(0px, -32%);">
                         <div class="row" style="height:30px;display:flex;align-items:center;">
                         <h5 class="card-title" style="transform: translate(0px, 5%);text-align:center;width=100%">${name}</h5>
+                        <p class="card-title" style="transform: translate(0px, -20%%);width=100%;font-size:12px;color:gray;">por: ${author}</p>
                         </div>
                         <div class="row">
                         <div style="transform: translate(0px, -3%,); ">
