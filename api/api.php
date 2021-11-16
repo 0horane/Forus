@@ -19,7 +19,11 @@ header("Content-type: application/json; charset=utf-8");
 
 //sc: SIN PROBAR (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
 //mc: SIN PROBAR (modify comment) recibe el id del comentario en $v. Usa variables : receta,text, .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo. Si es para crear un comentario nuevo, no mandar nada o mandar 0 en id
-//dc: SIN IMPLEMENTAR (delete comment) recibe un id de comentario en $v. La borra si es del usuario logueado. Devuelve True si se borro y False si no
+//dc: SIN Probar (delete comment) recibe un id de comentario en $v. La borra si es del usuario logueado. Devuelve True si se borro y False si no
+
+//iv: (increase viwews) recibe un id de receta en $v. La incrementa las vistas por 1
+//if: (is favorite) recibe un id de receta en $v. devuelve true o false correspondientemente
+
 
 //ejemplos
 //http://localhost/Forus/api/api.php?qt=rd&v=2,5,8,3
@@ -290,6 +294,22 @@ switch($qt){
         
         break;
 
+    case 'iv':
+        
+        $query="UPDATE recipes SET Views=Views+1 WHERE ID=${value}";
+        qq($link, $query);
+        die('true');
+        break;
+
+    case 'if':
+        $id=privQSt();
+        $isfav= mysqli_num_rows(qq($link, "SELECT Created_At FROM favorites WHERE Recipes_ID = ".$value." AND USER_ID=".$id));
+        if ($isfav){
+            die('true');
+        } else {
+            die('false');
+        }
+        break;
 }
 
 
