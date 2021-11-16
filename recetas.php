@@ -140,11 +140,13 @@ require_once 'partials/starfunc.php';
 						</div>`;
 					//console.log(result);
 					let ajaxvalues=[];
-					for (i=page*9+1;i<page*9+10;i++){
+					for (i=page*9;i<page*9+9;i++){
 						if (result[i]){
 						ajaxvalues.push(result[i]);
+						
 						}
 					}
+					console.log(ajaxvalues);
 					$.ajax({
 						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
 						dataType:"json",

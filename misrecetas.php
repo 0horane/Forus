@@ -85,7 +85,7 @@ require_once 'partials/starfunc.php';
 				},
 				success: function( result ) {
 					let ajaxvalues=[];
-					for (i=0;i<9;i++){
+					for (i=page*9;i<page*9+9;i++){
 						if(result[0][i]){
 						ajaxvalues.push(result[0][i]);
 						}

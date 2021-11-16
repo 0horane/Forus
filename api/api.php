@@ -45,9 +45,11 @@ function privQSt(){
 
 function orderAndPush($query,$link){
     $json=[];
+    //echo $query;
     $result=qq($link, $query);
     while ($row=mysqli_fetch_assoc($result)){
         $json[]=$row['ID'];
+        //echo $row['Views'];
     }
     if (count($json)==0){
         $json[]="0";
