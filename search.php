@@ -31,11 +31,6 @@
             right:10px;
             transform: translate(-20%, -20%);
         }
-        #container-search{
-            z-index: -1;
-            height: 350px !important;
-            overflow: hidden;
-        }
         .paginador a{
             text-decoration: none;
             color: black;
@@ -47,31 +42,18 @@
         }
         
         .image-link{
-            max-width=100%;
+            max-width:100%;
         }
-
-	}
-
+        .acortador{
+            height: 210px !important;
+            overflow: hidden;
+        }
+        #items-search{
+            border-radius: 10px;
+            border: 1px solid #BDBDBD;
+            padding: 25px;
+        }
 	</style>
-    <script>
-        //Get the button:
-        mybutton = document.getElementById("arriba");
-
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
-            }   else {
-                mybutton.style.display = "none";
-            }
-        }       
-        function topFunction() {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        }
-    </script>
 </head>
 <body>
     <?php include 'partials/header.php' ?>
@@ -108,9 +90,58 @@
         if ($endpage>$qlen){
             $endpage=$qlen;
         }
-        
 ?>
-        <div class="container rounded mt-3" >
+        <?php
+        $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
+        while ($row=mysqli_fetch_assoc($rows)){
+        //	print_r($row);
+            ?>
+            <div class="dp-flex justify-items-center mt-5 p-4"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" --> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:50%;margin-right:auto;margin-left:25%;" -->
+            <div id="container-search" class="container dp-flex justify-content-center">
+				<div id="items-search" class="row">
+					<a class="image-link p-1 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
+					<div class="col-9 col-lg-8 dp-flex justify-content-center">
+					
+						<div style="justify-content:space-between" class="d-flex">
+							<h4 style="display:inline-block">
+								<a href="recetaParticular.php?r=<?php echo $row['ID']; ?>">
+								 <?php echo $row['Name']?>
+								</a>
+							</h4>
+						
+							<span class="text-end text-muted"><?php echo $row['Created_At'] ?></span>
+						</div>
+						<p class="info text-muted">
+                            Creado por:
+							<?php
+							echo mysqli_fetch_assoc(qq($link, "SELECT UserName FROM users WHERE ID = ".$row['User_ID']))['UserName'];
+							?>                            
+						</p>
+                        <div class="acortador">
+                            <p class="description">
+						    	<?php echo $row['Recipe'];  ?>
+						    </p>
+                        </div>
+                        <div class="container text-end p-2">
+				
+									
+                <span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
+                    <?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
+                    <?php echo $loggedin ? "<div id='replace${row['ID']}'>aa<script>document.getElementById('replace${row['ID']}').innerHTML=genstar(${row['ID']});</script></div>" : '';?>
+                </span>
+                <a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
+
+        
+            </div>
+					</div>
+                    
+				</div>
+                
+            </div>
+            </div>
+            <div class="espaciado mt-3"></div>
+  <?php } ?>
+  <div class="container rounded mt-4" >
             <div class="row">
                 <div class="col-12">
                     <?php if ($qlen>1){ ?>
@@ -160,61 +191,12 @@
                 </div>
             </div>
         </div>
-        <?php
-        $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
-        while ($row=mysqli_fetch_assoc($rows)){
-        //	print_r($row);
-            ?>
-            <button onclick="topFunction()" title="Go to top" id="arriba" href="search.php"class="btn btn-primary shadow">🠥</button>
-            <div class="dp-flex justify-items-center" style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:15%;"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" -->
-            <div id="container-search" class="container dp-flex justify-content-center">
-				<div class="row mt-3 rounded-3">
-					<a class="image-link p-1 col-5" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
-					<div class="col-9 col-lg-7 p-2 dp-flex justify-content-center">
-					
-							<div class="container" style="position:absolute;transform:translate(41.7%, 110%)">
-				
-									
-								<span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
-									<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
-									<?php echo $loggedin ? "<div id='replace${row['ID']}'>aa<script>document.getElementById('replace${row['ID']}').innerHTML=genstar(${row['ID']});</script></div>" : '';?>
-								</span>
-								<a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
-
-						
-							</div>
-					
-						<div style="justify-content:space-between" class="d-flex">
-							<h4 style="display:inline-block">
-								<a href="recetaParticular.php?r=<?php echo $row['ID']; ?>">
-								 <?php echo $row['Name']?>
-								</a>
-							</h4>
-						
-							<span class="text-end text-muted"><?php echo $row['Created_At'] ?></span>
-						</div>
-						<p class="info text-muted">
-                            Creado por:
-							<?php
-							echo mysqli_fetch_assoc(qq($link, "SELECT UserName FROM users WHERE ID = ".$row['User_ID']))['UserName'];
-							?>                            
-						</p>
-						<p class="description">
-							<?php echo $row['Recipe'];  ?>
-						</p>
-					</div>
-				</div>
-            </div>
-            
-            </div>
-            <div class="espaciado mt-3"></div>
-  <?php } ?>
-
+        <div class="espaciador mt-4"></div>
 <?php } else { ?>
 
 
 <h1>
-     esto tiene que quedar como la pagina principal de google (≧∇≦)ﾉ
+    esto tiene que quedar como la pagina principal de google (≧∇≦)ﾉ
 </h1>
 
 
@@ -222,16 +204,3 @@
 <?php } ?>
 
 </body>
-<script>
-    window.onscroll = function(){
-    if(document.documentElement.scrollTop > 100){
-        document.querySelector("#arriba")
-        .classList.add("show");
-    }
-    else{
-        document.querySelector("#arriba")
-        .classList.remove("show");
-    }
-}
-setfavs()
-</script>

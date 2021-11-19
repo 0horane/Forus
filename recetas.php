@@ -25,14 +25,14 @@ require_once 'partials/starfunc.php';
 	.page-item{
 		cursor: pointer;
 	}
-	.selects{
-		width: 15%;
+	#selects{
+		display: flex;
 	}
-	.selects form{
+	#selects form{
 		display: flex;
 		justify-content: space-between;
+		align-items: flex-end;
 	}
-
 </style>
 <body> 
 
@@ -51,21 +51,24 @@ require_once 'partials/starfunc.php';
   </script>
 	
     <?php include 'partials/header.php'?>
-	<div class="selects">
-		<form class="p-3">
-			<select id="condition" name="condition" onchange="updateCards ()" class="form-select">
-				<option value='a'>Alfabético</option>
-				<option value='c'>Cronológico</option>
-				<option value='f'>Por Favoritos</option>
-				<option value='v'>Por Vistas</option>
-				<option value='p'>Por Popularidad</option>
-			</select>
-			<select id="direction" name="direction" onchange="updateCards ()" class="form-select">
-				<option value='a'>Ascendiente</option>
-				<option value='d'>Descendiente</option>
-
-			</select>
-		</form>
+	<div class="container mt-2">
+		<div class="row d-flex justify-content-end"> 
+			<div id="selects" class="col-4">
+				<form class="p-3">
+					<select id="condition" name="condition" onchange="updateCards ()" class="form-select">
+						<option value='a'>Alfabético</option>
+						<option value='c'>Cronológico</option>
+						<option value='f'>Por Favoritos</option>
+						<option value='v'>Por Vistas</option>
+						<option value='p'>Por Popularidad</option>
+					</select>
+					<select id="direction" name="direction" onchange="updateCards ()" class="form-select">
+						<option value='a'>Ascendiente</option>
+						<option value='d'>Descendiente</option>
+					</select>
+				</form>
+			</div>
+		</div>
 	</div>
 
     <div id="container" class="container">

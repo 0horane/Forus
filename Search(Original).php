@@ -139,7 +139,9 @@
 
 
 <h1>
-     esto tiene que quedar como la pagina principal de google (≧∇≦)ﾉ
+     esto tiene que quedar como la pagina principal de google (≧∇≦)ﾉ <br>
+     Lucas was here >:)
+
 </h1>
 
 

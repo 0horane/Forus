@@ -49,14 +49,14 @@
                 <form class = "mt-3" action = "login.php" method = "POST"> 
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre de usuario o mail</label>
-                    <input name="usr" type="text" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Escribí aca tu email o numbre de usuario." >
+                    <input name="usr" type="text" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Escribí aca tu email o numbre de usuario.">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>                           
                     <input name="pwd" type="password" class="form-control" id="pwd" placeholder = "Escribí aca tu contraseña.">
                   </div>
                   <div class = "d-grid">
-                    <button type = "submit" value = "submit" class = "btn mt-2">Login</button>
+                    <button type = "submit" value = "submit" class = "btn mt-2" name="loguearse">Login</button>
                   </div>
                 </form>
                 <div class="row text-center">

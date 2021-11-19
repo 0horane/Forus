@@ -67,7 +67,7 @@
                     <input name='pwdc' type="password" class="form-control" id="pwd" placeholder = "Confirma tu contraseña.">
                   </div>
                   <div class = "d-grid">
-                    <button type = "submit" value = "submit" class = "btn mt-2">Registrarse</button>
+                    <button type = "submit" value = "submit" class = "btn mt-2" name="registrarse">Registrarse</button>
                   </div>
                 <!-- al que le toque esta parte tiene que hacer con js que se ponhga gris el boton de sumbit hasta que el usuario y contrasenia sean iguakles-->
                 </form>

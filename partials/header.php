@@ -5,6 +5,9 @@
   nav{
     border-bottom: 2.5px solid #2322;
   }
+  #usuarios{
+    margin-right: 1%;
+  }
 </style>
 <nav class="navbar navbar-expand-lg navbar-light"> 
       <div div="navbarsito" class="container my-2">
@@ -26,7 +29,9 @@
               <a id="donaciones" class="nav-link" href="donations.php">Donaciones</a>
             </li>
             </li>
-            <?php 
+          </ul>
+          <ul id="usuarios" class="navbar-nav mb-2 mb-lg-0">
+          <?php 
           
 
           if (!$loggedin){
@@ -57,7 +62,7 @@
           
           ?>
           </ul>
-          <form class="d-flex" action="search.php">
+          <form id="search" class="d-flex mt-3" action="search.php">
             <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
             <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>

@@ -2,14 +2,14 @@
 require 'partials\session_start.php';
 
 if (isset($_SESSION["id"])){
-	$_SESSION["msg"]="Ya estas logeado";
-	$_SESSION["icon"]="success";
+	$_SESSION["msg"]="Ya estas logeado y registrado!";
+	$_SESSION["icon"]="info";
 	header('Location: index.php');
 	exit;
 }
 
-
-if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !empty($_POST['Email'])){
+if(isset($_POST['registrarse'])){
+	if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !empty($_POST['Email'])){
 		if ($_POST['pwd']==$_POST['pwdc']){
 
 			$sqlquery= 'select * from users where users.UserName = "' . mysqli_real_escape_string($link, $_POST['usr']) . '"';
@@ -25,27 +25,28 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd']) && !empty($_POST['pwdc']) && !
 				session_start();
 
 				$_SESSION["user"]=mysqli_real_escape_string($link, htmlspecialchars($_POST['usr']));
-				$_SESSION["msg"]="account created";
+				$_SESSION["msg"]="Cuenta creada con exito!";
 				$_SESSION["icon"]="success";
 				$sqlquery='select * from users where users.UserName = "' . $_SESSION["user"] . '"';
 				$_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["ID"];
 				header('Location: index.php');
 				exit;
 			} else { 
-				$_SESSION["msg"]= 'este usuario ya existe';
+				$_SESSION["msg"]= 'Este usuario ya existe';
 				$_SESSION["icon"]="error";
 			}  
 		
 		} else {
-			$_SESSION["msg"]= 'SSon diferentes las contraseñas';
+			$_SESSION["msg"]= 'Las contraseñas son diferentes';
 			$_SESSION["icon"]="error";
 		}
 	
 } else {
 	if(empty($_POST['usr']) || empty($_POST['pwd']) || empty($_POST['Email']) || empty($_POST['pwdc'])){
-			$_SESSION["msg"]= 'No completaste todos los datos';
+			$_SESSION["msg"]= 'Rellena todos los campos';
 			$_SESSION["icon"]="error";
 	   }}
+}
 	   
 require 'partials\session_start.php';
 
