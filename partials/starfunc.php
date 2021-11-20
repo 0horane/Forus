@@ -116,16 +116,20 @@ function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditd
     str="";
     str+=`  <div id="c${id}" class="col-md-4 mt-2">
             
-                <div class="card text-center" style="max-height:550px;">
-                
-                    <img src="images/recipe/${image}" alt="Sin Imagen" onerror=this.src="images/noimage.png" style="clip-path: inset(15% 0% 15% 0%);transform: translate(0px, -15%);">
-                    <div class="card-body container" style="transform: translate(0px, -32%);">
-                        <div class="row" style="height:30px;display:flex;align-items:center;">
-                        <h5 class="card-title" style="transform: translate(0px, 5%);text-align:center;width=100%">${name}</h5>
-                        <p class="card-title" style="transform: translate(0px, -20%%);width=100%;font-size:12px;color:gray;">por: ${author}</p>
+                <div class="card text-center" style="max-height:97%;">
+					<div style="height:240px;width:100%;">
+						${ code ?
+						`<iframe src="//www.youtube.com/embed/${code}" style="width:100%;height:240px; border-radius:3px 3px 0px 0px" allowfullscreen="" frameborder="0"></iframe>` :
+						`<img src="images/recipe/${image}" alt="Sin Imagen" onerror=this.src="images/noimage.png" style="object-fit: cover;width:100%;height:100%; border-radius:3px 3px 0px 0px">`
+						}
+					</div>
+                    <div class="card-body container" style="">
+                        <div class="row" style="display:flex;align-items:center;">
+                        <h5 class="card-title" style="text-align:center;width=100%">${name}</h5>
+                        <p class="card-title" style="width=100%;font-size:12px;color:gray;">por: ${author}</p>
                         </div>
                         <div class="row">
-                        <div style="transform: translate(0px, -3%,); ">
+                        <div style=" ">
                             <div style="height:200px;overflow:hidden;">
                                 <p class="card-text">${text}</p>
                             </div>

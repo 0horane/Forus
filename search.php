@@ -53,6 +53,21 @@
             border: 1px solid #BDBDBD;
             padding: 25px;
         }
+		
+		@media (min-width: 975px) {
+			.buttonh {
+				transform: translate(0%, -270px);
+			}
+			
+			.vrmas{
+			margin-top:200px
+			}
+			
+			#items-search{
+				max-height:400px;
+			}
+		}
+		
 	</style>
 </head>
 <body>
@@ -122,14 +137,14 @@
 						    	<?php echo $row['Recipe'];  ?>
 						    </p>
                         </div>
-                        <div class="container text-end p-2">
+                        <div class="container text-end p-2 buttonh">
 				
 									
                 <span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
                     <?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
                     <?php echo $loggedin ? "<div id='replace${row['ID']}'>aa<script>document.getElementById('replace${row['ID']}').innerHTML=genstar(${row['ID']});</script></div>" : '';?>
                 </span>
-                <a class="btn btn-primary btn-info btn-sm" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
+                <a class="btn btn-primary btn-info btn-sm vrmas" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
 
         
             </div>
@@ -139,7 +154,7 @@
                 
             </div>
             </div>
-            <div class="espaciado mt-3"></div>
+            
   <?php } ?>
   <div class="container rounded mt-4" >
             <div class="row">
@@ -151,12 +166,12 @@
                     $spchar=strpos($_SERVER['REQUEST_URI'],"?") ? '&' : '?';
                     $isdis = 0==$page ? " disabled" : ""; ?>
                     <li class="page-item <?php echo $isdis; ?>"> 
-                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=0"; ?>"  <?php echo $isdis; ?>>
+                        <a class="page-link" href="<?php echo $_SERVER['SCRIPT_NAME']."?q=".$_GET["q"]."&page=0"; ?>"  <?php echo $isdis; ?>>
                             «
                         </a>
                     </li>
                     <li class="page-item <?php echo $isdis; ?>"> 
-                        <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=".$page-1; ?>"  <?php echo $isdis; ?>>
+                        <a class="page-link" href="<?php echo $_SERVER['SCRIPT_NAME']."?q=".$_GET["q"]."&page=".$temp; ?>"  <?php echo $isdis; ?>>
                             ‹
                         </a>
                     </li>
@@ -166,7 +181,7 @@
                         $isact = $i==$page ? " active" : "";
                         ?>
                         <li class="page-item <?php echo $isact." ".$isdis ?>">
-                            <a class="page-link" href="<?php echo $_SERVER['REQUEST_URI'].$spchar."page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
+                            <a class="page-link" href="<?php echo $_SERVER['SCRIPT_NAME']."?q=".$_GET["q"]."&page=${i} "?>" <?php echo $isdis; ?> > <?php echo $i ?> </a>
                         </li>
                         <?php
                     }
@@ -176,12 +191,12 @@
                     ?>
 
                     <li class="page-item <?php echo $isdis; ?>">
-                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=". $temp?>' <?php echo $isdis ?>>
+                        <a class="page-link" href='<?php echo $_SERVER['SCRIPT_NAME']."?q=".$_GET["q"]."&page=". $temp?>' <?php echo $isdis ?>>
                             ›
                         </a>
                     </li>
                     <li class="page-item <?php echo $isdis; ?>">
-                        <a class="page-link" href='<?php echo $_SERVER['REQUEST_URI'].$spchar."page=" . $temp2; ?>' <?php echo $isdis; ?>>
+                        <a class="page-link" href='<?php echo $_SERVER['SCRIPT_NAME']."?q=".$_GET["q"]."&page=" . $temp2; ?>' <?php echo $isdis; ?>>
                             »
                         </a>
                     </li>
@@ -202,5 +217,7 @@
 
 
 <?php } ?>
-
+	<script>
+		setfavs()
+	</script>
 </body>

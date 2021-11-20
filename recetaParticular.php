@@ -57,6 +57,29 @@ require_once 'partials/starfunc.php';
         display: flex;
         justify-content: space-between;
     }
+	
+	  #absoluto{
+    color: white;
+    width: 100%;
+    height: 100%;
+    top: 32%;
+    right: 0;
+    position: absolute;
+  }
+  
+  #absoluto{
+	  text-shadow: -1px 1px 0 #000,
+                          1px 1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px -1px 0 #000;
+  }
+  
+    header{
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+  }
 </style>
 <script>
     // $.(document).ready(function(){
@@ -67,16 +90,26 @@ require_once 'partials/starfunc.php';
 </script>
 <body>
     <?php include 'partials/header.php'?>
+	<header class="mt-0">
+				<div style="min-height:100vh;">
+				<img id="insImg" class="image mt-3" src="asfkh" alt="Sin Imagen" onerror='this.src="images/noimage.png"' width = "100%" style="object-fit: cover;width:100%;height:100%;">
+				</div>
+				<div class = "container">
+				  <div id = "absoluto" class = "text-center">
+					<h1 id="insTitle" class = "display-1 mt-5"></h1>
+					<h3 class = "display-4">Escrito por: <strong id="insAuthor"></strong></h3>
+				  </div>
+				</div>
+			</header>
     <div id="container-receta" class='container'>
         <section>
-            </a>
+            
             <div class="search-result-item-body">
                 <div class="row">
                     <div class="col-sm-9">
-                        <div id="insTitle" class="display-1"></div>
-                        <div class="display-5" style="font-size:35px;">Escrito por: <strong id="insAuthor"></strong></div>
-                        <img id="insImg" class="image mt-3" src="asfkh" alt="Sin Imagen" onerror='this.src="images/noimage.png"' width = "75%">
+						  
                         <p class="fs-mini text-muted mt-3">Esta receta tiene: <span id="insViews"></span> 👁️ </p>
+						<div id="insVid"></div>
                         <hr>
                         <div id="insRecipe"></div> 
                         <br>
@@ -105,9 +138,12 @@ require_once 'partials/starfunc.php';
             a=result;
             document.getElementById("insTitle").innerText=result[0]['name'];
             document.getElementById("insAuthor").innerText=result[0]['username'];
-            document.getElementById("insImg").src="images/recipe/"+result[0]['image_path'];
+            document.getElementById("insImg").src="images/recipe/"+result[0]['img_path'];
             document.getElementById("insViews").innerText=result[0]['views'];
             document.getElementById("insRecipe").innerHTML=result[0]['recipe'];
+			
+			document.getElementById("insVid").innerHTML=result[0]['code'] ? `<iframe src="//www.youtube.com/embed/${result[0]['code']}" style="width:100%;height:500px; border-radius:3px" allowfullscreen="" frameborder="0"></iframe>` : "";
+			
 
             callAPI ('sc',<?php echo $_GET['r']; ?>,function( result ) {
                 let str="";
@@ -128,7 +164,6 @@ require_once 'partials/starfunc.php';
 
             callAPI ('iv',<?php echo $_GET['r']; ?>,function( result ){});
             var str=genstar(<?php echo $_GET['r']; ?>);
-            document.getElementById('cardbox').innerHTML=str;
 			setfavs();
 
 

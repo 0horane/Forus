@@ -33,7 +33,7 @@ require_once("partials/session_start.php");
 	$recipe=mysqli_fetch_assoc(qq($link, "SELECT * FROM Recipes WHERE ID = ".$r));
 	
 		if (!isset($_SESSION['id'])){ 
-		$_SESSION['msg']=$_SESSION['id'];
+		$_SESSION['msg']="no estas logueado";
 		?> 
 		
 		<script>
