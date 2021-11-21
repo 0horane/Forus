@@ -20,7 +20,7 @@ header("Content-type: application/json; charset=utf-8");
 
 //sc: (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
 //mc: (modify comment) recibe el id del comentario en $v. Usa variables : recipe,text, .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo. Si es para crear un comentario nuevo, no mandar nada o mandar 0 en id
-//dc: SIN Probar (delete comment) recibe un id de comentario en $v. La borra si es del usuario logueado. Devuelve True si se borro y False si no
+//dc: (delete comment) recibe un id de comentario en $v. La borra si es del usuario logueado. Devuelve True si se borro y False si no
 
 //iv: (increase viwews) recibe un id de receta en $v. La incrementa las vistas por 1
 //if: (is favorite) recibe un id de receta en $v. devuelve true o false correspondientemente
@@ -218,12 +218,12 @@ switch($qt){
 		}
 		if (isset($_POST['name']) && isset($_POST['recipe'])) {		 //si estan los requerimientos minimos	
 			if (isset($_FILES['img'])){ //si mandaron imagen
-				if (strpos($_FILES['img']['type'],'image') && $_FILES['img']['type']<20000 && !($_FILES['img']['error']>0)){ //si la imagen es válida
+				if (strpos($_FILES['img']['type'],'image')!==false && $_FILES['img']['size']<20000000 && !($_FILES['img']['error']>0)){ //si la imagen es válida
 					
-					move_uploaded_file($_FILES['img']['tmp_name'],"..\\images\\recipe\\".$imagefile.end(explode('.',$_FILES['img']['tmp_name']))); //mueve la imagen y le pone de nombre el id de receta.png/jpg/etc
+					move_uploaded_file($_FILES['img']['tmp_name'],"..\\images\\recipe\\".$imagefile.".".explode('/',$_FILES['img']['type'])[1]); //mueve la imagen y le pone de nombre el id de receta.png/jpg/etc
 					$img_exists=1;
 				} else { $img_exists=0; }
-			} else { $img_exists=0; }
+			} else { $img_exists=0;  }
 			if ($value==0){ //si la receta es nueva
 				$query="INSERT INTO recipes VALUES(
 									NULL,
@@ -231,7 +231,7 @@ switch($qt){
 									'".mysqli_real_escape_string($link, htmlspecialchars($_POST['name']))."',
 									'".mysqli_real_escape_string($link, $_POST['recipe'])."',
 									0,
-									".($img_exists ?  '"'.$imagefile.end(explode('.',$_FILES['img']['tmp_name'])).'"' : "NULL" ).",
+									".($img_exists ?  '"'.$imagefile.'.'.explode('/',$_FILES['img']['type'])[1].'"' : "NULL" ).",
                                     '".mysqli_real_escape_string($link, htmlspecialchars((isset($_POST['code']) ? $_POST['code'] : "NULL")))."',
                                     NOW(),
                                     NULL
@@ -245,8 +245,8 @@ switch($qt){
                 $query="UPDATE recipes SET 
                     `Name` = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['name']))."', 
                     Recipe = '".mysqli_real_escape_string($link, $_POST['recipe'])."'";
-                $query.= $img_exists ? ",img_path = '".$imagefile.end(explode('.',$_FILES['img']['tmp_name']))."'" : "";
-                $query.= $isset($_POST['code']) ? ",Code = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['code']))."'" : "";
+                $query.= $img_exists ? ",img_path = '".$imagefile.".".explode('/',$_FILES['img']['type'])[1]."'" : "";
+                $query.= isset($_POST['code']) ? ",Code = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['code']))."'" : "";
                 $query.= "WHERE recipes.ID = ".mysqli_real_escape_string($link, $value);
                 qq($link, $query);
                 die('true');

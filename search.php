@@ -107,7 +107,7 @@
         }
 ?>
         <?php
-        $rows=qq($link, "SELECT *".$sqlquery."limit " . $page*$perpage . ",". $perpage);
+        $rows=qq($link, "SELECT *".$sqlquery."limit " . mysqli_real_escape_string($link, $page)*$perpage . ",". $perpage);
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
@@ -155,7 +155,11 @@
             </div>
             </div>
             
-  <?php } ?>
+  <?php } 
+  if (!mysqli_num_rows($rows)){
+	  echo "no hay resultados";
+  }
+  ?>
   <div class="container rounded mt-4" >
             <div class="row">
                 <div class="col-12">
