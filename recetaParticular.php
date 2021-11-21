@@ -87,6 +87,7 @@ require_once 'partials/starfunc.php';
     //         $(this).toggleClass("active");
     //    });
     // });
+    userid= <?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 0; ?>;
 </script>
 <body>
     <?php include 'partials/header.php'?>
@@ -129,10 +130,39 @@ require_once 'partials/starfunc.php';
             
               
         </div>
-        <?php include 'partials/footer.php' ?>
+        <?php if ($loggedin){ ?>
+        <form onsubmit="return postComment(event);">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
+                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary"></button>
+        </form>
+        <?php } include 'partials/footer.php' ?>
     </div>
 
     <script>
+    function renderComments(){
+            callAPI ('sc',<?php echo $_GET['r']; ?>,function( result ) {
+                let str="";
+                result.forEach(comment=>{
+                    //console.log(comment);
+                    str+=`<div class="comentarios p-2 mt-2" id="c${comment[0]['ID']}">
+                            <div class="titulo-comentarios">
+                                <h6>${comment[0]['UserName']}</h6>
+                                <h6 class="text-end">Hecho el dia ${comment[0]['Created_At']}</h6>
+                            </div>
+                            <h3 class="comentario col-12 p-3">${comment[0]['Text']}</h3>
+                            ${ userid==comment[0]['User_ID'] ? 
+                            `<button onclick="editComment('${comment[0]['ID']}')" class="btn btn-primary mt-1">Editar</button>`:``
+                            }
+                        </div>  `;
+                });
+                document.getElementById('comentarios-section').innerHTML=str;
+
+            });
+        }
+
     callAPI ('rd',<?php echo $_GET['r']; ?>,function( result ) {
         if (result){
             a=result;
@@ -144,23 +174,8 @@ require_once 'partials/starfunc.php';
 			
 			document.getElementById("insVid").innerHTML=result[0]['code'] ? `<iframe src="//www.youtube.com/embed/${result[0]['code']}" style="width:100%;height:500px; border-radius:3px" allowfullscreen="" frameborder="0"></iframe>` : "";
 			
-
-            callAPI ('sc',<?php echo $_GET['r']; ?>,function( result ) {
-                let str="";
-                console.log(result);
-                result.forEach(comment=>{
-                    //console.log(comment);
-                    str+=`<div class="comentarios p-2 mt-2">
-                            <div class="titulo-comentarios">
-                                <h6>${comment[0]['UserName']}</h6>
-                                <h6 class="text-end">Hecho el dia ${comment[0]['Created_At']}</h6>
-                            </div>
-                            <h3 class="comentario col-12 p-3">${comment[0]['Text']}</h3>
-                        </div>  `;
-                });
-                document.getElementById('comentarios-section').innerHTML=str;
-
-            });
+            
+            renderComments()
 
             callAPI ('iv',<?php echo $_GET['r']; ?>,function( result ){});
             var str=genstar(<?php echo $_GET['r']; ?>);
@@ -174,6 +189,81 @@ require_once 'partials/starfunc.php';
     
 
     setfavs();
+
+    function postComment(event){
+        event.preventDefault();
+        $.ajax({
+            url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+            dataType:"json",
+            method:"post",
+            data: {
+                qt: 'mc',
+                recipe:  <?php echo $_GET['r']; ?>,
+                text: document.querySelector('textarea:last-child').value
+            },
+            success: function(result){
+                if(result){
+                    renderComments();
+                    document.querySelector('textarea:last-child').value="";
+                }
+            }
+        });
+        return false;
+        
+    }
+
+    function editComment (commentid){
+        comment=document.getElementById('c'+commentid);
+        ntxtarea=document.createElement('textarea');
+        ntxtarea.value=comment.children[1].innerHTML;
+        ntxtarea.id='a'+commentid;
+        ntxtarea.className='form-control';
+        bcancel=document.createElement('button');
+        bcancel.onclick=function(){renderComments()};
+        bcancel.className='btn btn-primary mt-1';
+        bcancel.innerHTML='Cancelar';
+        bdel=document.createElement('button');
+        bdel.onclick=function(){document.getElementById('a'+commentid).value="";saveEdit(commentid)};
+        bdel.className='btn btn-warning mt-1';
+        bdel.innerHTML='Eliminar';
+        comment.replaceChild(ntxtarea, comment.children[1])
+        comment.children[2].onclick=function(){saveEdit(commentid)};
+        comment.children[2].innerHTML='Guardar';
+        comment.appendChild(bcancel);
+        comment.appendChild(bdel);
+
+    }
+
+    function saveEdit(commentid){
+        comment=document.getElementById('a'+commentid);
+        if (comment.value){
+            $.ajax({
+                url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+                dataType:"json",
+                method:"post",
+                data: {
+                    qt: 'mc',
+                    recipe:  <?php echo $_GET['r']; ?>,
+                    text: comment.value,
+                    v: commentid
+                },
+                success: function(result){
+                    if(result){
+                        renderComments();
+                    }
+                }
+            });
+        } else {
+            callAPI ('dc',commentid,function(result){
+                if(result){
+                    renderComments();
+                }
+            });
+        }
+        
+    }
+
+
     </script>
 </body>
 </html>

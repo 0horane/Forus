@@ -49,7 +49,7 @@
                 <form class = "mt-3" action = "login.php" method = "POST"> 
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre de usuario o mail</label>
-                    <input name="usr" type="text" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Escribí aca tu email o numbre de usuario.">
+		    <input name="usr" type="text" class="form-control" id="usr" aria-describedby="emailHelp" placeholder="Escribí aca tu email o numbre de usuario." value="<?php echo isset($_POST["usr"]) ?  $_POST["usr"] : "";?>">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contraseña</label>                           

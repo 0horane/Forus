@@ -49,12 +49,12 @@
                 <form class = "mt-3" action = "register.php" method = "POST"> 
 				  <div class="mb-3">
                     <label for="usr" class="form-label">Nombre de Usuario</label>
-                    <input name='usr' type="text" class="form-control" id="username" aria-describedby="userHelp" placeholder="Escribí aca tu nombre de usuario." >
+                    <input name='usr' type="text" class="form-control" id="username" aria-describedby="userHelp" placeholder="Escribí aca tu nombre de usuario." value="<?php echo isset($_POST["usr"]) ?  $_POST["usr"] : "";?>">     
                     <div id="userHelp" class="form-text">Ingrese su nombre de usuario por el cual sera reconocido en nuestro sitio</div>
                   </div>
                   <div class="mb-3">
                     <label for="Email" class="form-label">Direccion de correo <!--<span style="color:gray">(opcional)</span>--></label>
-                    <input name='Email' type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Escribí aca tu email." >
+                    <input name='Email' type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Escribí aca tu email." value="<?php echo isset($_POST["Email"]) ?  $_POST["Email"] : "";?>">
                     <div id="emailHelp" class="form-text">Nunca compartiremos tu mail con nadie.</div>
                   </div>
                   <div class="mb-3">

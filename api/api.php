@@ -17,8 +17,8 @@ header("Content-type: application/json; charset=utf-8");
 //yf: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. ESTO PROXIMO NO ES CIERTO PERO LO AGREGO SI TENGO TIEMPO Tambien permite usar el valor 'm' como primera letra para ver guardadas mas recientes
 //sf: (Swap favorites)cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
 
-//sc: SIN PROBAR (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
-//mc: SIN PROBAR (modify comment) recibe el id del comentario en $v. Usa variables : receta,text, .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo. Si es para crear un comentario nuevo, no mandar nada o mandar 0 en id
+//sc: (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
+//mc: (modify comment) recibe el id del comentario en $v. Usa variables : recipe,text, .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo. Si es para crear un comentario nuevo, no mandar nada o mandar 0 en id
 //dc: SIN Probar (delete comment) recibe un id de comentario en $v. La borra si es del usuario logueado. Devuelve True si se borro y False si no
 
 //iv: (increase viwews) recibe un id de receta en $v. La incrementa las vistas por 1
@@ -283,7 +283,7 @@ switch($qt){
 
     case 'mc':
         $id=privQSt();
-        if (isset($_POST['text'])){
+        if (isset($_POST['text'])){//????????? what
             if ($value!=0){ //Se fija si el comment es nuevo. 
                 if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from comments where ID = ".mysqli_real_escape_string($link, $value)))['User_ID']==$id)){ //se fija si la receta es del usuario
                     die('false');
@@ -295,7 +295,7 @@ switch($qt){
             } else if (isset($_POST['recipe'])) { //da el numero de la receta nueva
                 $query="INSERT INTO comments VALUES(null,${id},".mysqli_real_escape_string($link, $_POST['recipe']).",'".mysqli_real_escape_string($link, htmlspecialchars($_POST['text']))."',NOW())" ;
                 qq($link, $query);
-                $json[]=mysqli_fetch_assoc(qq("SELECT MAX(ID) AS maxID FROM comments"))['maxID'];
+                $json[]=mysqli_fetch_assoc(qq($link, "SELECT MAX(ID) AS maxID FROM comments"))['maxID'];
             } else {
                 die('false');
             }
