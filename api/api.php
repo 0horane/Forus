@@ -16,6 +16,7 @@ header("Content-type: application/json; charset=utf-8");
 //yr: (Your recipes)funciona igual que sr, pero busca las recetas del usuario ordenadas. Devuelve una lista con als recetas sin borrar y otra con borradas
 //yf: (Your favorites) funciona igual que sr, pero busca las recetas guardadas del usuario ordenadas. ESTO PROXIMO NO ES CIERTO PERO LO AGREGO SI TENGO TIEMPO Tambien permite usar el valor 'm' como primera letra para ver guardadas mas recientes
 //sf: (Swap favorites)cambia el estado de favorito de una receta. Devuelve True si queda en favoritos y False si queda no en favorito.
+//dd: (deleted [recipe] data) igual que rd, pero devuelve la receta aunque este borrada si es tuya
 
 //sc: (show comments) devuelve array con todos los comentarios del post ingresado en $v. este array contiene el id, id del autor, texto, y fecha
 //mc: (modify comment) recibe el id del comentario en $v. Usa variables : recipe,text, .Hay que usarlo por post debido al limite del get. Devuelve True si se modificó , False si falló, y el id de comentario si es nuevo. Si es para crear un comentario nuevo, no mandar nada o mandar 0 en id
@@ -77,6 +78,66 @@ function sortorder($sorttype, $order, $where){
 }
 
 
+function recipedata($link, $value, $deleted=0){
+    $json=[];
+    if (is_numeric($value)){ // if there is only just one recipe
+        $query="SELECT recipes.*,UserName FROM recipes INNER JOIN users ON users.ID=recipes.User_ID WHERE recipes.ID =".$value." AND ";
+        $query.= $deleted ? "recipes.User_ID = ".$deleted : "recipes.Deleted_At IS NULL";
+    }
+    else {
+        
+        $idarr=explode (",", $value);
+        $orderstr="";
+        if (!is_numeric($idarr[0])){ //if the recepies are given a sort order
+            
+            $sortarr=str_split(array_shift($idarr));
+            $orderstr=" ORDER BY ";
+            switch ($sortarr[0]){
+                case 'a': $orderstr.="Name"; break;
+                case 'c': $orderstr.="Created_At"; break;
+                case 'f': $orderstr.="favcount"; break; 
+                case 'v': $orderstr.="Views"; break; 
+                case 'p': $orderstr.="popularity"; break;
+                }
+            switch ($sortarr[1]){
+                case 'a': $orderstr.=" ASC"; break;
+                case 'd': $orderstr.=" DESC"; break;
+            }
+        }
+        $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as favcount FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID WHERE ( 0 ";
+        if (!empty($orderstr) && $sortarr[0]=='p'){
+            $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as popularity FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID AND favorites.Created_At + INTERVAL 7 DAY > NOW() WHERE ( 0 ";
+        }
+        foreach ($idarr as $subid){
+            $query.="OR recipes.ID=".mysqli_real_escape_string($link, $subid)." ";
+        }
+        $query.= $deleted ? " ) AND recipes.User_ID = ".$deleted :" ) AND recipes.Deleted_At IS NULL";
+        $query.=" GROUP BY recipes.ID".$orderstr;
+    }
+    $result=qq($link, $query);
+    if(mysqli_fetch_assoc($result)){ //foreach result of query
+        mysqli_data_seek($result,0);
+        while ($row=mysqli_fetch_assoc($result)){
+            $json[]=[
+                'id'=>$row['ID'],
+                'user_id'=>$row['User_ID'],
+                'username'=>$row['UserName'],
+                'name'=>$row['Name'],
+                'recipe'=>$row['Recipe'],
+                'views'=>$row['Views'],
+                'img_path'=>$row['img_path'],
+                'created_at'=>$row['Created_At'],
+                'code'=>$row['Code'],
+            ];
+        }
+    } else {
+        die('false');
+    }
+    return $json;
+}
+
+
+
 if (isset($_GET['qt'])) {
     $qt=$_GET['qt'];
 } else if  (isset($_POST['qt'])){
@@ -107,59 +168,12 @@ $json=[];
 
 switch($qt){
     case 'rd':
-        if (is_numeric($value)){ // if there is only just one recipe
-            $query="SELECT recipes.*,UserName FROM recipes INNER JOIN users ON users.ID=recipes.User_ID WHERE recipes.ID =".$value." AND recipes.Deleted_At IS NULL";
-        }
-        else {
-            
-            $idarr=explode (",", $value);
-            $orderstr="";
-            if (!is_numeric($idarr[0])){ //if the recepies are given a sort order
-                
-                $sortarr=str_split(array_shift($idarr));
-                $orderstr=" ORDER BY ";
-                switch ($sortarr[0]){
-                    case 'a': $orderstr.="Name"; break;
-                    case 'c': $orderstr.="Created_At"; break;
-                    case 'f': $orderstr.="favcount"; break; 
-                    case 'v': $orderstr.="Views"; break; 
-                    case 'p': $orderstr.="popularity"; break;
-                    }
-                switch ($sortarr[1]){
-                    case 'a': $orderstr.=" ASC"; break;
-                    case 'd': $orderstr.=" DESC"; break;
-                }
-            }
-            $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as favcount FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID WHERE ( 0 ";
-            if (!empty($orderstr) && $sortarr[0]=='p'){
-                $query="SELECT recipes.*,UserName, COUNT(favorites.Recipes_ID) as popularity FROM recipes INNER JOIN users ON users.ID=recipes.User_ID LEFT JOIN favorites ON favorites.Recipes_ID = recipes.ID AND favorites.Created_At + INTERVAL 7 DAY > NOW() WHERE ( 0 ";
-            }
-            foreach ($idarr as $subid){
-                $query.="OR recipes.ID=".mysqli_real_escape_string($link, $subid)." ";
-            }
-            $query.=" ) AND recipes.Deleted_At IS NULL"." GROUP BY recipes.ID".$orderstr;
-        }
-        $result=qq($link, $query);
-        if(mysqli_fetch_assoc($result)){ //foreach result of query
-            mysqli_data_seek($result,0);
-            while ($row=mysqli_fetch_assoc($result)){
-                $json[]=[
-                    'id'=>$row['ID'],
-                    'user_id'=>$row['User_ID'],
-                    'username'=>$row['UserName'],
-                    'name'=>$row['Name'],
-                    'recipe'=>$row['Recipe'],
-                    'views'=>$row['Views'],
-                    'img_path'=>$row['img_path'],
-                    'created_at'=>$row['Created_At'],
-                    'code'=>$row['Code'],
-                ];
-            }
-        } else {
-            die('false');
-        }
+        $json=recipedata($link, $value);
         break;
 
+    case 'dd':
+        $json=recipedata($link, $value, privQSt());
+        break;
 
     case 'cf':
         $query="SELECT COUNT('User_ID') as tf FROM favorites WHERE Recipes_ID=".mysqli_real_escape_string($link, $value);

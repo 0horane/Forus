@@ -63,7 +63,7 @@
           ?>
           </ul>
           <form id="search" class="d-flex mt-3" action="search.php">
-            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
+            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ; ?>"></input>
             <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>
         </div>
