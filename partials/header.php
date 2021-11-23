@@ -47,11 +47,12 @@
             ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php echo htmlspecialchars($_SESSION["user"]) ?>
+                <?php echo ($_SESSION["user"]) ?>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="navlink-disabled text-center">Mi Actividad</li>
                 <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-center" href="richtext.php">Crear receta</a></li>
                 <li><a class="dropdown-item text-center" href="misrecetas.php">Mis recetas</a></li>
                 <li><a class="dropdown-item text-center" href="favoritosUser.php">Favoritos</a></li>
 				<li><a id="logout" class="dropdown-item text-center" href="database/logout.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Cerrar Sesion</a></li>

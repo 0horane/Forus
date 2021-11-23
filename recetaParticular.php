@@ -9,7 +9,8 @@ require_once 'partials/starfunc.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Recetario - Receta no encontrada</title>
+	<link rel="shortcut icon" href="cutlery.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -126,18 +127,18 @@ require_once 'partials/starfunc.php';
             
         </div>
         <h4 class="display-6 mt-4">Comentarios</h4>
+        <?php if ($loggedin){ ?>
+        <form onsubmit="return postComment(event);">
+            <div class="form-group p-2">
+                <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
+                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <input type="submit" class="btn btn-primary mt-2" value="Comentar"></button>
+            </div>
+        </form>
         <div id='comentarios-section' class="comentarios-section container-fluid">
             
               
         </div>
-        <?php if ($loggedin){ ?>
-        <form onsubmit="return postComment(event);">
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
-                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <input type="submit" class="btn btn-primary"></button>
-        </form>
         <?php } include 'partials/footer.php' ?>
     </div>
 
@@ -171,7 +172,7 @@ require_once 'partials/starfunc.php';
             document.getElementById("insImg").src="images/recipe/"+result[0]['img_path'];
             document.getElementById("insViews").innerText=result[0]['views'];
             document.getElementById("insRecipe").innerHTML=result[0]['recipe'];
-			
+            document.title=result[0]['name']+" - Recetario";
 			document.getElementById("insVid").innerHTML=result[0]['code'] ? `<iframe src="//www.youtube.com/embed/${result[0]['code']}" style="width:100%;height:500px; border-radius:3px" allowfullscreen="" frameborder="0"></iframe>` : "";
 			
             
@@ -192,22 +193,25 @@ require_once 'partials/starfunc.php';
 
     function postComment(event){
         event.preventDefault();
-        $.ajax({
-            url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-            dataType:"json",
-            method:"post",
-            data: {
-                qt: 'mc',
-                recipe:  <?php echo $_GET['r']; ?>,
-                text: document.querySelector('textarea:last-child').value
-            },
-            success: function(result){
-                if(result){
-                    renderComments();
-                    document.querySelector('textarea:last-child').value="";
-                }
-            }
-        });
+		commenttext=document.querySelector('textarea');
+		if (commenttext.value){
+			$.ajax({
+				url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+				dataType:"json",
+				method:"post",
+				data: {
+					qt: 'mc',
+					recipe:  <?php echo $_GET['r']; ?>,
+					text: commenttext.value
+				},
+				success: function(result){
+					if(result){
+						renderComments();
+						commenttext.value="";
+					}
+				}
+			});
+		}
         return false;
         
     }
