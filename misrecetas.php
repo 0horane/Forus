@@ -99,7 +99,7 @@ require_once 'partials/starfunc.php';
 			directionElement = document.getElementById('public');
 			direction=directionElement.options[directionElement.selectedIndex].value;
 			let str="";
-			callAPI('yr',`${condition}${direction}${public}`, function( result ) {
+			callAPI('yr',`${condition}${direction}`, function( result ) {
 
 				str+=makepager(result[0], page);
 				//console.log(result);
@@ -109,6 +109,7 @@ require_once 'partials/starfunc.php';
 					ajaxvalues.push(result[0][i]);
 					}
 				}
+				
 				callAPI('rd',[`${condition}${direction}${public}`]+','+ajaxvalues.join(','), function( result ) {
 						
 						result.forEach(recipe=>{
@@ -118,7 +119,6 @@ require_once 'partials/starfunc.php';
 						setfavs()
 				});
 			});
-			
 			
 		}
 		updateCards ()

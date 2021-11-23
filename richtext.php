@@ -18,9 +18,6 @@
   		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		<meta charset="UTF-8">
     	<title>Receta</title>
-
-
-
 		<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script>
@@ -35,40 +32,88 @@
 		</script>
 		<?php require_once 'partials/starfunc.php'; ?>
 		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 			.cont1{
-				max-width:70vw;
+				margin:60px;
+			}
+			.form_title{
+				text-align: center;
+				font-family: 'Raleway', sans-serif;
+			}
+			.form-row{
+				text-align: center;
+				font-family: 'Raleway', sans-serif;
+			}
+			.form2{
 				margin:30px;
 			}
+			.img{
+				width: 30%;
+				border-radius: 10px;
+			}
+			.button1 {
+				text-decoration:none;
+				font-family: 'Raleway', sans-serif;
+				font-weight: 600;
+				font-size: 20px;
+				color:#ffffff;
+				padding-top:15px;
+				padding-bottom:15px;
+				padding-left:30px;
+				padding-right:30px;
+				background-color:#0c9129f8;
+				border-color: #0c4715f8;
+				border-width: 2px;
+				border-style: solid;
+				border-radius:10px;
+			}
+
 		</style>
 	</head>
 	<body>
 	<?php include 'partials/header.php'?>
 
-		<div class="cont1">
-			<form onsubmit="return saverecipe(event)" id="fullform">
-				<input id='qt' name='qt' type='hidden' value='mr'>
-				<label for="name" class="form-label">Titulo</label>
-				<input id="name" name="name" type='text'>
-				<br>
-				<label for="img" class="form-label">Imagen</label>
-				<input id="img" name="img" type='file' onchange="displayimg(this)">
-				<p>(Imagen actual:)</p>
-				<img src="" id="cimg">
-				<br>
-				<label for="code" class="form-label">Video de youtube</label>
-				<input id="code" name="code" type='text'>
-				<div name="texto" id="editor">
-					
+<div class="cont1 shadow">
+	<div class="col p-3">
+		<div class="text-end">
+			<a href="index.php"><img src="images/LogoMakr-56L0gt.png" alt="logo" width="6%" href="index.php"></a>
+		</div>      
+			<h1 class= "form_title">Mi receta</h1>
+
+		<form onsubmit="return saverecipe(event)" id="fullform">
+			<div class="form-row">
+				<div class="form2"> 
+					<input id='qt' name='qt' type='hidden' value='mr'>
+					<label for="name"><b>Titulo de la Receta: </b></label>
+					<input id="name" name="name" type='text' class="form-control" placeholder="Escriba el nombre de su receta aquí">
 				</div>
-				
-				<textarea name="recipe" id="text-area" style="display:none;">
-				</textarea>
-				<?php if ($rnum){ ?>
-					<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
-				<?php }  ?>
-				<input id="save" name="b" type='submit'>
+			</div>
+		<br>
+			<div class="form-row">
+				<div class="form2">
+					<label for="img" class="form-label"><b>Imagen:</b></label>
+					<input id="img" name="img" type='file' onchange="displayimg(this)">
+					<p><b>Imagen actual:</b></p>
+					<img class="img"  src="" id="cimg">
+				</div>
+		<br>
+			<div class="form-row">
+				<div class="form2">
+					<label for="code"><b>Video de youtube: </b></label>
+					<input for="code" class="form-control" id="code" name="code" type='text' placeholder="Pegué aquí la URL de su video (opcional)">
+				</div>
+		<br>
+			<div class="form2">
+				<div name="texto" id="editor">
+			</div>
+					<textarea name="recipe" id="text-area" style="display:none;"></textarea>
+					<?php if ($rnum){ ?>
+						<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
+					<?php }  ?>
+		<input  class="button1 mt-2"id="save" name="b" type='submit'>
 			</form>
-		</div>
+	<div>
+</div>
 		<script>
 			editor=ClassicEditor.create(document.querySelector('#editor'))
 			.catch(error =>{
