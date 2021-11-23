@@ -193,7 +193,7 @@ require_once 'partials/starfunc.php';
 
     function postComment(event){
         event.preventDefault();
-		commenttext=document.querySelector('textarea:last-child');
+		commenttext=document.querySelector('textarea');
 		if (commenttext.value){
 			$.ajax({
 				url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
