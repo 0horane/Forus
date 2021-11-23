@@ -28,13 +28,14 @@
         background-position: center;
         border-radius: 15px 0px 0px 15px;
     }
-    .btn{
+    #btnLog{
         background-color: #949492;
         color: white;
     }
     </style>
 </head>
 <body>
+<?php include_once "partials/header.php" ?>
     <div class="container shadow">
         <div class="row align-items-stretch">
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
@@ -56,7 +57,7 @@
                     <input name="pwd" type="password" class="form-control" id="pwd" placeholder = "Escribí aca tu contraseña.">
                   </div>
                   <div class = "d-grid">
-                    <button type = "submit" value = "submit" class = "btn mt-2" name="loguearse">Login</button>
+                    <button id = "btnLog" type = "submit" value = "submit" class = "btn mt-2" name="loguearse">Login</button>
                   </div>
                 </form>
                 <div class="row text-center">

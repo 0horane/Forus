@@ -127,18 +127,18 @@ require_once 'partials/starfunc.php';
             
         </div>
         <h4 class="display-6 mt-4">Comentarios</h4>
+        <?php if ($loggedin){ ?>
+        <form onsubmit="return postComment(event);">
+            <div class="form-group p-2">
+                <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
+                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <input type="submit" class="btn btn-primary mt-2" value="Comentar"></button>
+            </div>
+        </form>
         <div id='comentarios-section' class="comentarios-section container-fluid">
             
               
         </div>
-        <?php if ($loggedin){ ?>
-        <form onsubmit="return postComment(event);">
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
-                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <input type="submit" class="btn btn-primary"></button>
-        </form>
         <?php } include 'partials/footer.php' ?>
     </div>
 
