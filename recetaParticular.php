@@ -193,22 +193,25 @@ require_once 'partials/starfunc.php';
 
     function postComment(event){
         event.preventDefault();
-        $.ajax({
-            url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
-            dataType:"json",
-            method:"post",
-            data: {
-                qt: 'mc',
-                recipe:  <?php echo $_GET['r']; ?>,
-                text: document.querySelector('textarea:last-child').value
-            },
-            success: function(result){
-                if(result){
-                    renderComments();
-                    document.querySelector('textarea:last-child').value="";
-                }
-            }
-        });
+		commenttext=document.querySelector('textarea:last-child');
+		if (commenttext.value){
+			$.ajax({
+				url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
+				dataType:"json",
+				method:"post",
+				data: {
+					qt: 'mc',
+					recipe:  <?php echo $_GET['r']; ?>,
+					text: commenttext.value
+				},
+				success: function(result){
+					if(result){
+						renderComments();
+						commenttext.value="";
+					}
+				}
+			});
+		}
         return false;
         
     }
