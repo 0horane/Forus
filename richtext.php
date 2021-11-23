@@ -43,31 +43,33 @@
 	</head>
 	<body>
 	<?php include 'partials/header.php'?>
+		<div class="container border  rounded-3 mt-5">
+			<h5 class="display-5 text-center">Sube tu receta!</h5>
+			<div class="cont1">
+				<form onsubmit="return saverecipe(event)" id="fullform">
+					<input id='qt' name='qt' type='hidden' value='mr'>
+					<label for="name" class="form-label">Titulo</label>
+					<input id="name" name="name" type='text'>
+					<br>
+					<label for="img" class="form-label">Imagen</label>
+					<input id="img" name="img" type='file' onchange="displayimg(this)">
+					<p>(Imagen actual:)</p>
+					<img src="" id="cimg">
+					<br>
+					<label for="code" class="form-label">Video de youtube</label>
+					<input id="code" name="code" type='text'>
+					<div name="texto" id="editor">
 
-		<div class="cont1">
-			<form onsubmit="return saverecipe(event)" id="fullform">
-				<input id='qt' name='qt' type='hidden' value='mr'>
-				<label for="name" class="form-label">Titulo</label>
-				<input id="name" name="name" type='text'>
-				<br>
-				<label for="img" class="form-label">Imagen</label>
-				<input id="img" name="img" type='file' onchange="displayimg(this)">
-				<p>(Imagen actual:)</p>
-				<img src="" id="cimg">
-				<br>
-				<label for="code" class="form-label">Video de youtube</label>
-				<input id="code" name="code" type='text'>
-				<div name="texto" id="editor">
-					
-				</div>
-				
-				<textarea name="recipe" id="text-area" style="display:none;">
-				</textarea>
-				<?php if ($rnum){ ?>
-					<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
-				<?php }  ?>
-				<input id="save" name="b" type='submit'>
-			</form>
+					</div>
+
+					<textarea name="recipe" id="text-area" style="display:none;">
+					</textarea>
+					<?php if ($rnum){ ?>
+						<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
+					<?php }  ?>
+					<input id="save" name="b" type='submit'>
+				</form>
+			</div>
 		</div>
 		<script>
 			editor=ClassicEditor.create(document.querySelector('#editor'))

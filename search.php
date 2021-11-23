@@ -111,7 +111,7 @@
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
-            <div class="dp-flex justify-items-center mt-5 p-4"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" --> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:50%;margin-right:auto;margin-left:25%;" -->
+            <div class="dp-flex justify-items-center mt-5 p-2"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" --> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:50%;margin-right:auto;margin-left:25%;" -->
             <div id="container-search" class="container dp-flex justify-content-center">
 				<div id="items-search" class="row">
 					<a class="image-link p-1 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
@@ -210,7 +210,6 @@
                 </div>
             </div>
         </div>
-        <div class="espaciador mt-4"></div>
 <?php } else { ?>
 
 
