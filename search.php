@@ -9,8 +9,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recetario</title>
-    <link rel="shortcut icon" href="favicon.png">
+    <title>Busqueda - Recetario</title>
+    <link rel="shortcut icon" href="cutlery.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -114,7 +114,7 @@
             <div class="dp-flex justify-items-center mt-5 p-2"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" --> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:50%;margin-right:auto;margin-left:25%;" -->
             <div id="container-search" class="container dp-flex justify-content-center">
 				<div id="items-search" class="row">
-					<a class="image-link p-1 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/fromusers/'.$row['img']:'images/noimage.png' ?>" ></a>
+					<a class="image-link p-1 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/recipe/'.$row['img_path']:'images/noimage.png' ?>" style="object-fit: cover;width:100%;height:65%;"></a>
 					<div class="col-9 col-lg-8 dp-flex justify-content-center">
 					
 						<div style="justify-content:space-between" class="d-flex">
@@ -157,7 +157,7 @@
             
   <?php } 
   if (!mysqli_num_rows($rows)){
-	  echo "no hay resultados";
+	  echo "<h5 class='display-4 text-center mt-5' style='color:gray'>No se han encontrado resultados para tu búsqueda</h5>.";
   }
   ?>
   <div class="container rounded mt-4" >
