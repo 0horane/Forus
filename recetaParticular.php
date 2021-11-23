@@ -25,13 +25,10 @@ require_once 'partials/starfunc.php';
         background-color: white;
         border-radius: 5px;
     }
-    body{
-      background-color: #E9E9E9;
-    }
     .comentarios{
-        background-color: red;
+        border: 1px solid  #d5d2d2;
+        background-color: #f5f5f5;
         border-radius: 5px;
-
     }
     .fav-btn{
         height: 45px;
@@ -57,30 +54,35 @@ require_once 'partials/starfunc.php';
     .options{
         display: flex;
         justify-content: space-between;
+        margin-left: 9%;
     }
 	
-	  #absoluto{
-    color: white;
-    width: 100%;
-    height: 100%;
-    top: 32%;
-    right: 0;
-    position: absolute;
-  }
+	#absoluto{
+        color: white;
+        width: 100%;
+        height: 100%;
+        top: 32%;
+        right: 0;
+        position: absolute;
+    }
   
   #absoluto{
-	  text-shadow: -1px 1px 0 #000,
-                          1px 1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px -1px 0 #000;
-  }
+	text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000;
+    }
   
     header{
-    width: 100%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-  }
+        width: 100%;
+        height: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .bordado{
+        border: 1.5px solid #ececec;
+        border-radius: 13px;
+    }
 </style>
 <script>
     // $.(document).ready(function(){
@@ -94,7 +96,7 @@ require_once 'partials/starfunc.php';
     <?php include 'partials/header.php'?>
 	<header class="mt-0">
 				<div style="min-height:100vh;">
-				<img id="insImg" class="image mt-3" src="asfkh" alt="Sin Imagen" onerror='this.src="images/noimage.png"' width = "100%" style="object-fit: cover;width:100%;height:100%;">
+				<img id="insImg" class="image" src="asfkh" alt="Sin Imagen" onerror='this.src="images/noimage.png"' width = "100%" style="object-fit: cover;width:100%;height:100%;">
 				</div>
 				<div class = "container">
 				  <div id = "absoluto" class = "text-center">
@@ -107,9 +109,8 @@ require_once 'partials/starfunc.php';
         <section>
             
             <div class="search-result-item-body">
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <div class="col-sm-9">
-						  
                         <p class="fs-mini text-muted mt-3">Esta receta tiene: <span id="insViews"></span> 👁️ </p>
 						<div id="insVid"></div>
                         <hr>
@@ -126,15 +127,17 @@ require_once 'partials/starfunc.php';
                
             
         </div>
-        <h4 class="display-6 mt-4">Comentarios</h4>
-        <?php if ($loggedin){ ?>
-        <form onsubmit="return postComment(event);">
-            <div class="form-group p-2">
-                <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
-                <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <input type="submit" class="btn btn-primary mt-2" value="Comentar"></button>
-            </div>
-        </form>
+        <div class="bordado p-3">
+            <h4 class="display-6 mt-2">Comentarios</h4>
+            <?php if ($loggedin){ ?>
+            <form onsubmit="return postComment(event);">
+                <div class="form-group p-3">
+                    <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
+                    <textarea type="text" class="form-control mt-2" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    <input type="submit" class="btn btn-primary mt-2" value="Comentar"></button>
+                </div>
+            </form>
+        </div>
         <div id='comentarios-section' class="comentarios-section container-fluid">
             
               
@@ -148,12 +151,12 @@ require_once 'partials/starfunc.php';
                 let str="";
                 result.forEach(comment=>{
                     //console.log(comment);
-                    str+=`<div class="comentarios p-2 mt-2" id="c${comment[0]['ID']}">
+                    str+=`<div class="comentarios p-2 mt-4" id="c${comment[0]['ID']}">
                             <div class="titulo-comentarios">
                                 <h6>${comment[0]['UserName']}</h6>
-                                <h6 class="text-end">Hecho el dia ${comment[0]['Created_At']}</h6>
+                                <h6 class="text-end text-muted fst-italic">Comentado el dia ${comment[0]['Created_At']}</h6>
                             </div>
-                            <h3 class="comentario col-12 p-3">${comment[0]['Text']}</h3>
+                            <h3 class="comentario col-12 p-3 text-break">${comment[0]['Text']}</h3>
                             ${ userid==comment[0]['User_ID'] ? 
                             `<button onclick="editComment('${comment[0]['ID']}')" class="btn btn-primary mt-1">Editar</button>`:``
                             }
@@ -269,5 +272,6 @@ require_once 'partials/starfunc.php';
 
 
     </script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>
