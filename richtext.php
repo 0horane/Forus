@@ -123,8 +123,14 @@
 			<?php if ($rnum){ ?>
 			callAPI('rd','<?php echo $rnum; ?>',function(result){
 				if (result[0]['user_id']!=<?php echo $_SESSION['id']; ?>){
-					alert('Esta no es tu receta!');
-					window.location.href="misrecetas.php";
+					Swal.fire({
+						icon: "error",
+						title: "Esta no es tu receta!",
+						backdrop: true,
+						timer: 2000
+					}).then(function(){
+						window.location.href="misrecetas.php";
+					});
 					throw new Error("User IDs Dont match");
 				}
 				document.getElementById('name').value=result[0]['name'];
@@ -138,7 +144,18 @@
 
 			function saverecipe(event){
 					event.preventDefault();
-					var formData = new FormData(document.getElementById("fullform"));
+					var formData =new FormData(document.getElementById("fullform"));
+					
+					
+					
+
+					if (formData.get('code').indexOf('?v=')>0){
+						formData.set('code', formData.get('code').split('=')[1].split('/')[0].split('?')[0].split('&')[0]);
+					}
+					if (formData.get('code').indexOf('.be/')>0){
+						formData.set('code',formData.get('code').split('.be/')[1].split('/')[0].split('?')[0].split('&')[0]);
+					}
+					
 					$.ajax({
 						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
 						dataType:"json",
@@ -170,5 +187,6 @@
         		}
 			} 
 		</script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	</body>
 </html>
