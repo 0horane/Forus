@@ -121,7 +121,7 @@ function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditd
                 <div class="card text-center" style="max-height:97%;">
 					<div style="height:240px;width:100%;">
 						${ code ?
-						`<iframe src="//www.youtube.com/embed/${code}" style="width:100%;height:240px; border-radius:3px 3px 0px 0px" allowfullscreen="" frameborder="0"></iframe>` :
+						`<iframe src="//www.youtube-nocookie.com/embed/${code}" style="width:100%;height:240px; border-radius:3px 3px 0px 0px" allowfullscreen="" frameborder="0"></iframe>` :
 						`<img src="images/recipe/${image}" alt="Sin Imagen" onerror=this.src="images/noimage.png" style="object-fit: cover;width:100%;height:100%; border-radius:3px 3px 0px 0px">`
 						}
 					</div>

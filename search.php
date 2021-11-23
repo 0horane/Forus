@@ -213,9 +213,9 @@
 <?php } else { ?>
 
 
-<h1>
-    esto tiene que quedar como la pagina principal de google (≧∇≦)ﾉ
-</h1>
+<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/umpzp2RXqGU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 
 
 

@@ -135,11 +135,13 @@ require_once 'partials/starfunc.php';
                 <input type="submit" class="btn btn-primary mt-2" value="Comentar"></button>
             </div>
         </form>
-        <div id='comentarios-section' class="comentarios-section container-fluid">
+        
+        <?php }  ?>
+		<div id='comentarios-section' class="comentarios-section container-fluid">
             
               
         </div>
-        <?php } include 'partials/footer.php' ?>
+		<?php include 'partials/footer.php'; ?>
     </div>
 
     <script>
@@ -173,7 +175,7 @@ require_once 'partials/starfunc.php';
             document.getElementById("insViews").innerText=result[0]['views'];
             document.getElementById("insRecipe").innerHTML=result[0]['recipe'];
             document.title=result[0]['name']+" - Recetario";
-			document.getElementById("insVid").innerHTML=result[0]['code'] ? `<iframe src="//www.youtube.com/embed/${result[0]['code']}" style="width:100%;height:500px; border-radius:3px" allowfullscreen="" frameborder="0"></iframe>` : "";
+			document.getElementById("insVid").innerHTML=result[0]['code'] ? `<iframe src="//www.youtube-nocookie.com/embed/${result[0]['code']}" style="width:100%;height:500px; border-radius:3px" allowfullscreen="" frameborder="0"></iframe>` : "";
 			
             
             renderComments()
