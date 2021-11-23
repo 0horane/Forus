@@ -50,6 +50,7 @@
 			.img{
 				width: 30%;
 				border-radius: 10px;
+				max-width: 75%
 			}
 			.button1 {
 				text-decoration:none;

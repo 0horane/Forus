@@ -67,8 +67,8 @@ require_once 'partials/starfunc.php';
 						<option value='d'>Descendiente</option>
 					</select>
 					<select id="public" name="public" onchange="updateCards ()" class="form-select">
-						<option value='ev'>visibles</option>
-						<option value='nv'>No visible</option>
+						<option value='0'>visibles</option>
+						<option value='1'>No visible</option>
 					</Select>
 				</form>
 				<a href="richtext.php" class="btn btn-primary mt-1" style="height:40px">Crear nueva receta</a>
@@ -89,21 +89,21 @@ require_once 'partials/starfunc.php';
 			condition=conditionElement.options[conditionElement.selectedIndex].value;
 			directionElement = document.getElementById('direction');
 			direction=directionElement.options[directionElement.selectedIndex].value;
-			directionElement = document.getElementById('public');
-			direction=directionElement.options[directionElement.selectedIndex].value;
+			publicElement = document.getElementById('public');
+			public=publicElement.options[publicElement.selectedIndex].value;
 			let str="";
 			callAPI('yr',`${condition}${direction}`, function( result ) {
 
-				str+=makepager(result[0], page);
+				str+=makepager(result[public], page);
 				//console.log(result);
 				let ajaxvalues=[];
 				for (i=page*9;i<page*9+9;i++){
-					if(result[0][i]){
-					ajaxvalues.push(result[0][i]);
+					if(result[public][i]){
+					ajaxvalues.push(result[public][i]);
 					}
 				}
 				
-				callAPI('rd',[`${condition}${direction}${public}`]+','+ajaxvalues.join(','), function( result ) {
+				callAPI('dd',[`${condition}${direction}`]+','+ajaxvalues.join(','), function( result ) {
 						if (result){
 						result.forEach(recipe=>{
 							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, true, false);
