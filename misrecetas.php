@@ -1,6 +1,12 @@
 <?php 
 include 'partials/session_start.php' ;
+if (!$loggedin){
+	$_SESSION["msg"]="No estas logueado!";
+	$_SESSION["icon"]="info";
+	header('Location: index.php');
+}
 require_once 'partials/starfunc.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +14,7 @@ require_once 'partials/starfunc.php';
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Recetas</title>
+    <title>Mis Recetas - Recetario</title>
 	<link rel="stylesheet" href="css/estilos.css">
     <link rel="shortcut icon" href="cutlery.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -28,12 +34,12 @@ require_once 'partials/starfunc.php';
 	.selects{
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-end;
+		//align-items: flex-end;
 	}
 	.selects form{
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-end;
+		//align-items: flex-end;
 	}
 
 </style>
@@ -79,6 +85,7 @@ require_once 'partials/starfunc.php';
 						<option value='nv'>No visible</option>
 					</Select>
 				</form>
+				<a href="richtext.php" class="btn btn-primary mt-1" style="height:40px">Crear nueva receta</a>
 			</div>
 		</div>
 	</div>
@@ -110,13 +117,19 @@ require_once 'partials/starfunc.php';
 					}
 				}
 				callAPI('rd',[`${condition}${direction}${public}`]+','+ajaxvalues.join(','), function( result ) {
-						
+						if (result){
 						result.forEach(recipe=>{
 							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, true, false);
 						});
+						
+						
+						} else {
+							str+="<h5 class='display-4 text-center' style='color:gray'>No has creado ninguna receta. <a href='richtext.php' style='color:darkgray'>Creá Una!</a></h5>";
+						}
 						document.getElementById('cardbox').innerHTML=str;
 						setfavs()
 				});
+
 			});
 			
 			

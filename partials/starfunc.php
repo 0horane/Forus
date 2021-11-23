@@ -25,61 +25,63 @@ function callAPI (queryt,val,runfunction){
 function makepager(recipeidarray, page){
     var str="";
     var cantidadDePaginas = Math.ceil(recipeidarray.length/9); 
-//    console.log(recipeidarray);
-    if (page >=cantidadDePaginas-5){
-        startpage=cantidadDePaginas-10;
-        endpage=cantidadDePaginas;
+    if (!(cantidadDePaginas==1)){
+    //    console.log(recipeidarray);
+        if (page >=cantidadDePaginas-5){
+            startpage=cantidadDePaginas-10;
+            endpage=cantidadDePaginas;
 
-    } else if (page>=5){
-        startpage=page-5;
-        endpage=page+5;
+        } else if (page>=5){
+            startpage=page-5;
+            endpage=page+5;
 
-    } else{
-        startpage=0;
-        endpage=10;
+        } else{
+            startpage=0;
+            endpage=10;
 
-    }
-    if (startpage<0){
-        startpage=0;
-    }
+        }
+        if (startpage<0){
+            startpage=0;
+        }
 
-    str+= `<div id = "paginator" class='container rounded mt-2' >
-        <div class="row">
-            <div class="col-12">
-                <ul class="pagination dp-flex justify-content-center">
-                <li class="page-item ${page ==0 ? 'disabled': ''}"> 
-                    <a class="page-link" onclick = " page=0; updateCards ()"  ${page ==0 ? "disabled": ""}>
-                        «
-                    </a>
-                </li>
-                <li class="page-item ${page ==0 ? 'disabled': ''}"> 
-                    <a class="page-link" onclick = " page-=1; updateCards ()"  ${page ==0 ? "disabled": ""}>
-                        ‹
-                    </a>
-                </li>`;
-                
-    for (i=startpage;i<endpage;i++) {
-                    str+= `<li class="page-item ${page ==i ? 'active disabled': ''} ">
-                        <a class="page-link" onclick = " page=${i}; updateCards ()"  ${page ==i ? "disabled": ""}> ${i} </a>
+        str+= `<div id = "paginator" class='container rounded mt-2' >
+            <div class="row">
+                <div class="col-12">
+                    <ul class="pagination dp-flex justify-content-center">
+                    <li class="page-item ${page ==0 ? 'disabled': ''}"> 
+                        <a class="page-link" onclick = " page=0; updateCards ()"  ${page ==0 ? "disabled": ""}>
+                            «
+                        </a>
+                    </li>
+                    <li class="page-item ${page ==0 ? 'disabled': ''}"> 
+                        <a class="page-link" onclick = " page-=1; updateCards ()"  ${page ==0 ? "disabled": ""}>
+                            ‹
+                        </a>
                     </li>`;
-                }
-                
-                
-                str+=`<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
-                    <a class="page-link" onclick = " page+=1; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}>
-                        ›
-                    </a>
-                </li>
-                <li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
-                    <a class="page-link" onclick = " page=${cantidadDePaginas-1}; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}> 
-                        »
-                    </a>
-                </li>
+                    
+        for (i=startpage;i<endpage;i++) {
+                        str+= `<li class="page-item ${page ==i ? 'active disabled': ''} ">
+                            <a class="page-link" onclick = " page=${i}; updateCards ()"  ${page ==i ? "disabled": ""}> ${i} </a>
+                        </li>`;
+                    }
+                    
+                    
+                    str+=`<li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
+                        <a class="page-link" onclick = " page+=1; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}>
+                            ›
+                        </a>
+                    </li>
+                    <li class="page-item ${page ==cantidadDePaginas-1 ? 'disabled': ''}">
+                        <a class="page-link" onclick = " page=${cantidadDePaginas-1}; updateCards ()"  ${page ==cantidadDePaginas-1 ? "disabled": ""}> 
+                            »
+                        </a>
+                    </li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>`;
+        </div>`;
+    }
     return str;
 }
 
