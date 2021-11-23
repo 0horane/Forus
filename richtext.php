@@ -143,7 +143,18 @@
 
 			function saverecipe(event){
 					event.preventDefault();
-					var formData = new FormData(document.getElementById("fullform"));
+					var formData =new FormData(document.getElementById("fullform"));
+					
+					
+					
+
+					if (formData.get('code').indexOf('?v=')>0){
+						formData.set('code', formData.get('code').split('=')[1].split('/')[0].split('?')[0].split('&')[0]);
+					}
+					if (formData.get('code').indexOf('.be/')>0){
+						formData.set('code',formData.get('code').split('.be/')[1].split('/')[0].split('?')[0].split('&')[0]);
+					}
+					
 					$.ajax({
 						url: window.location.pathname.split('/').slice(0,-1).join('/')+"/api/api.php",
 						dataType:"json",
