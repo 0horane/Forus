@@ -106,7 +106,9 @@ require_once 'partials/starfunc.php';
 				callAPI('dd',[`${condition}${direction}`]+','+ajaxvalues.join(','), function( result ) {
 						if (result){
 						result.forEach(recipe=>{
-							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, true, false);
+							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'], recipe['code'], true, true, (public==1 ? true : false));
+							console.log((public==1 ? true : false));
+							console.log(public);
 						});
 						
 						
