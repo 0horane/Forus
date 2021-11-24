@@ -50,7 +50,7 @@
             height: 210px !important;
             overflow: hidden;
         }
-        #items-search{
+        .items-search{
             border-radius: 10px;
             border: 1px solid #BDBDBD;
             padding: 25px;
@@ -65,11 +65,17 @@
 			margin-top:200px
 			}
 			
-			#items-search{
+			.items-search{
 				max-height:400px;
 			}
+			
+			
+			
+			
 		}
-		
+		@media (max-width: 975px) {.image{
+				display:none;
+			}}
 	</style>
 </head>
 <body>
@@ -113,10 +119,13 @@
         while ($row=mysqli_fetch_assoc($rows)){
         //	print_r($row);
             ?>
+			<?php if(isset($row['img_path'])){ ?>
+			<style> @media (max-width: 975px) { #rsc<?php echo $row['ID']; ?> { background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("<?php echo 'images/recipe/'.$row['img_path'] ;?>");background-size: cover;}} </style>
+			<?php } ?>
             <div class="dp-flex justify-items-center mt-5 p-2"> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:70%;margin-right:auto;margin-left:5%;" --> <!-- style="border-style:solid;border-color:lightgray;border-width:2px;border-radius:10px;width:50%;margin-right:auto;margin-left:25%;" -->
             <div id="container-search" class="container dp-flex justify-content-center">
-				<div id="items-search" class="row">
-					<a class="image-link p-1 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/recipe/'.$row['img_path']:'images/noimage.png' ?>" style="object-fit: cover;width:100%;height:65%;"></a>
+				<div class="items-search row" id="rsc<?php echo $row['ID']; ?>">
+					<a class="image-link p-1 col-4" href="recetaParticular.php?r=<?php echo $row['ID']; ?>"><img class="image" src="<?php echo isset($row['img_path']) ? 'images/recipe/'.$row['img_path']:'images/noimage.png' ?>" style="object-fit: cover;width:100%;height:57%;"></a>
 					<div class="col-9 col-lg-8 dp-flex justify-content-center">
 					
 						<div style="justify-content:space-between" class="d-flex">
@@ -142,14 +151,14 @@
                         <div class="container text-end p-2 buttonh">
 				
 									
-                <span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
-                    <?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
-                    <?php echo $loggedin ? "<div id='replace${row['ID']}'>aa<script>document.getElementById('replace${row['ID']}').innerHTML=genstar(${row['ID']});</script></div>" : '';?>
-                </span>
-                <a class="btn btn-primary btn-info btn-sm vrmas" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
+							<span><?php echo $row['Views'] ?><span style="color:gray"> 👁</span>
+								<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row['ID']))['cOC'] ?> 
+								<?php echo $loggedin ? "<div id='replace${row['ID']}'>aa<script>document.getElementById('replace${row['ID']}').innerHTML=genstar(${row['ID']});</script></div>" : '';?>
+							</span>
+							<a class="btn btn-primary btn-info btn-sm vrmas" href="recetaParticular.php?r=<?php echo $row['ID']; ?>">Ver más</a>
 
         
-            </div>
+						</div>
 					</div>
                     
 				</div>

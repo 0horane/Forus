@@ -68,14 +68,20 @@
 				border-style: solid;
 				border-radius:10px;
 			}
+			
+			#formbox{
+				max-width:1300px;
+				margin-left:auto;
+				margin-right:auto;
+			}
 
 		</style>
 	</head>
 	<body>
 	<?php include 'partials/header.php'?>
 
-<div class="cont1 shadow">
-	<div class="col p-3">
+<div class="cont1 shadow" id="formbox">
+	<div class="col p-3" >
 		<div class="text-end">
 			<a href="index.php"><img src="images/LogoMakr-56L0gt.png" alt="logo" width="6%" href="index.php"></a>
 		</div>      
