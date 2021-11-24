@@ -1,10 +1,21 @@
 <?php
 require 'partials\session_start.php';
 
+if (isset($_GET['url'])){
+	$url=$_GET['url'];
+} else if (isset($_POST['url'])) {
+	$url=$_POST['url'];
+}
+
+
 if (isset($_SESSION["id"])){
 	$_SESSION["msg"]="Ya estas logeado y registrado!";
 	$_SESSION["icon"]="info";
-	header('Location: index.php');
+	if (isset($url)){
+		header('Location: '.$url);
+	} else {
+		header('Location: index.php');
+	}
 	exit;
 }
 
@@ -29,7 +40,12 @@ if(isset($_POST['registrarse'])){
 				$_SESSION["icon"]="success";
 				$sqlquery='select * from users where users.UserName = "' . $_SESSION["user"] . '"';
 				$_SESSION["id"]=mysqli_fetch_assoc(qq($link, $sqlquery))["ID"];
-				header('Location: index.php');
+				if (isset($url)){
+					header('Location: '.$url);
+				} else {
+					header('Location: index.php');
+				}
+
 				exit;
 			} else { 
 				$_SESSION["msg"]= 'Este usuario ya existe';

@@ -59,6 +59,7 @@
                   <div class = "d-grid">
                     <button id = "btnLog" type = "submit" value = "submit" class = "btn mt-2" name="loguearse">Login</button>
                   </div>
+				  <input name="url" type="hidden" id="url"   value="<?php echo isset($url) ?  $url : "";?>">
                 </form>
                 <div class="row text-center">
                     <div class="col-13 mt-3">

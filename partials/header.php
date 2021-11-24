@@ -37,10 +37,10 @@
           if (!$loggedin){
             ?>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="login.php">Iniciar Sesión</a>
+              <a class="nav-link" aria-current="page" href="login.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Iniciar Sesión</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="register.php">Registrarse</a>
+              <a class="nav-link" aria-current="page" href="register.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Registrarse</a>
             </li>
             <?php
           } else {

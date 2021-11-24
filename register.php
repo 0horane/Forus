@@ -71,6 +71,7 @@
                     <button type = "submit" value = "submit" class = "btn mt-2" name="registrarse">Registrarse</button>
                   </div>
                 <!-- al que le toque esta parte tiene que hacer con js que se ponhga gris el boton de sumbit hasta que el usuario y contrasenia sean iguakles-->
+				<input name="url" type="hidden" id="url"   value="<?php echo isset($url) ?  $url : "";?>">
                 </form>
                 <div class="row text-center">
                     <div class="col-13 mt-3">

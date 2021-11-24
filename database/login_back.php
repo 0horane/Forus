@@ -1,10 +1,19 @@
 <?php
 require 'partials\session_start.php';
+if (isset($_GET['url'])){
+	$url=$_GET['url'];
+} else if (isset($_POST['url'])) {
+	$url=$_POST['url'];
+}
 
 if (isset($_SESSION["id"])){
 	$_SESSION["msg"]="Ya estas logeado!";
 	$_SESSION["icon"]="info";
-	header('Location: index.php');
+	if (isset($url)){
+		header('Location: '.$url);
+	} else {
+		header('Location: index.php');
+	}
 	exit;
 }
 
@@ -27,7 +36,12 @@ if (isset($_POST['loguearse'])){
 			   $_SESSION["msg"]="Te logueaste correctamente!";
 			   $_SESSION["icon"]="success";
 			   $_SESSION["id"]=$assoc["ID"];
-				header('Location: index.php');
+				if (isset($url)){
+					header('Location: '.$url);
+				} else {
+					header('Location: index.php');
+				}
+
 				exit;
 		   } else {
 				$_SESSION["msg"]="El nombre de usuario o contraseña es incorrecto!"; // El usuario y/o contraseña esta mal
