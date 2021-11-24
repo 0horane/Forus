@@ -43,6 +43,8 @@
         
         .image-link{
             max-width:100%;
+            border-radius: 10px;
+
         }
         .acortador{
             height: 210px !important;
