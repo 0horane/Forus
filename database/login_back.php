@@ -32,7 +32,7 @@ if (isset($_POST['loguearse'])){
 			   session_unset();
 			   session_destroy();
 			   session_start();
-			   $_SESSION["user"]=mysqli_real_escape_string($link,$_POST['usr']);
+			   $_SESSION["user"]=mysqli_real_escape_string($link,$assoc['UserName']);
 			   $_SESSION["msg"]="Te logueaste correctamente!";
 			   $_SESSION["icon"]="success";
 			   $_SESSION["id"]=$assoc["ID"];
