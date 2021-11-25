@@ -32,6 +32,7 @@
     </style>
 </head>
 <body>
+<?php include 'partials/header.php' ?>
     <div class="container shadow">
         <div class="row align-items-stretch">
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
