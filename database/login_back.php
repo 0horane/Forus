@@ -40,6 +40,7 @@ if (isset($_POST['loguearse'])){
 					header('Location: '.$url);
 				} else {
 					header('Location: index.php');
+
 				}
 
 				exit;

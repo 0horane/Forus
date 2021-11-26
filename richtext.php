@@ -82,7 +82,7 @@
 		<div class="text-end">
 			<a href="index.php"><img src="images/LogoMakr-56L0gt.png" alt="logo" width="6%" href="index.php"></a>
 		</div>      
-			<h1 class= "form_title">Mi receta</h1>
+		<h1 class= "form_title">Mi receta</h1>
 
 		<form onsubmit="return saverecipe(event)" id="fullform">
 			<div class="form-row">
@@ -92,7 +92,7 @@
 					<input id="name" name="name" type='text' class="form-control" placeholder="Escriba el nombre de su receta aquí">
 				</div>
 			</div>
-		<br>
+			<br>
 			<div class="form-row">
 				<div class="form2">
 					<label for="img" class="form-label"><b>Imagen:</b></label>
@@ -100,23 +100,25 @@
 					<p><b>Imagen actual:</b></p>
 					<img class="img"  src="" id="cimg">
 				</div>
-		<br>
+			</div>
+			<br>
 			<div class="form-row">
 				<div class="form2">
 					<label for="code"><b>Video de youtube: </b></label>
 					<input for="code" class="form-control" id="code" name="code" type='text' placeholder="Pegué aquí la URL de su video (opcional)">
 				</div>
-		<br>
-			<div class="form2">
-				<div name="texto" id="editor">
 			</div>
-					<textarea name="recipe" id="text-area" style="display:none;"></textarea>
-					<?php if ($rnum){ ?>
-						<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
-					<?php }  ?>
-		<input  class="button1 mt-2"id="save" name="b" type='submit'>
-			</form>
-	<div>
+			<br>
+			<div class="form2">
+				<div name="texto" id="editor"></div>
+			</div>
+			<textarea name="recipe" id="text-area" style="display:none;"></textarea>
+			<?php if ($rnum){ ?>
+				<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
+			<?php }  ?>
+			<input class="btn btn-outline-success" id="save" name="b" type='submit' style="width:100%" disabled></input>
+		</form>
+	</div>
 </div>
 		<script>
 			editor=ClassicEditor.create(document.querySelector('#editor'))
@@ -139,6 +141,7 @@
 				document.getElementById('name').value=result[0]['name'];
 				document.getElementById('cimg').src="images/recipe/"+result[0]['img_path']
 				document.getElementById('code').value=result[0]['code'];
+				document.getElementById('save').disabled=false;
 				//console.log(result);
 				editor.then(editorobj =>{editorobj.setData(result[0]['recipe'])})
 				
@@ -191,5 +194,18 @@
 			} 
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script>
+		inputarr={};
+		recipebody=document.getElementsByClassName('ck-editor__editable')[0].children[0];
+		recipename=document.getElementById('name');
+		submitbutton=document.getElementById('save');
+		document.addEventListener('keydown', keypress=>{
+			setTimeout(() => {  submitbutton.disabled = (recipebody.innerHTML != '<br data-cke-filler="true">') && recipename.value ? false : true;}, 5);
+			
+
+		});
+
+
+		</script>
 	</body>
 </html>

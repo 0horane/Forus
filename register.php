@@ -70,6 +70,7 @@
                     <input id="submit" type = "submit" value = "Registrarse" class = "btn btn-outline-success" name="registrarse" disabled></input>
                   </div>
                 <!-- al que le toque esta parte tiene que hacer con js que se ponhga gris el boton de sumbit hasta que el usuario y contrasenia sean iguakles-->
+                <input name="url" type="hidden" id="url"   value="<?php echo $url ?? "";?>">
                 </form>
                 <div class="row text-center">
                     <div class="col-13 mt-3">
@@ -91,7 +92,7 @@ document.querySelectorAll('input').forEach(input=>{
     if ( input.id == 'submit' ){ submitbutton=input } 
     input.addEventListener('input', keypress=>{
         inputarr[keypress.srcElement.id]=keypress.srcElement.value;
-        console.log(inputarr);
+        //console.log(inputarr);
         submitbutton.disabled= inputarr['username'] && inputarr['pwd'] && inputarr['pwd'] == inputarr['pwdc'] && inputarr['Email'].match(/^[^@]+@\w+(\.\w+)+\w$/) ? false : true;
     })
 });

@@ -62,6 +62,7 @@
                   <div class = "d-grid">
                     <input type = "submit" id="submit" value = "Ingresar" class = "btn btn-outline-success" name="loguearse" disabled></input>
                   </div>
+                  <input name="url" type="hidden" id="url"   value="<?php echo $url ?? "";?>">
                 </form>
                 <div class="row text-center">
                     <div class="col-13 mt-3">
@@ -84,7 +85,7 @@ document.querySelectorAll('input').forEach(input=>{
     if ( input.id == 'submit' ){ submitbutton=input } 
     input.addEventListener('input', keypress=>{
         inputarr[keypress.srcElement.id]=keypress.srcElement.value;
-        console.log(inputarr);
+        //console.log(inputarr);
         submitbutton.disabled= inputarr['usr'] && inputarr['pwd'] ? false : true;
     })
 });
