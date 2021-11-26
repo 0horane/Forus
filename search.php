@@ -84,9 +84,7 @@
     if (isset($_GET['q'])){
         $q=$_GET['q'];
         $perpage=5;
-        if (isset($_GET['page'])){
-            $page = $_GET['page'];
-        } else {$page = 0;}
+        $page=$_GET['page'] ?? 0;
 
 
 

@@ -60,7 +60,7 @@
                     <input name="pwd" type="password" class="form-control" id="pwd" placeholder = "Escribí aca tu contraseña.">
                   </div>
                   <div class = "d-grid">
-                    <button type = "submit" value = "submit" class = "btn btn-outline-success" name="loguearse">Registrarme</button>
+                    <input type = "submit" id="submit" value = "Ingresar" class = "btn btn-outline-success" name="loguearse" disabled></input>
                   </div>
                 </form>
                 <div class="row text-center">
@@ -76,5 +76,19 @@
         <?php include 'partials/footer.php' ?>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+inputarr={};
+document.querySelectorAll('input').forEach(input=>{
+    inputarr[input.id]=input.value;
+   
+    if ( input.id == 'submit' ){ submitbutton=input } 
+    input.addEventListener('input', keypress=>{
+        inputarr[keypress.srcElement.id]=keypress.srcElement.value;
+        console.log(inputarr);
+        submitbutton.disabled= inputarr['usr'] && inputarr['pwd'] ? false : true;
+    })
+});
+
+</script>
 </body>
 </html>

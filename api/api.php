@@ -232,7 +232,7 @@ switch($qt){
 									'".mysqli_real_escape_string($link, $_POST['recipe'])."',
 									0,
 									".($img_exists ?  '"'.$imagefile.'.'.explode('/',$_FILES['img']['type'])[1].'"' : "NULL" ).",
-                                    '".mysqli_real_escape_string($link, htmlspecialchars((isset($_POST['code']) ? $_POST['code'] : "NULL")))."',
+                                    '".mysqli_real_escape_string($link, htmlspecialchars(($_POST['code'] ?? "NULL")))."',
                                     NOW(),
                                     NULL
                                     

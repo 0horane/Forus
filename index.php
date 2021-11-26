@@ -30,7 +30,7 @@
                             <form id="search" class="form-subscribe" action="search.php" data-sb-form-api-token="API_TOKEN">
                                 <div class="row">
                                     <div class="col">
-                                        <input name="q" class="form-control form-control-lg" id="emailAddress" type="search" placeholder="Escribe aquí la receta que quieras buscar" value=<?php echo isset($_GET['q']) ? $_GET['q']:'' ; ?>>
+                                        <input name="q" class="form-control form-control-lg" id="emailAddress" type="search" placeholder="Escribe aquí la receta que quieras buscar" value=<?php echo $_GET['q'] ?? '' ; ?>>
                                     </div>
                                     <div class="col-auto">
                                     <button class="btn btn-primary btn-lg" type="submit">Buscar</button>

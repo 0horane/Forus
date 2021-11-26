@@ -64,10 +64,10 @@
                 <!-- Aca yo supongo que tenemos que hacer que el boton submit solo funcione cuando password ==  confirmpassword -->
                   <div class="mb-3">
                     <label for="pwdc" class="form-label">Confirmar contraseña</label>
-                    <input name='pwdc' type="password" class="form-control" id="pwd" placeholder = "Confirma tu contraseña.">
+                    <input name='pwdc' type="password" class="form-control" id="pwdc" placeholder = "Confirma tu contraseña.">
                   </div>
                   <div class = "d-grid">
-                    <button type = "submit" value = "submit" class = "btn btn-outline-success" name="registrarse">Registrarse</button>
+                    <input id="submit" type = "submit" value = "Registrarse" class = "btn btn-outline-success" name="registrarse" disabled></input>
                   </div>
                 <!-- al que le toque esta parte tiene que hacer con js que se ponhga gris el boton de sumbit hasta que el usuario y contrasenia sean iguakles-->
                 </form>
@@ -83,5 +83,18 @@
         <?php include 'partials/footer.php' ?>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+inputarr={};
+document.querySelectorAll('input').forEach(input=>{
+    inputarr[input.id]=input.value;
+   
+    if ( input.id == 'submit' ){ submitbutton=input } 
+    input.addEventListener('input', keypress=>{
+        inputarr[keypress.srcElement.id]=keypress.srcElement.value;
+        console.log(inputarr);
+        submitbutton.disabled= inputarr['username'] && inputarr['pwd'] && inputarr['pwd'] == inputarr['pwdc'] && inputarr['Email'].match(/^[^@]+@\w+(\.\w+)+\w$/) ? false : true;
+    })
+});
+</script>
 </body>
 </html>

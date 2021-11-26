@@ -29,7 +29,7 @@ require_once("partials/session_start.php");
 	
 
 	
-	$r=isset($_GET['r']) ? $_GET['r'] : '3';
+	$r=$_GET['r'] ?? '3';
 	$recipe=mysqli_fetch_assoc(qq($link, "SELECT * FROM Recipes WHERE ID = ".$r));
 	
 		if (!isset($_SESSION['id'])){ 
