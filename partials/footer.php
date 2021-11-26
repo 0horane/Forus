@@ -17,8 +17,7 @@
 
       <!-- Content -->
       <h5 class="text-uppercase">Contenido</h5>
-      <p>Hemos realizado una pagina la cual pueda acortar el tiempo de busqueda de los usuarios cuando buscar recetas se trata</p>
-
+      <p>Hemos realizado una pagina la cual pueda disminuir el tiempo de busqueda de los usuarios cuando buscar recetas se trata</p>
     </div>
     <!-- Grid column -->
 
@@ -30,16 +29,19 @@
 
       <ul class="list-unstyled">
         <li>
-          <a href="#!">Link 1</a>
+          <p>Leandro Horane Siracusa</p>
         </li>
         <li>
-          <a href="#!">Link 2</a>
+          <p>Catherin Merida Tapia</p>
         </li>
         <li>
-          <a href="#!">Link 3</a>
+          <p>Lucas Abdhala</p>
         </li>
         <li>
-          <a href="#!">Link 4</a>
+          <p>Alejandro Campaya</p>
+        </li>
+		<li>
+		<p>Facundo Gabriel Quevedo</p>
         </li>
       </ul>
 
@@ -54,17 +56,23 @@
 
       <ul class="list-unstyled">
         <li>
-          <a href="#!">Link 1</a>
+		  <p>Recursos usados:</p>
+		  </li>
+		  <li>
+          <a href="https://jquery.com/">jQuery<a>
         </li>
         <li>
-          <a href="#!">Link 2</a>
+          <a href="https://getbootstrap.com/">Boostrap<a>
         </li>
         <li>
-          <a href="#!">Link 3</a>
+          <a href="https://www.php.net/">PHP<a>
         </li>
         <li>
-          <a href="#!">Link 4</a>
+          <a href="https://ckeditor.com/">RichText<a>
         </li>
+		<li>
+		  <a href="https://www.javascript.com/">JavaScipt<a>
+		</li>
       </ul>
 
     </div>
@@ -77,8 +85,8 @@
 <!-- Footer Links -->
 
 <!-- Copyright -->
-<div class="footer-copyright text-center py-3">© 2020 Copyright:
-  <a href="https://mdbootstrap.com/"> Lucas Abdhala</a>
+<div class="footer-copyright text-center py-3">© 2021 Copyright
+  <a href="https://sites.google.com/view/aulasvirtualeset26/p%C3%A1gina-principal"> Confederacion Suiza</a>
 </div>
 <!-- Copyright -->
 
