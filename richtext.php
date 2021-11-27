@@ -33,6 +33,9 @@
 			.cont1{
 				margin:60px;
 			}
+			#search{
+        		margin-bottom: 15px;
+    		}
 			.form_title{
 				text-align: center;
 				font-family: 'Raleway', sans-serif;
