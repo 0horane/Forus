@@ -135,12 +135,12 @@ function gencard(id,name,text,author,views,image="",code="",hasfav=true,haseditd
                             <div style="height:200px;overflow:hidden;">
                                 <p class="card-text">${text}</p>
                             </div>
-                            ${ isdis ? `<div style="padding:6px;"><a href="#" onclick="isdel('c${id}')" class="btn btn-warning mt-1">Reactivar</a></div>` :
+                            ${ isdis ? `<div style="padding:6px;"><a onclick="isdel('c${id}')" class="btn btn-warning mt-1">Reactivar</a></div>` :
                                 `<div style="padding:6px;">
-                                    <a href="recetaParticular.php?r=${id}" class="btn btn-primary mt-1">Ver Mas</a>
+                                    <a href="recetaParticular.php?r=${id}" class="btn btn-outline-success mt-1">Ver Mas</a>
                                     ${ haseditdel ? 
-                                        `<a href="richtext.php?r=${id}" class="btn btn-primary mt-1">Editar</a>
-                                        <a href="#" onclick="isdel('c${id}')" class="btn btn-warning mt-1">Borrar</a>` : ""
+                                        `<a href="richtext.php?r=${id}" class="btn btn-outline-primary mt-1">Editar</a>
+                                        <a onclick="isdel('c${id}')" class="btn btn-danger mt-1">Borrar</a>` : ""
                                     }
                                 </div>
                                 <div style="display:flex;justify-content:space-around;">

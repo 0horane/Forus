@@ -3,6 +3,10 @@ include 'partials/session_start.php' ;
 require_once 'partials/starfunc.php';
 ?>
 <style>
+	#cardbox img{
+		max-height: 120%;
+
+	}
 	#cartita{
 		max-width: 25%;
 	}
@@ -101,6 +105,8 @@ require_once 'partials/starfunc.php';
 	</script>
 	<?php include 'partials/footer.php' ?>
   	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>
 

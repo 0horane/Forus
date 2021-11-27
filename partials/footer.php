@@ -29,19 +29,19 @@
 
       <ul class="list-unstyled">
         <li>
-          <p>Leandro Horane Siracusa</p>
+          <a href="https://github.com/LeandroHorane">Leandro Horane Siracusa</a>
         </li>
         <li>
-          <p>Catherin Merida Tapia</p>
+          <a href="https://github.com/catherine786">Catherine Merida Tapia</a>
         </li>
         <li>
-          <p>Lucas Abdhala</p>
+        <a href="https://github.com/Lucas-Porras">Lucas Abdhala</a>
         </li>
         <li>
-          <p>Alejandro Campaya</p>
+          <a href="https://github.com/Aclaem">Alejandro Campaya</a>
         </li>
-		<li>
-		<p>Facundo Gabriel Quevedo</p>
+		    <li>
+          <a href="https://github.com/GabrielQ22">Facundo Gabriel Quevedo</a>
         </li>
       </ul>
 
@@ -70,9 +70,9 @@
         <li>
           <a href="https://ckeditor.com/">RichText<a>
         </li>
-		<li>
-		  <a href="https://www.javascript.com/">JavaScipt<a>
-		</li>
+        <li>
+          <a href="https://sweetalert2.github.io/">SweetAlert<a>
+        </li>
       </ul>
 
     </div>
@@ -86,7 +86,7 @@
 
 <!-- Copyright -->
 <div class="footer-copyright text-center py-3">© 2021 Copyright
-  <a href="https://sites.google.com/view/aulasvirtualeset26/p%C3%A1gina-principal"> Confederacion Suiza</a>
+  <a href="https://github.com/Lucas-Porras/Forus/blob/master/LICENSE">Lucas Abdhala (En representacion del grupo)</a>
 </div>
 <!-- Copyright -->
 

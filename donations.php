@@ -35,6 +35,13 @@
                 </div>
             </div>
   </header>
-        <?php include 'partials/footer.php' ?>
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+        <div class="col-xl-12">
+            <?php include 'partials/footer.php' ?>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@
                                         <input name="q" class="form-control form-control-lg" id="emailAddress" type="search" placeholder="Escribe aquí la receta que quieras buscar" value=<?php echo $_GET['q'] ?? '' ; ?>>
                                     </div>
                                     <div class="col-auto">
-                                    <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
+                                    <button class="btn btn-success btn-lg" type="submit">Buscar</button>
                                     </div>
                             </form>
                         </div>
