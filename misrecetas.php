@@ -71,7 +71,7 @@ require_once 'partials/starfunc.php';
 						<option value='1'>No visible</option>
 					</Select>
 				</form>
-				<a href="richtext.php" class="btn btn-primary mt-1" style="height:40px">Crear nueva receta</a>
+				<a href="richtext.php" class="btn btn-success mt-1" style="height:40px">Crear nueva receta</a>
 			</div>
 		</div>
 	</div>

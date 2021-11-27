@@ -131,6 +131,7 @@
 					Swal.fire({
 						icon: "error",
 						title: "Esta no es tu receta!",
+						confirmButtonColor: "#34a34e",
 						backdrop: true,
 						timer: 2000
 					}).then(function(){
@@ -174,6 +175,7 @@
 								Swal.fire({
 									icon: "success",
 									title: "Se subio la receta correctamente!",
+									confirmButtonColor: "#34a34e",
 									timerProgressBar: true,
 									backdrop: true,
 									timer: 2000
@@ -184,6 +186,7 @@
 								Swal.fire({
 									icon: "error",
 									title: "No se pudo subir la receta",
+									confirmButtonColor: "#34a34e",
 									backdrop: true,
 									timer: 2000
 								}).then(function(){
@@ -195,6 +198,7 @@
 							Swal.fire({
 								icon: "error",
 								title: "No se pudo subir la receta",
+								confirmButtonColor: "#34a34e",
 								timerProgressBar: true,
 								backdrop: true,
 								timer: 2000
