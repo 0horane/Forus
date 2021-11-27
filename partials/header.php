@@ -37,12 +37,14 @@
           if (!$loggedin){
             ?>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="login.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Iniciar Sesión</a>
+              <a class="nav-link" aria-current="page" href="login.php<?php echo strpos($_SERVER['REQUEST_URI'], "?url=")===false ? "?url=".$_SERVER['REQUEST_URI'] :  '?url='.array_slice(explode('?url=', $_SERVER['REQUEST_URI']),-1)[0];  ?>">Iniciar Sesión</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="register.php?url=<?php echo $_SERVER['REQUEST_URI'];  ?>">Registrarse</a>
+              <a class="nav-link" aria-current="page" href="register.php<?php echo strpos($_SERVER['REQUEST_URI'], "?url=")===false ? "?url=".$_SERVER['REQUEST_URI'] : '?url='.array_slice(explode('?url=', $_SERVER['REQUEST_URI']),-1)[0] ;  ?>">Registrarse</a>
             </li>
+            
             <?php
+            
           } else {
             ?>
             <li class="nav-item dropdown">

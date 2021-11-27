@@ -41,7 +41,7 @@ function privQSt(){
         return $_SESSION['id'];
     } else {
         var_dump($_SESSION);
-        exit('{"error":"This call requires being logged in","$_SESSION:"'.print_r($_SESSION).'}');
+        exit('false');
     }
 }
 
@@ -302,12 +302,12 @@ switch($qt){
                 if (!(mysqli_fetch_assoc(qq($link, "SELECT User_ID from comments where ID = ".mysqli_real_escape_string($link, $value)))['User_ID']==$id)){ //se fija si la receta es del usuario
                     die('false');
                 } else {
-                    $query="UPDATE comments SET `Text` = '".mysqli_real_escape_string($link, htmlspecialchars($_POST['text']))."'WHERE ID = ".$value;
+                    $query="UPDATE comments SET `Text` = '".mysqli_real_escape_string($link, htmlspecialchars(substr($_POST['text'],0,500)))."'WHERE ID = ".$value;
                     qq($link, $query);
                     die('true');
                 }
             } else if (isset($_POST['recipe'])) { //da el numero de la receta nueva
-                $query="INSERT INTO comments VALUES(null,${id},".mysqli_real_escape_string($link, $_POST['recipe']).",'".mysqli_real_escape_string($link, htmlspecialchars($_POST['text']))."',NOW())" ;
+                $query="INSERT INTO comments VALUES(null,${id},".mysqli_real_escape_string($link, $_POST['recipe']).",'".mysqli_real_escape_string($link, htmlspecialchars(substr($_POST['text'],0,500)))."',NOW())" ;
                 qq($link, $query);
                 $json[]=mysqli_fetch_assoc(qq($link, "SELECT MAX(ID) AS maxID FROM comments"))['maxID'];
             } else {

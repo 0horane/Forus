@@ -96,7 +96,7 @@ require_once 'partials/starfunc.php';
     <?php include 'partials/header.php'?>
 	<header class="mt-0">
 				<div style="min-height:100vh;">
-				<img id="insImg" class="image" src="asfkh" alt="Sin Imagen" onerror='this.src="images/noimage.png"' width = "100%" style="object-fit: cover;width:100%;height:100%;">
+				<img id="insImg" class="image" src="asfkh" onerror='this.parentElement.style="background:linear-gradient(217deg, rgba(32,107,38,.8), rgba(32,107,38,0) 70.71%),linear-gradient(127deg, rgba(74,162,39,.8), rgba(74,162,39,0) 70.71%),linear-gradient(336deg, rgba(106,203,39,.8), rgba(106,203,39,0) 70.71%);";//this.style="display:none"' width = "100%" style="object-fit: cover;width:100%;height:100%;">
 				</div>
 				<div class = "container">
 				  <div id = "absoluto" class = "text-center">
@@ -134,7 +134,7 @@ require_once 'partials/starfunc.php';
             <form onsubmit="return postComment(event);">
                 <div class="form-group p-3">
                     <label for="exampleFormControlTextarea1">Dejá tu comentario!</label>
-                    <textarea type="text" class="form-control mt-2" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    <textarea type="text" class="form-control mt-2" id="exampleFormControlTextarea1" rows=2 maxlength=500 ></textarea>
                     <input type="submit" class="btn btn-primary mt-2" value="Comentar"></button>
                 </div>
             </form>
@@ -229,6 +229,7 @@ require_once 'partials/starfunc.php';
         ntxtarea.value=comment.children[1].innerHTML;
         ntxtarea.id='a'+commentid;
         ntxtarea.className='form-control';
+        ntxtarea.maxLength=500;
         bcancel=document.createElement('button');
         bcancel.onclick=function(){renderComments()};
         bcancel.className='btn btn-primary mt-1';

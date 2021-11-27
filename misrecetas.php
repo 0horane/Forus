@@ -94,7 +94,7 @@ require_once 'partials/starfunc.php';
 			let str="";
 			callAPI('yr',`${condition}${direction}`, function( result ) {
 
-				str+=makepager(result[public], page);
+				var pager=makepager(result[public], page);
 				//console.log(result);
 				let ajaxvalues=[];
 				for (i=page*9;i<page*9+9;i++){
@@ -115,6 +115,7 @@ require_once 'partials/starfunc.php';
 						} else {
 							str+="<h5 class='display-4 text-center' style='color:gray'>No has creado ninguna receta. <a href='richtext.php' style='color:darkgray'>Creá Una!</a></h5>";
 						}
+						str+=pager;
 						document.getElementById('cardbox').innerHTML=str;
 						setfavs()
 				});

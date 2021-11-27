@@ -25,10 +25,7 @@
     .imagen{
         border-radius:30px;
     }
-    .btn{
-        background-color: #09853d;
-        color: white;
-    }
+
     </style>
 </head>
 <body>

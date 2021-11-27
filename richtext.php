@@ -10,7 +10,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="favicon.png">
+		<link rel="shortcut icon" href="cutlery.png">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		<meta charset="UTF-8">
@@ -120,6 +120,7 @@
 		</form>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<script>
 			editor=ClassicEditor.create(document.querySelector('#editor'))
 			.catch(error =>{
@@ -128,6 +129,7 @@
 			<?php if ($rnum){ ?>
 			callAPI('rd','<?php echo $rnum; ?>',function(result){
 				if (result[0]['user_id']!=<?php echo $_SESSION['id']; ?>){
+					console.log("deebria moror")
 					Swal.fire({
 						icon: "error",
 						title: "Esta no es tu receta!",
@@ -193,7 +195,7 @@
         		}
 			} 
 		</script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		
 		<script>
 		inputarr={};
 		recipebody=document.getElementsByClassName('ck-editor__editable')[0].children[0];

@@ -79,7 +79,7 @@ require_once 'partials/starfunc.php';
 			let str="";
 			callAPI ('sr',`${condition}${direction}`,function( result ) {
 
-				str+=makepager(result, page);
+				var pager=makepager(result, page);
 				let ajaxvalues=[];
 				for (i=page*9;i<page*9+9;i++){
 					if (result[i]){
@@ -92,6 +92,7 @@ require_once 'partials/starfunc.php';
 						result.forEach(recipe=>{
 							str+=gencard(recipe['id'],recipe['name'],recipe['recipe'],recipe['username'],recipe['views'],recipe['img_path'],recipe['code'],(<?php echo strval($loggedin) ?> ? true : false));
 						});
+						str+=pager;
 						document.getElementById('cardbox').innerHTML=str;
 						setfavs();
 				});

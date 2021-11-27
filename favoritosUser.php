@@ -97,7 +97,7 @@ require_once 'partials/starfunc.php';
 			let str="";
 			callAPI ('yf',`${condition}${direction}`,function( result ) {
 
-				str+=makepager(result, page);
+				var pager=makepager(result, page);
 				let ajaxvalues=[];
 				for (i=page*9;i<page*9+9;i++){
 					if (result[i]){
@@ -115,6 +115,7 @@ require_once 'partials/starfunc.php';
 						} else {
 							str+="<h5 class='display-4 text-center' style='color:gray'>No has has agregado ninguna receta a tus favoritos</h5>";
 						}
+						str+=pager;
 						document.getElementById('cardbox').innerHTML=str;
 						setfavs();
 				});
