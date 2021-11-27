@@ -153,8 +153,7 @@
 								<?php mysqli_fetch_assoc(qq($link, "SELECT COUNT(User_id) AS cOC FROM favorites WHERE Recipes_id = ".$row[0]))['cOC'] ?> 
 								<?php echo $loggedin ? "<div id='replace${row[0]}'>aa<script>document.getElementById('replace${row[0]}').innerHTML=genstar(${row[0]});</script></div>" : '';?>
 							</span>
-							<a class="btn btn-primary btn-info btn-sm vrmas" href="recetaParticular.php?r=<?php echo $row[0]; ?>">Ver más</a>
-                            
+							<a class="btn btn-outline-success btn-sm vrmas" href="recetaParticular.php?r=<?php echo $row[0]; ?>">Ver más</a>
 
         
 						</div>
@@ -233,4 +232,5 @@
 	<script>
 		setfavs()
 	</script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>

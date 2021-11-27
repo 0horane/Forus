@@ -71,7 +71,7 @@ require_once 'partials/starfunc.php';
 						<option value='1'>No visible</option>
 					</Select>
 				</form>
-				<a href="richtext.php" class="btn btn-primary mt-1" style="height:40px">Crear nueva receta</a>
+				<a href="richtext.php" class="btn btn-success mt-1" style="height:40px">Crear nueva receta</a>
 			</div>
 		</div>
 	</div>
@@ -113,7 +113,12 @@ require_once 'partials/starfunc.php';
 						
 						
 						} else {
-							str+="<h5 class='display-4 text-center' style='color:gray'>No has creado ninguna receta. <a href='richtext.php' style='color:darkgray'>Creá Una!</a></h5>";
+							if(public == 0){
+								str+="<h5 class='display-4 text-center' style='color:gray'>No has creado ninguna receta. <a href='richtext.php' style='color:darkgray'>Creá Una!</a></h5>";
+							}
+							else{
+								str+="<h5 class='display-4 text-center' style='color:gray'>No tenes ninguna receta borrada </h5>";
+							}
 						}
 						str+=pager;
 						document.getElementById('cardbox').innerHTML=str;
@@ -127,5 +132,6 @@ require_once 'partials/starfunc.php';
 	</script>
 	<?php include 'partials/footer.php' ?>
   	</div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

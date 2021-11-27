@@ -45,9 +45,9 @@
 				margin:30px;
 			}
 			.img{
-				width: 30%;
+				width: 50%;
 				border-radius: 10px;
-				max-width: 75%
+				max-width: 85%;
 			}
 			.button1 {
 				text-decoration:none;
@@ -77,8 +77,8 @@
 	<body>
 	<?php include 'partials/header.php'?>
 
-<div class="cont1 shadow" id="formbox">
-	<div class="col p-3" >
+<div class="cont1 shadow rounded-3 border" id="formbox">
+	<div class="col p-2" >
 		<div class="text-end">
 			<a href="index.php"><img src="images/LogoMakr-56L0gt.png" alt="logo" width="6%" href="index.php"></a>
 		</div>      
@@ -116,7 +116,7 @@
 			<?php if ($rnum){ ?>
 				<input id='v' name='v' type='hidden' value='<?php echo $rnum; ?>'>
 			<?php }  ?>
-			<input class="btn btn-outline-success" id="save" name="b" type='submit' style="width:100%" disabled></input>
+			<input class="btn btn-outline-success" value="Subir receta" id="save" name="b" type='submit' style="width:100%" disabled></input>
 		</form>
 	</div>
 </div>
@@ -133,6 +133,7 @@
 					Swal.fire({
 						icon: "error",
 						title: "Esta no es tu receta!",
+						confirmButtonColor: "#34a34e",
 						backdrop: true,
 						timer: 2000
 					}).then(function(){
@@ -173,10 +174,39 @@
     					contentType: false,
 						success: function(result){
 							if(result){
-								window.location.href="misrecetas.php"
+								Swal.fire({
+									icon: "success",
+									title: "Se subio la receta correctamente!",
+									confirmButtonColor: "#34a34e",
+									timerProgressBar: true,
+									backdrop: true,
+									timer: 2000
+								}).then(function(){
+									window.location.href="misrecetas.php";
+								});
 							} else {
-								alert('no se pudo subir');
+								Swal.fire({
+									icon: "error",
+									title: "No se pudo subir la receta",
+									confirmButtonColor: "#34a34e",
+									backdrop: true,
+									timer: 2000
+								}).then(function(){
+									window.location.href="misrecetas.php";
+								});
 							}
+						},
+						error: function(result){
+							Swal.fire({
+								icon: "error",
+								title: "No se pudo subir la receta",
+								confirmButtonColor: "#34a34e",
+								timerProgressBar: true,
+								backdrop: true,
+								timer: 2000
+							}).then(function(){
+								window.location.href="misrecetas.php";
+							});
 						}
 					});
 					return false;

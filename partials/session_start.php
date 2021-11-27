@@ -15,6 +15,8 @@ if (isset($_SESSION["msg"])){
 				Swal.fire({
 					icon: "<?php echo $_SESSION["icon"]; ?>",
 					title: "<?php echo $_SESSION["msg"]; ?>",
+					confirmButtonColor: "#34a34e",
+					timerProgressBar: true,
 					backdrop: true,
 					timer: 2000
 				});

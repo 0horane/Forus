@@ -2,8 +2,6 @@
 include 'partials/session_start.php' ;
 require_once 'partials/starfunc.php';
 ?>
-<<<<<<< HEAD
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +15,6 @@ require_once 'partials/starfunc.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	
 </head>
->>>>>>> a25569b4f3b9ab9e1b604c46667348b961a0b598
 <style>
 	#cartita{
 		max-width: 25%;
