@@ -1,1 +1,0 @@
-<?php echo htmlspecialchars("eita<h1>sshsd"); ?>
