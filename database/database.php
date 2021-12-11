@@ -1,5 +1,5 @@
  <?php
-	require_once(./credentials.php);
+	require_once("credentials.php");
     
     $link = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
     mysqli_set_charset($link, "utf8");
