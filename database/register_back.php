@@ -1,5 +1,5 @@
 <?php
-require 'partials\session_start.php';
+require 'partials/session_start.php';
 
 if (isset($_GET['url'])){
 	$url=$_GET['url'];
@@ -64,6 +64,6 @@ if(isset($_POST['registrarse'])){
 	   }}
 }
 	   
-require 'partials\session_start.php';
+require 'partials/session_start.php';
 
 ?>

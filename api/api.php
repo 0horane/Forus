@@ -35,7 +35,7 @@ header("Content-type: application/json; charset=utf-8");
 /////////devuelve un array con los ids de todos las recetas, en orden de cantidad de favoritos decendiente
 
 function privQSt(){
-    require_once '..\partials\session_start.php'; 
+    require_once '../partials/session_start.php'; 
     
     if (isset($_SESSION['id'])){
         return $_SESSION['id'];
@@ -163,7 +163,7 @@ if (isset($_GET['v'])) {
 }
 
 
-require_once '..\database\database.php';
+require_once '../database/database.php';
 $json=[];
 
 switch($qt){
@@ -220,7 +220,7 @@ switch($qt){
 			if (isset($_FILES['img'])){ //si mandaron imagen
 				if (strpos($_FILES['img']['type'],'image')!==false && $_FILES['img']['size']<20000000 && !($_FILES['img']['error']>0)){ //si la imagen es válida
 					
-					move_uploaded_file($_FILES['img']['tmp_name'],"..\\images\\recipe\\".$imagefile.".".explode('/',$_FILES['img']['type'])[1]); //mueve la imagen y le pone de nombre el id de receta.png/jpg/etc
+					move_uploaded_file($_FILES['img']['tmp_name'],"../images/recipe/".$imagefile.".".explode('/',$_FILES['img']['type'])[1]); //mueve la imagen y le pone de nombre el id de receta.png/jpg/etc
 					$img_exists=1;
 				} else { $img_exists=0; }
 			} else { $img_exists=0;  }

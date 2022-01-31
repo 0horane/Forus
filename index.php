@@ -18,7 +18,7 @@
 <style>
 body{
     background-clip: url("vids/backgroundVid.mp4"); 
-  
+	background-color:#88f2a4;
   }
   video{
     width: 100%;
@@ -44,7 +44,8 @@ body{
     <div class = "container">
       <div id = "absoluto" class = "text-center">
         <h1 class = "display-1 mt-5">Recetario</h1>
-        <h3 class = "display-4">Unidos por el amor de la cocina</h3>
+        <!--<h3 class = "display-4">Unidos por el amor de la cocina</h3>-->
+        <h3 class = "display-4">Le sacamos todas las imagenes por copyright</h3>
         <div class="container">
           <div class="row d-flex justify-content-center">
             <div class="col-8 mt-3">

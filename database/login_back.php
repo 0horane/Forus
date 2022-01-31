@@ -1,5 +1,5 @@
 <?php
-require 'partials\session_start.php';
+require 'partials/session_start.php';
 if (isset($_GET['url'])){
 	$url=$_GET['url'];
 } else if (isset($_POST['url'])) {
@@ -58,5 +58,5 @@ if (isset($_POST['loguearse'])){
 	}
 }
 
-require 'partials\session_start.php';
+require 'partials/session_start.php';
 ?>
